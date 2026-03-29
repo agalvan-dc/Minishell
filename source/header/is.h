@@ -104,5 +104,7 @@ int		is_variable_exist(t_env *env, char  *name);
 char	*var_name_extraction(char *s, int i);
 
 int		is_same_name(char *first, char *second);
+int		is_valid_identifier(char *s);
+int		is_flag_n(char *s);
 
 #endif

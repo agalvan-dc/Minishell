@@ -31,6 +31,21 @@
 
 
 
+
+
+void	ft_connect_new_var();
+void	ft_connect_var();
+void	ft_connect_token();
+void	ft_connect_arg();
+void	ft_connect_line(t_line *curr_line, t_line *next_line);
+
 char	*ft_get_content_double(char *line, int start, int *index);
+
+int		ft_size_of_cmd_list(t_cmd *cmd);
+int		ft_size_of_var_list(t_env  *env);
+
+char	**ft_cmd_list_to_array(t_cmd *cmd);
+char	**ft_var_list_to_array(t_env *env);
+char	*ft_cmd_list_to_str(t_cmd *cmd);
 
 #endif
