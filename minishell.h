@@ -30,8 +30,10 @@
 
 extern t_env	*g_env;
 
+void	ft_ask_verbose(t_env *env);
+t_env	*ft_init_env(char **env_var);
+t_var	*ft_init_env_var(char *name, char *value, int id);
 t_line	*ft_init_line(char *content);
-
 
 void	ft_add_signal_env_var(t_env *env);
 void	ft_add_line_to_env(t_env *env, char *content);
@@ -73,11 +75,31 @@ int		ft_single_quote_detection(char *line, int index);
 int		ft_double_quote_detection(char *line, int index);
 int		ft_redirectionn_detection(char *line, int index);
 int		ft_limiter_detection(char *line, int index);
+int		ft_variable_detection(char *line, int index);
+
+int		ft_single_tokenizer(t_cmd *cmd, char *line, int index);
+int		ft_double_tokenizer(t_env *env, t_cmd *cmd, char *line, int index);
+void	ft_double_tokenization(t_env *env, t_cmd *cmd, char *content);
 
 
 
+int		ft_arg_redirect_extraction(t_token *token, t_env *env, char *line, int i);
+int		ft_word_arg_extraction(t_env *env, t_cmd *cmd, char *line, int index);
+int		ft_string_extraction(t_env *env, t_cmd *cmd, char *line int index);
+int		ft_limiter_extraction(t_redir *redir, char *line, int i);
+
+int		ft_redir_classification(t_env *env, char *line, int i);
+int		ft_word_classification(t_env *env, char *line, int i);
+int		ft_arg_classification(t_env *env, t_cmd *cmd, char *line, int i);
+t_token	*ft_cmd_classification(t_env *env, char *content);
+
+int		ft_type_of_redirect(char *content);
+int		ft_type_of_boolean(char *content);
 
 void	ft_parsing(t_env *env, char *line);
+void	ft_processing_redir(t_env *env);
+void	ft_change_fd_cmd(t_cmd *cmd, int fd_in, int fd_out);
+void	ft_redirect_cmd(t_cmd *cmd);
 
 void    ft_add_line_list(t_env *env, t_line *line);
 void	ft_add_var_list(t_env *env, t_var *var);
@@ -85,12 +107,39 @@ void	ft_add_token_list(t_env *env, t_token *token);
 void	ft_add_arg_list(t_cmd *cmd, t_arg *arg);
 void    ft_add_line_to_env(t_env *env, char *content);
 
+void	ft_processing_builtin(t_env *env);
+void	ft_choose_processing_builtin(t_env *env, t_cmd *cmd);
+void	ft_processing_exit(t_cmd *cmd);
+void	ft_processing_echo(t_cmd *cmd);
+void	ft_processing_cd(t_cmd *cmd);
 
+void	ft_processing_cmd(t_env *env);
+void	ft_processing_cmd_args(t_env *env);
+void	ft_processing_bin(t_env *env);
+
+void	ft_get_arg_var_value(t_env *env);
+void	ft_change_arg_var_content(t_env *env, t_arg *arg);
 
 void	ft_concatenate_cmd_args(t_env *env);
 void	ft_change_arg_var_content(t_env *env, t_arg *arg);
 
+int		ft_compare_line(char *line, char *limiter, int fd_tmp);
+char	*ft_heredoc_prompt(char *limiter);
+char	*ft_heredoc_not_finish(char *limiter);
+char	*ft_read_and_extract_content_file(char *path);
+void	ft_open_next_file_with_flags(t_token *token, t_file *file);
+void	ft_manage_fd_for_redir(t_token *token);
+void	ft_manage_fd_basic_redir(t_token *token);
+void	ft_manage_fd_pipe(t_token *token);
+void	ft_manage_fd_heredoc(t_token *token);
 
+
+void	ft_close_all_fd(t_env *env);
+void	ft_close_fd_cmd(t_cmd *cmd);
+void	ft_remove_tmp_file(t_token *token_heredoc);
+
+int		ft_wait_all_pid(t_env *env);
+int		ft_get_last_status(int bin_status, int ret_builtin);
 
 void	ft_reset_counter_error(t_env *env);
 int		ft_doesnt_have_error_parsing(t_env *env);

@@ -51,7 +51,7 @@ int		is_token_cmd(t_token *token);
 int		is_token_bin(t_token *token);
 int		is_token_builtin(t_token *token);
 int		is_cmd_bin(t_cmd *cmd);
-int		is_cmd_builtin(t_cmd *cmt_cmd *cmd);
+int		is_cmd_builtin(t_cmd *cmd);
 
 int		is_output_chevron(char *s, int i);
 int		is_input_chevon(char *s, int i);

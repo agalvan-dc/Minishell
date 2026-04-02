@@ -28,15 +28,35 @@
 #define TOKEN_STRING 24
 #define TOKEN_NOT_FINISH 25
 
+t_file	*ft_init_file(char *name, int fd);
+t_redir	*ft_init_redir(int type, char *content);
+t_redir	*ft_init_heredoc(int type, char *content, char *delimiter);
+t_token	*ft_init_token(void);
+t_arg	*ft_init_arg(char *content, int id);
+t_blank	*ft_init_blank(char *content, int id);
+t_word	*ft_init_word(char *content, int id);
+t_cmd	*ft_init_cmd(char *content, int id);
 
+void	ft_tokenization(t_env *env, char *line);
+int		ft_single_tokenization(t_cmd *cmd char *line, int start, int index);
+t_token	*ft_cmd_tokenization(char *word, int fd);
 
+int		ft_cmd_tokenizer(t_env *env, char *line, char *content, int index);
+t_arg	*ft_arg_tokenizer(char *line, int start, int end, int fd);
+int		ft_flags_tokenizer(t_env *env, t_cmd *cmd, char *line, int index);
+int		ft_var_tokenizer(t_env *env, t_cmd *cmd, char *line, int index);
+int		ft_vars_tokenization(t_env *env, t_cmd *cmd, char *line, int index);
 
+t_token	*ft_create_token_word(char *content, int id);
+t_token	*ft_create_token_redir(char *content, int index, int new_i);
+t_token	*ft_create_token_cmd(char *content, int id);
+t_token	*ft_create_token_file(char *name, int fd, int id);
+t_arg	*ft_create_arg(char *content, int id);
 
-
-void	ft_connect_new_var();
-void	ft_connect_var();
-void	ft_connect_token();
-void	ft_connect_arg();
+void	ft_connect_new_var(t_var *curr_var, t_var *prev_var, t_var *next_var);
+void	ft_connect_var(t_var *curr_var, t_var *next_var);
+void	ft_connect_token(t_token *curr_token, t_token *next_token);
+void	ft_connect_arg(t_arg *curr_arg, t_arg *next_arg);
 void	ft_connect_line(t_line *curr_line, t_line *next_line);
 
 char	*ft_get_content_double(char *line, int start, int *index);
