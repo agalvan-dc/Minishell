@@ -1,6 +1,6 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
-int		is_arg_variable(t_arg *arg)
+int		is_arg_var(t_arg *arg)
 {
 	if (!arg)
 		return (0);

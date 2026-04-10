@@ -1,10 +1,10 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 t_file	*ft_init_file(char *name, int fd)
 {
 	t_file	*file;
 
-	file = (t_file *)malloc(sizeof(t_file);
+	file = (t_file *)malloc(sizeof(t_file));
 	if (!file)
 		return (NULL);
 	file->name = name;
@@ -28,7 +28,7 @@ t_env	*ft_init_env(char **env_var)
 	env->first_var = NULL;
 	ft_create_chained_var(env, env_var);
 	ft_add_signal_env_var(env);
-	ft_free_array(env_var);
+	free_array(env_var);
 	g_env = env;
 	return (env);
 }

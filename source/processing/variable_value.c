@@ -1,20 +1,18 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	ft_change_arg_var_content(t_env *env, t_arg *arg)
 {
 	char	*name;
 	char	*value;
 
-	name = ft_malloc_strcpy(arg->content);
+	name = malloc_strcpy(arg->content);
 	free(arg->content);
+	arg->content = NULL;
 	value = ft_get_env_var_value_with_name(env, name);
 	if (!value)
-	{
-		printf("Error : unknown variable [%s]\n", name);
-		env->error_processing += 1;
-	}
+		arg->content = malloc_strcpy("");
 	else
-		arg->content = ft_malloc_strcpy(value);
+		arg->content = malloc_strcpy(value);
 	free(name);
 }
 

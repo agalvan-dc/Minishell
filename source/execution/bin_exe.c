@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	ft_bin_execution(t_env *env, t_cmd *cmd, char **var)
 {
@@ -14,6 +14,7 @@ void	ft_bin_execution(t_env *env, t_cmd *cmd, char **var)
 		if (cmd_have_standard_fd(cmd))
 		{
 			execve(path, ft_get_cmd_args(cmd), var);
+			free(path);
 			perror("Command failure : ");
 			exit(1);
 		}

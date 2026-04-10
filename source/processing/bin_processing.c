@@ -1,11 +1,11 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 char	**ft_append_bin_name_in_args(char **args, char *name)
 {
 	char	**new_args;
 
 	if (!args)
-		ft_str_to_array(name);
+		return(str_to_array(name));
 	else
 	{
 		new_args = ft_arrayjoin_str(args, name, 0);
@@ -21,8 +21,8 @@ char	*ft_extract_bin_name_in_path(char *path)
 
 	index = ft_strlen(path);
 	while (index > 0 && path[index] != '/')
-		i--;
-	name = ft_malloc_strcpy_after_index(path, index + 1);
+		index--;
+	name = malloc_strcpy_after_index(path, index + 1);
 	if (!name)
 		return (NULL);
 	return (name);
@@ -30,18 +30,16 @@ char	*ft_extract_bin_name_in_path(char *path)
 
 void	ft_setup_bin_path(t_cmd *cmd, char **bins)
 {
-	char	*cmd;
 	char	*path;
 
-	cmd = cmd->content;
-	if (ft_test_bin_acces(bins, cmd))
+	if (ft_test_bin_access(bins, cmd->content))
 	{
-		path = ft_create_path_bin(bins, cmd);
+		path = ft_create_path_bin(bins, cmd->content);
 		cmd->bin = path;
 		return ;
 	}
-	else if (ft_test_absolute_bin_access(cmd))
-		cmd->bin = ft_malloc_strcpy(cmd);
+	if (ft_test_absolute_bin_access(cmd->content))
+		cmd->bin = malloc_strcpy(cmd->content);
 	return ;
 }
 
@@ -50,7 +48,7 @@ void	ft_setup_bin_args(t_cmd *cmd, char **bins)
 	char	*command;
 
 	command = cmd->content;
-	if (ft_test_bin_acces(bins, command))
+	if (ft_test_bin_access(bins, command))
 	{
 		cmd->args = ft_append_bin_name_in_args(cmd->args, cmd->content);
 		return ;
@@ -74,8 +72,9 @@ char	*ft_create_path_bin(char **bins, char *cmd)
 	while (bins[i])
 	{
 		path = ft_strjoin_char(bins[i], cmd, '/');
-		if (acces(path, X_OK & F_OK) == 0)
+		if (access(path, X_OK | F_OK) == 0)
 			return (path);
+		free(path);
 		i++;
 	}
 	return (NULL);

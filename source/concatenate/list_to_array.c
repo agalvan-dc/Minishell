@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 int		ft_size_of_cmd_list(t_cmd *cmd)
 {
@@ -47,7 +47,7 @@ char	**ft_cmd_list_to_array(t_cmd *cmd)
 		return (NULL);
 	while (arg)
 	{
-		complete[i] = ft_substr(arg->content);
+		complete[i] = malloc_strcpy(arg->content);
 		if (!(complete[i]))
 		{
 			while (i > 0)
@@ -83,9 +83,9 @@ char	**ft_var_list_to_array(t_env *env)
 	while (var)
 	{
 		if (!var->value)
-			complete[i] = ft_strjoin(var->name, "", '=');
+			complete[i] = ft_strjoin_char(var->name, "", '=');
 		else
-			complete[i] = ft_strjoin(var->name, var->value, '=');
+			complete[i] = ft_strjoin_char(var->name, var->value, '=');
 		var = var->next;
 		i++;
 	}
@@ -103,7 +103,7 @@ char	*ft_cmd_list_to_str(t_cmd *cmd)
 	arg = ft_get_first_arg(cmd);
 	if (!(arg->content))
 		return (NULL);
-	complete = ft_substr(arg->content);
+	complete = malloc_strcpy(arg->content);
 	arg = arg->next;
 	while (arg)
 	{

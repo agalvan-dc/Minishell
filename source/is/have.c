@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 int		have_token(t_env *env)
 {
@@ -20,7 +20,7 @@ int		have_token_redir(t_env *env)
 
 	if (!(have_token(env)))
 		return (0);
-	token = get_first_token(env);
+	token = ft_get_first_token(env);
 	while (token)
 	{
 		if (is_token_redir(token))

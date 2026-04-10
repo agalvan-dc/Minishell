@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 int		is_standard_fd(int fd)
 {
@@ -16,7 +16,7 @@ int		isnot_standard_fd(int fd)
 
 int		cmd_have_standard_fd(t_cmd *cmd)
 {
-	if (is_standard(cmd->fd_in) && is_standard(cmd->fd_out))
+	if (is_standard_fd(cmd->fd_in) && is_standard_fd(cmd->fd_out))
 		return (1);
 	return (0);
 }

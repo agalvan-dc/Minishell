@@ -1,16 +1,16 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 int		is_variable_word(char *s, int i)
 {
 	if (s[i] == '$' && !(is_blank(s[i + 1])) && !(is_finish(s[i + 1]))
-	!(is_quote(s[i + 1])) && !(is_separator(s, i + 1)))
+		 && !(is_quote(s[i + 1])) && !(is_separator(s, i + 1)))
 		return (1);
 	return (0);
 }
 
-int		variable_exist(t_env *env, char *name)
+int		is_variable_exist(t_env *env, char *name)
 {
-	if(get_env_var_value_with_name(env, name) != NULL)
+	if(ft_get_env_var_value_with_name(env, name) != NULL)
 		return (1);
 	return (0);
 }
@@ -18,10 +18,7 @@ int		variable_exist(t_env *env, char *name)
 char	*var_name_extraction(char *s, int i)
 {
 	int		start;
-	int		end;
 
-
-	end = i;
 	start = i;
 	if (s[i] == '$')
 		return (NULL);
@@ -29,11 +26,12 @@ char	*var_name_extraction(char *s, int i)
 	while (s[i])
 	{
 		if (is_var_delimiter(s, i))
-			return (ft_substr(s, start, i - 1));
+			return (malloc_substrcpy(s, start, i - 1));
 		i++;
 	}
 	if (is_var_delimiter(s, i))
-		return (ft_substr(s, start, i - 1));
+		return (malloc_substrcpy(s, start, i - 1));
+	return (NULL);
 }
 
 int		is_variable(t_env *env, char *s, int i)
@@ -45,7 +43,7 @@ int		is_variable(t_env *env, char *s, int i)
 		name = var_name_extraction(s, i++);
 		if (!name)
 			return (0);
-		if (variable_exist(env, name))
+		if (is_variable_exist(env, name))
 			return (free(name),1);
 		free(name);
 	}
@@ -54,7 +52,7 @@ int		is_variable(t_env *env, char *s, int i)
 
 int		is_valid_variable(t_env *env, char *name)
 {
-	if (!(is_variable(env, name, 0) && is_variable_word(name, 0))
+	if (!(is_variable(env, name, 0) && is_variable_word(name, 0)))
 		return (0);
 	return (1);
 }

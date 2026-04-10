@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 int		ft_check_error_token_basic_redir(t_token *token, t_redir *redir)
 {
@@ -20,8 +20,8 @@ int		ft_check_error_token_heredoc(t_redir *redir)
 	return (0);
 }
 
-int		ft_check_error_token_pipe(t_token *token, t_rendir *rendir)
-}
+int		ft_check_error_token_pipe(t_token *token, t_redir *redir)
+{
 	if (!(is_token_cmd(token->next)) || !token->next)
 	{
 		ft_printf("Error : [next cmd after %s not found]\n]", redir->content);
@@ -33,7 +33,7 @@ int		ft_check_error_token_pipe(t_token *token, t_rendir *rendir)
 		return (1);
 	}
 	return (0);
-{
+}
 
 int		ft_check_error_token_redir(t_token *token)
 {
@@ -43,7 +43,7 @@ int		ft_check_error_token_redir(t_token *token)
 	res = 0;
 	redir = ft_get_class(token);
 	if (!redir)
-		return (NULL);
+		return (0);
 	if (is_token_basic_redir(token))
 		res = ft_check_error_token_basic_redir(token, redir);
 	else if (is_token_heredoc(token))

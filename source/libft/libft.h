@@ -23,8 +23,8 @@ void			ft_lstadd_back(t_list **alst, t_list *new);
 void			ft_lstdelone(t_list *lst, void (*del)(void *));
 void			ft_lstclear(t_list **lst, void (*del)(void *));
 void			ft_lstiter(t_list *lst, void (*f)(void *));
-t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
-					void (*del)(void *));
+t_list			*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
 
 int				ft_isalpha(int i);
 int				ft_isdigit(int n);
@@ -33,14 +33,16 @@ int				ft_isascii(int c);
 int				ft_isprint(int c);
 int				ft_toupper(int ch);
 int				ft_tolower(int ch);
-int				ft_memcmp( const void *pointer1, const void *pointer2,
-					size_t size );
+
+
+int				ft_memcmp( const void *pointer1, const void *pointer2,size_t size);
 int				ft_strncmp( const char *first, const char *second, size_t n);
 int				same_str(char *first, char *second, int size);
 int				same_str_index(char *first, char *second, int size, int index);
 int				index_diff(char *first, char *second, int size);
 int				ft_atoi( const char *str);
 long long int	ft_atol(const char *str);
+
 
 char			*ft_strchr(const char *str, int c);
 char			*ft_strrchr(const char *str, int find);
@@ -56,7 +58,7 @@ void			copy_dimensions(char **array, char **new_array, int y, int *i);
 void			copy_str_in_array(char **new_array, int index, char *str);
 char			**str_to_array(char *str);
 char			**ft_arrayremove_str(char **array, int pos);
-char			*ft_substr(char *s, int start, int len);
+char			*ft_substr(char const *s, unsigned int start, size_t len);
 char			*ft_itoa(int n);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char			*ft_strtrim(char const *s1, char const *set);
@@ -74,6 +76,11 @@ void			count_putchar_fd(char c, int *count, int fd);
 void			ft_putstr_fd(char *str, int fd);
 void			ft_putnbr_fd(int n, int fd);
 void			ft_striteri(char *s, void (*f)(unsigned int, char*));
+void			print_array_back_slash(char **str);
+void			print_array(char **str);
+void			print_array_fd(char **str, int fd);
+void			print_array_index(char **str, int index);
+void			print_str_index(char *str, int i);
 
 size_t			ft_strlcat(char *dest, const char *src, size_t size);
 int				ft_strlen(const char *str);
@@ -90,6 +97,7 @@ char			*get_next_line(int fd);
 char			*ft_separation(char **statik, int retour);
 int				index_newline(char *buf);
 void			ft_append(char **statik, char *buf, int retour);
+char			*mini_get_next_line(int fd);
 
 int				ft_putchar(int c);
 int				ft_putstr(char *str);

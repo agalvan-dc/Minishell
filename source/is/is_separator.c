@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 int		is_separator(char *s, int i)
 {
@@ -11,7 +11,7 @@ int		is_separator(char *s, int i)
 
 int		is_delimiter(t_env *env, char *s, int i)
 {
-	if (is_blank(s[i]) || is_separator(s, i) || is_variable(s, i))
+	if (is_blank(s[i]) || is_separator(s, i) || is_variable(env, s, i))
 		return (1);
 	return (0);
 }
@@ -19,14 +19,14 @@ int		is_delimiter(t_env *env, char *s, int i)
 int		is_var_delimiter(char *s, int i)
 {
 	if (is_blank(s[i]) || is_separator(s, i) || s[i] == '$' 
-	|| is_finish(s, i) || is_quote(s[i]))
+	|| is_finish(s[i]) || is_quote(s[i]))
 		return (1);
 	return (0);
 }
 
 int		is_arg_sep(t_env *env, char *s, int i)
 {
-	if (is_separator(s, i) || is_variable(s, i))
+	if (is_separator(s, i) || is_variable(env, s, i))
 		return (1);
 	return (0);
 }

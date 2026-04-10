@@ -26,6 +26,12 @@ void	ft_remove_token_file(t_file *file);
 void	ft_remove_token_word(t_word *word);
 void	ft_remove_and_disconnect_env_var(t_env *env, t_var *var);
 
+void    ft_remove_all(t_env *env);
+void	ft_remove_line(t_line *line);
+void	ft_remove_all_line(t_env *env);
+void	ft_remove_env_var(t_var *var);
+void	ft_remove_var_list(t_env *env);
+
 void	ft_remove_blank_arg(t_cmd *cmd);
 
 #endif

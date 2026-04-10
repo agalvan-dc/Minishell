@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 t_var	*ft_get_first_env_var(t_env *env)
 {
@@ -63,7 +63,7 @@ int		ft_get_env_var_size(t_env *env)
 	i = 0;
 	var = ft_get_first_env_var(env);
 	if (!var)
-		return (NULL);
+		return (0);
 	while (var)
 	{
 		i++;

@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	ft_print_env_var_fd(t_var *var, int fd)
 {
@@ -18,7 +18,7 @@ void	ft_print_all_env_var_fd(t_env *env, int fd)
 	(void)fd;
 	var = ft_get_first_env_var(env);
 	if (!var)
-		var = return ;
+		return ;
 	while (var)
 	{
 		if (var->id == VALUE)
@@ -34,7 +34,7 @@ void	ft_print_all_env_export_var_fd(t_env *env, int fd)
     (void)fd;
     var = ft_get_first_env_var(env);
     if (!var)
-        var = return ;
+        return ;
     while (var)
     {
         ft_print_env_var_fd(var, fd);

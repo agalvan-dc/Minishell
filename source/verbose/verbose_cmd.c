@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	ft_print_cmd_info(t_cmd *cmd)
 {
@@ -8,7 +8,7 @@ void	ft_print_cmd_info(t_cmd *cmd)
 	{
 		ft_printf(" | path : [%s]\n", cmd->bin);
 		ft_printf(" | args : [");
-		ft_print_array(cmd->args);
+		print_array(cmd->args);
 		ft_printf("]\n");
 	}
 	else if (is_cmd_builtin(cmd))

@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void    ft_print_args_array(char **args)
 {
@@ -22,12 +22,12 @@ void    ft_print_args(t_cmd *cmd)
 	int		i;
 
 	i = 1;
-	iter = cmd->first-arg;
+	iter = cmd->first_arg;
 	if (!iter)
 		return ;
 	while (iter)
 	{
-		ft_printf("	[%d][%d : [%s]\n]", i, iter->id, iter->contenr);
+		ft_printf("	[%d][%d : [%s]\n]", i, iter->id, iter->content);
 		i++;
 		iter = iter->next;
 	}
@@ -48,7 +48,7 @@ void	ft_print_redir(t_token *token, t_redir *redir)
 {
 	ft_printf("[%d][%d] : [%s]\n", token->index, redir->type, redir->content);
 	if (redir->type == TOKEN_HEREDOC)
-		 ft_printf("	[%s][%s]\n", "TOKEN_LIMITER", redir->limiter);
+		 ft_printf("	[%s][%s]\n", "TOKEN_LIMITER", redir->delimiter);
 	else
 	{
 		 ft_printf("	[FD_IN : %d]\n", redir->fd_in);

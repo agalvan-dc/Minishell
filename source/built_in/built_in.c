@@ -1,12 +1,14 @@
-#include "../minishell.h"
+#include "../../minishell.h"
+
 
 int     ft_echo(t_cmd *cmd)
 {
     int     i;
 
-    if (!cmd->arg && !cmd->args)
+    if (!cmd->args)
     {
-        ft_putstr_fd("\n", cmd->fd_out);
+        if (!cmd->flags || !is_flag_n(cmd->flags))
+            ft_putstr_fd("\n", cmd->fd_out);
         return (0);
     }
     i = 0;
@@ -17,7 +19,7 @@ int     ft_echo(t_cmd *cmd)
             ft_putstr_fd(" ", cmd->fd_out);
         i++;
     }
-    if (!cmd->flags || !ft_is_flag_n(cmd->flags))
+    if (!cmd->flags || !is_flag_n(cmd->flags))
         ft_putstr_fd("\n", cmd->fd_out);
     return (0);
 }
@@ -36,10 +38,10 @@ int		ft_cd(t_cmd *cmd, t_env *env)
 		ft_printf("%s : No such file or directory\n", path);
 		return (1);
 	}
-	new_path = ft_get_current_path();
-	last_path = ft_get_last_path(env);
-	ft_change_env_var_value_with_name(env, "PWD", new_path);
-	ft_change_env_var_value_with_name(env, "OLDPWD", last_path);
+	next_path = ft_get_current_path();
+	prev_path = ft_get_last_path(env);
+	ft_change_env_var_value_with_name(env, "PWD", next_path);
+	ft_change_env_var_value_with_name(env, "OLDPWD", prev_path);
 	return (0);
 }
 
@@ -48,15 +50,17 @@ int		ft_pwd(t_cmd *cmd)
 	char	*path;
 
 	path = ft_get_current_path();
-	ft_putstr_fd(path, cmd->out);
-	ft_putstr_fd("\n", cmd->out);
+	if (!path)
+		return (1);
+	ft_putstr_fd(path, cmd->fd_out);
+	ft_putstr_fd("\n", cmd->fd_out);
 	free(path);
 	return (0);
 }
 
 int		ft_env_builtin(t_cmd *cmd, t_env *env)
 {
-	ft_print_all_env_var_fd(env, cmd->out);
+	ft_print_all_env_var_fd(env, cmd->fd_out);
 	return (0);
 }
 
@@ -72,4 +76,5 @@ int		ft_exit_builtin(t_cmd *cmd, t_env *env)
 		signal = ft_atoi(cmd->arg);
 	ft_remove_all(env);
 	exit(signal);
+	return (0);
 }

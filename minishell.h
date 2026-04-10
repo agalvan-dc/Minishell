@@ -19,14 +19,14 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-#include "libft/libft.h"
-#include "header/token.h"
-#include "header/class.h"
-#include "header/free.h"
-#include "header/get.h"
-#include "header/execution.h"
-#include "header/is.h"
-#include "header/verbose.h"
+#include "source/libft/libft.h"
+#include "source/header/token.h"
+#include "source/header/class.h"
+#include "source/header/free.h"
+#include "source/header/get.h"
+#include "source/header/execution.h"
+#include "source/header/is.h"
+#include "source/header/verbose.h"
 
 extern t_env	*g_env;
 
@@ -73,19 +73,20 @@ int		ft_blank_detection(char *line, int index);
 int		ft_blank_escape(char *line, int index);
 int		ft_single_quote_detection(char *line, int index);
 int		ft_double_quote_detection(char *line, int index);
-int		ft_redirectionn_detection(char *line, int index);
+int		ft_redirection_detection(char *line, int index);
 int		ft_limiter_detection(char *line, int index);
 int		ft_variable_detection(char *line, int index);
 
 int		ft_single_tokenizer(t_cmd *cmd, char *line, int index);
 int		ft_double_tokenizer(t_env *env, t_cmd *cmd, char *line, int index);
 void	ft_double_tokenization(t_env *env, t_cmd *cmd, char *content);
-
-
+int		ft_blank_arg_tokenizer(t_env *env, t_cmd *cmd, char *line, int index);
+int		ft_variable_tokenizer(t_env *env, t_cmd *cmd, char *line, int index);
+int		ft_arg_extraction(t_env *env, t_cmd *cmd, char *line, int index);
 
 int		ft_arg_redirect_extraction(t_token *token, t_env *env, char *line, int i);
 int		ft_word_arg_extraction(t_env *env, t_cmd *cmd, char *line, int index);
-int		ft_string_extraction(t_env *env, t_cmd *cmd, char *line int index);
+int		ft_string_extraction(t_env *env, t_cmd *cmd, char *line, int index);
 int		ft_limiter_extraction(t_redir *redir, char *line, int i);
 
 int		ft_redir_classification(t_env *env, char *line, int i);
@@ -111,7 +112,7 @@ void	ft_processing_builtin(t_env *env);
 void	ft_choose_processing_builtin(t_env *env, t_cmd *cmd);
 void	ft_processing_exit(t_cmd *cmd);
 void	ft_processing_echo(t_cmd *cmd);
-void	ft_processing_cd(t_cmd *cmd);
+void	ft_processing_cd(t_env *env, t_cmd *cmd);
 
 void	ft_processing_cmd(t_env *env);
 void	ft_processing_cmd_args(t_env *env);

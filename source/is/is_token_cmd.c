@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 int		is_token_cmd(t_token *token)
 {
@@ -41,4 +41,6 @@ int		is_cmd_builtin(t_cmd *cmd)
 	if (!cmd)
 		return (0);
 	if (cmd->id == TOKEN_CMD || cmd->id == TOKEN_BUILTIN)
+		return (1);
+	return (0);
 }

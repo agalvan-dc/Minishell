@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 int		cmd_have_args(t_cmd *cmd)
 {
@@ -25,7 +25,7 @@ int		cmd_have_arg_flags(t_cmd *cmd)
 
 	if (!(cmd_have_args(cmd)))
 		return (0);
-	arg = get_first_arg(cmd);
+	arg = ft_get_first_arg(cmd);
 	while (arg)
 	{
 		if (is_arg_flags(arg))

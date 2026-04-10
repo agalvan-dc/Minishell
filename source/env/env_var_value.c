@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void    ft_change_env_var_value(t_var *var, char *new_value)
 {
@@ -12,7 +12,7 @@ void	ft_change_env_var_value_with_name(t_env *env, char *name, char *value)
 {
 	t_var	*var;
 
-	var = ft_get_env_var_value_with_name(env, name);
+	var = ft_get_env_var_with_name(env, name);
 	if (!var)
 		return ;
 	ft_change_env_var_value(var, value);

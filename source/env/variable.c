@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 char	*ft_get_env_var_value(char *var)
 {
@@ -8,7 +8,6 @@ char	*ft_get_env_var_value(char *var)
     int     i;
 
     i = 0;
-    start = 0;
     if (!var)
         return (NULL);
     while (var[i])
@@ -17,10 +16,10 @@ char	*ft_get_env_var_value(char *var)
         {
             end = ft_strlen(var);
 			start = i + 1;
-            name = ft_substr(var, start, end);
+            name = malloc_substrcpy(var, start, end);
             if (is_value_null(name)) 
 			{
-				free(value);
+				free(name);
                 return (NULL);
 			}
             return (name);
@@ -44,9 +43,9 @@ char	*ft_get_var_name(char *var)
     while (var[i])
     {
         if (var[i] == '=')
-        {   
-            end = i - 1; 
-            name = ft_substr(var, start, end);
+        { 
+			end = i - 1; 
+            name = malloc_substrcpy(var, start, end);
             if (!name)
                 return (NULL);
             return (name);
@@ -76,7 +75,7 @@ char	*ft_get_export_var_name(char *var)
 		else if (var[i] == '=')
 		{
 			end = i - 1;
-			name = ft_substr(var, start, end);
+			name = malloc_substrcpy(var, start, end);
 			if (!name)
 				return (NULL);
 			return (name);

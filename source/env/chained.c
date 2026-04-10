@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	ft_add_var_list(t_env *env, t_var *var)
 {
@@ -27,11 +27,11 @@ void	ft_add_var_list(t_env *env, t_var *var)
 
 void	ft_add_token_list(t_env *env, t_token *token)
 {
-	t_arg 	*iter;
-	int		i;
+	t_token 	*iter;
+	int			i;
 
 	i = 0;
-	if (!(env->first_tokenk))
+	if (!(env->first_token))
 	{
 		env->first_token = token;
 		token->index = i;
@@ -45,7 +45,7 @@ void	ft_add_token_list(t_env *env, t_token *token)
 			i++;
 			iter = iter->next;
 		}
-		var->index = i;
+		token->index = i;
 		ft_connect_token(iter, token);
 	}
 }

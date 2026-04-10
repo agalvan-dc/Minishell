@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	ft_create_chained_var(t_env *env, char **env_variable)
 {
@@ -11,8 +11,8 @@ void	ft_create_chained_var(t_env *env, char **env_variable)
 	while (env_variable[index])
 	{
 		name = ft_get_var_name(env_variable[index]);
-		value = ft_get_var_value(env_variable[index]);
-		var = ft_init_env_variable(name, value, VALUE);
+		value = ft_get_env_var_value(env_variable[index]);
+		var = ft_init_env_var(name, value, VALUE);
 		ft_add_var_list(env, var);
 		index++;
 	}
@@ -31,10 +31,10 @@ void	ft_add_new_env_var(t_env *env, t_var *new)
 
 char	**ft_add_env_var(char **var, char *variable)
 {
-	int		*last_index;
+	int		last_index;
 	char	**new_var;
 
-	last_index = ft_len_array(var);
-	new_var = ft_array_join_str(var, variable, last_index);
+	last_index = len_array(var);
+	new_var = ft_arrayjoin_str(var, variable, last_index);
 	return (new_var);
 }

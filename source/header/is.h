@@ -11,7 +11,7 @@ int		is_backslash(char c);
 int		is_word(t_env *env, char *s, int i);
 
 int		is_blank(char c);
-int		is_blank_arg(t_env, *env, char *s, int i);
+int		is_blank_arg(t_env *env, char *s, int i);
 int		is_blank_before_redir(char *s, int i);
 int		is_blank_before_finish(char *s, int i);
 
@@ -54,7 +54,7 @@ int		is_cmd_bin(t_cmd *cmd);
 int		is_cmd_builtin(t_cmd *cmd);
 
 int		is_output_chevron(char *s, int i);
-int		is_input_chevon(char *s, int i);
+int		is_input_chevron(char *s, int i);
 int		is_append_chevron(char *s, int i);
 int		is_heredoc(char *s, int i);
 
@@ -72,10 +72,10 @@ int		is_exit(t_cmd *cmd);
 int		is_unset(t_cmd *cmd);
 int		is_bin(t_env *env, char *word);
 int		is_cmd(t_env *env, char *word);
-int		is_builitin(char *content);
+int		is_builtin(char *content);
 
 int		is_arg(char *s, int i);
-int		is_flag(char *s, int i);
+int		is_flags(char *s, int i);
 
 int		is_standard_fd(int fd);
 int		isnot_standard_fd(int fd);
@@ -84,7 +84,7 @@ int		cmd_have_standard_fd(t_cmd *cmd);
 int		is_file(char *s, int i);
 int		is_after_redirect(char *s, int i);
 int		is_after_heredoc(char *s, int i);
-int		is_delimiter(char *s, int i);
+int		is_limiter(char *s, int i);
 
 int		is_finish(char c);
 int		index_is_overflow(char *s, int i);
@@ -105,6 +105,8 @@ char	*var_name_extraction(char *s, int i);
 
 int		is_same_name(char *first, char *second);
 int		is_valid_identifier(char *s);
-int		is_flag_n(char *s);
+int		is_flag_n(char *flags);
+int     is_numeric(char *s);
+int     is_absolute_path(char *content);
 
 #endif

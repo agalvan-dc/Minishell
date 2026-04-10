@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../libft.h"
 
 int	len_array(char **array)
 {

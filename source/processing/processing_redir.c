@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	ft_processing_redir(t_env *env)
 {
@@ -6,16 +6,16 @@ void	ft_processing_redir(t_env *env)
 
 	if (have_token_redir(env))
 	{
-		token = ft_get_first_token_redir(env);
+		token = ft_get_first_token_redirection(env);
 		while (token)
 		{
 			ft_manage_fd_for_redir(token);
-			token = ft_get_next_token_redir(token);
+			token = ft_get_next_token_redirection(token);
 		}
 		if (env->verbose == 1)
 		{
 			printf("==== Processing Redirection ====\n");
-			ft_print_all_redirect_info(env);
+			ft_print_all_redir_info(env);
 			printf("-- Command Redirection --\n");
 			ft_print_all_cmd_info(env);
 			printf("======\n");

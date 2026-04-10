@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void    ft_print_pipe_info(t_redir *redir, t_cmd *prev_cmd, t_cmd *next_cmd)
 {
@@ -20,16 +20,16 @@ void    ft_print_pipe_info(t_redir *redir, t_cmd *prev_cmd, t_cmd *next_cmd)
 	ft_printf(" ----------------\n");
 }
 
-void	ft_print_redir(t_token *token, t_cmd *prev_cmd, t_cmd *next_cmd, t_file *next_file)
+void	ft_print_redirect(t_token *token, t_cmd *prev_cmd, t_cmd *next_cmd, t_file *next_file)
 {
 	t_redir		*redir;
 
 	redir = ft_get_class(token);
 	ft_printf("___[TOKEN REDIRECTION]___\n");
-	if (is_token_pipe(pipe))
+	if (is_token_pipe(token))
 		ft_print_pipe_info(redir, prev_cmd, next_cmd);
 	else if (is_token_heredoc(token))
-		ft_print_heredoc_token(redir, prev_cmd);
+		ft_print_heredoc_info(redir, prev_cmd);
 	else if (is_token_input_chevron(token))
 		ft_print_input_chevron(redir, prev_cmd, next_file);
 	else if (is_token_output_chevron(token))
@@ -48,7 +48,7 @@ void	ft_print_all_redir_info(t_env *env)
 	while (token)
 	{
 		if (is_token_redir(token))
-			ft_print_redir(token, ft_get_prev_cmd(token), ft_get_next_cmd(token), ft_get_next_token_file(token));
-		token = ft_get_next_token_redir(token);
+			ft_print_redirect(token, ft_get_prev_cmd(token), ft_get_next_cmd(token), ft_get_next_token_file(token));
+		token = ft_get_next_token_redirection(token);
 	}
 }

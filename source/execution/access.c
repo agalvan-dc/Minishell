@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 char	**ft_get_list_of_bins(t_env *env)
 {
@@ -19,11 +19,13 @@ int		ft_test_bin_access(char **bins, char *word)
 	while (bins[i])
 	{
 		path = ft_strjoin_char(bins[i], word, '/');
-		if (access(path X_OK & F_OK) == 0)
+		if (access(path, X_OK | F_OK) == 0)
 		{
 			free(path);
 			return (1);
 		}
+		free(path);
+		i++;
 	}
 	return (0);
 }

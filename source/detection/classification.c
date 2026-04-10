@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 int		ft_redir_classification(t_env *env, char *line, int i)
 {
@@ -8,7 +8,7 @@ int		ft_redir_classification(t_env *env, char *line, int i)
 	new_i = ft_redirection_detection(line, i);
 	token = ft_create_token_redir(line, i, new_i);
 	ft_add_token_list(env, token);
-	i = ft_arg_redirect_extraction(env, token, line, new_i);
+	i = ft_arg_redirect_extraction(token, env, line, new_i);
 	return (i);
 }
 
@@ -19,9 +19,9 @@ int		ft_word_classification(t_env *env, char *line, int i)
 	t_token	*token;
 
 	new_i = ft_word_detection(env, line, i);
-	content = ft_substr(line, i, new_i);
+	content = malloc_substrcpy(line, i, new_i);
 	if (is_cmd(env, content))
-		new_index = ft_cmd_tokenizer(env, line, content, new_i + 1);
+		new_i = ft_cmd_tokenizer(env, line, content, new_i + 1);
 	else
 	{
 		token = ft_word_tokenizer(content, TOKEN_WORD);
@@ -37,7 +37,11 @@ t_token	*ft_cmd_classification(t_env *env, char *content)
 	token = NULL;
 	if (is_builtin(content))
 		token = ft_cmd_tokenization(content, TOKEN_BUILTIN);
+	else if (is_absolute_path(content))
+		token = ft_cmd_tokenization(content, TOKEN_BIN);
 	else if (is_bin(env, content))
+		token = ft_cmd_tokenization(content, TOKEN_BIN);
+	else
 		token = ft_cmd_tokenization(content, TOKEN_BIN);
 	return (token);
 }
@@ -54,7 +58,7 @@ int		ft_arg_classification(t_env *env, t_cmd *cmd, char *line, int i)
 	else if (is_double_quote(line[i]))
 		new_i = ft_double_tokenizer(env, cmd, line, i);
 	else if (is_variable_word(line, i))
-		new_i = ft_variable_tokenizer(env, cmd, line, i);
+		new_i = ft_var_tokenizer(env, cmd, line, i);
 	else if (is_word(env, line, i))
 		new_i = ft_word_arg_extraction(env, cmd, line, i);
 	return (new_i);

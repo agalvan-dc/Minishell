@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 int     ft_assign_env_var_id(char *value)
 {
@@ -11,7 +11,7 @@ void	ft_change_or_create_var(t_env *env, char *name, char *value, int id)
 {
 	t_var	*var;
 
-	if (ft_var_exist(env, name))
+	if (is_variable_exist(env, name))
 	{
 		ft_change_env_var_value_with_name(env, name, value);
 		free(name);
@@ -29,7 +29,7 @@ int		ft_export_builtin(t_cmd *cmd, t_env *env)
 	char	*value;
 	int		id;
 
-	if (!cmd)
+	if (!cmd->arg)
 	{
 		ft_print_all_env_export_var_fd(env, cmd->fd_out);
 		return (0);	
@@ -42,7 +42,7 @@ int		ft_export_builtin(t_cmd *cmd, t_env *env)
 	}
 	value = ft_get_env_var_value(cmd->arg);
 	id = ft_assign_env_var_id(value);
-	change_or_create_var(env, name, value, id);
+	ft_change_or_create_var(env, name, value, id);
 	return (0);
 }
 

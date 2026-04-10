@@ -1,12 +1,10 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 int		ft_get_last_status(int bin_status, int ret_builtin)
 {
-	if (ret_builtin == -1)
-		return (bin_status);
-	else if (bin_status == -1)
+	if (ret_builtin != -1)
 		return (ret_builtin);
-	return (0);
+	return (bin_status);
 }
 
 int	ft_convert_status_process_value(int status)

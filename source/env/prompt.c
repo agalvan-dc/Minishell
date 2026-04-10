@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	ft_prompt(t_env *env)
 {
@@ -13,7 +13,7 @@ void	ft_prompt(t_env *env)
 			ft_printf("Exit\n");
 			return ;
 		}
-		if (!(ft_line_is_empty(read_line)))
+		if (!(line_is_empty(read_line)))
 			ft_execute_line(env, read_line);
 		free(read_line);
 	}
@@ -29,7 +29,7 @@ void	ft_create_history(char *line)
 {
 	int		fd;
 
-	ft_add_history(line);
+	add_history(line);
 	fd = open("history.log", O_CREAT | O_WRONLY | O_APPEND, 0644);
 	if (fd == -1)
 		perror("Error in history");

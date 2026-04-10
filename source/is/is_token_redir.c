@@ -1,10 +1,10 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 int		is_token_input_chevron(t_token *token)
 {
 	if (!token)
 		return (0);
-	if (token->id == INPUT_CHEVRON)
+	if (token->id == TOKEN_INPUT_CHEVRON)
 		return (1);
 	return (0);
 }
@@ -13,7 +13,7 @@ int		is_token_append_chevron(t_token *token)
 {
 	if (!token)
 		return (0);
-	if (token->id == OUTPUT_CHEVTON)
+	if (token->id == TOKEN_OUTPUT_CHEVRON)
 		return (1);
 	return (0);
 }

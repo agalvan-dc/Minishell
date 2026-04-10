@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	ft_remove_line(t_line *line)
 {
@@ -47,15 +47,14 @@ void	ft_remove_var_list(t_env *env)
 	var = ft_get_first_env_var(env);
 	if (!var)
 		return ;
-	var = iter;
-	while (iter)
+	while (var)
 	{
-		iter = iter->next;
+		iter = var->next;
 		ft_disconnect_env_var(env, var);
 		ft_remove_env_var(var);
 		var = iter;
 	}
-	env->first->var = NULL;
+	env->first_var = NULL;
 }
 
 void	ft_remove_all(t_env *env)
@@ -63,6 +62,5 @@ void	ft_remove_all(t_env *env)
 	ft_remove_all_token(env);
 	ft_remove_var_list(env);
 	ft_remove_all_line(env);
-	ft_remove_env_var(env);
 	free(env);
 }

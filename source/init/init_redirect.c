@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 t_redir		*ft_init_redir(int type, char *content)
 {
@@ -11,7 +11,7 @@ t_redir		*ft_init_redir(int type, char *content)
 	redir->content = content;
 	redir->fd_in = STDIN_FILENO;
 	redir->fd_out = STDOUT_FILENO;
-	redir->limiter = NULL;
+	redir->delimiter = NULL;
 	redir->tmp_file = NULL;
 	return (redir);
 }
@@ -27,7 +27,7 @@ t_redir		*ft_init_heredoc(int type, char *content, char *limiter)
     redir->content = content;
     redir->fd_in = STDIN_FILENO;
     redir->fd_out = STDOUT_FILENO;
-    redir->limiter = limiter;
+    redir->delimiter = limiter;
     redir->tmp_file = NULL;
     return (redir);
 }

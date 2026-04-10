@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	ft_tokenization(t_env *env, char *line)
 {
@@ -21,10 +21,10 @@ int		ft_single_tokenization(t_cmd *cmd, char *line, int start, int index)
 	char	*content;
 
 	if (is_finish(line[index]))
-		content = ft_get_rest_single_token(line, start, index, "\'");
+		content = ft_get_rest_single_quote(line, start, index, "\'");
 	else
 	{
-		content = ft_substr(line, start, index);
+		content = malloc_substrcpy(line, start, index);
 		index++;
 	}
 	arg = ft_create_arg(content, TOKEN_SINGLE_QUOTE);
@@ -36,6 +36,6 @@ t_token	*ft_cmd_tokenization(char *word, int fd)
 {
 	t_token	*token;
 
-	token = ft_create_token_command(id, word);
+	token = ft_create_token_cmd(word, fd);
 	return (token);
 }

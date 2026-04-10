@@ -1,8 +1,8 @@
-#include "../minishell.c"
+#include "../../minishell.h"
 
 int		line_is_finish(char *s, int i)
 {
-	if (i >= ft_strlen(s) && is_finish(s[i]))
+	if (i >= ft_strlen(s))
 		return (1);
 	return (0);
 }

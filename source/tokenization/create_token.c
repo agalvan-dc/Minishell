@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 t_token	*ft_create_token_word(char *content, int id)
 {
@@ -6,7 +6,7 @@ t_token	*ft_create_token_word(char *content, int id)
 	
 	token = ft_init_token();
 	token->id = id;
-	token->class = init_word(content, id);
+	token->class = ft_init_word(content, id);
 	return (token);
 }
 
@@ -24,11 +24,11 @@ t_token	*ft_create_token_redir(char *content, int index, int new_i)
 	int		type;
 	t_token	*token;
 
-	line = ft_substr(content, index, new_i);
-	type = ft_type_of_redirect(content);
+	line = malloc_substrcpy(content, index, new_i);
+	type = ft_type_of_redirect(line);
 	token = ft_init_token();
 	token->id = type;
-	token->class = ft_init_redir(type, content);
+	token->class = ft_init_redir(type, line);
 	return (token);
 }
 

@@ -1,8 +1,8 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	ft_connect_token(t_token *curr_token, t_token *next_token)
 {
-	curr_token-next = next_token;
+	curr_token->next = next_token;
 	next_token->prev = curr_token;
 }
 
@@ -24,7 +24,7 @@ void    ft_connect_new_var(t_var *curr_var, t_var *prev_var, t_var *next_var)
 		curr_var->prev = NULL;
 	else
 	{
-		cur_var->next = next_var;
+		curr_var->next = next_var;
 		prev_var->next = curr_var;
 	}
 	if (!next_var)

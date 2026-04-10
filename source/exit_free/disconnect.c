@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	ft_disconnect_args(t_arg *curr_arg)
 {
@@ -27,13 +27,13 @@ void	ft_disconnect_line(t_line *curr_line)
 	if (next_line)
 		next_line->prev = prev_line;
 	curr_line->next = NULL;
-	cutt_line->prev = NULL;
+	curr_line->prev = NULL;
 }
 
 void    ft_disconnect_env_var_first(t_env *env, t_var *var, t_var *var_next)
 {
 	if (!var->next)
-		env->first_env = NULL;
+		env->first_var = NULL;
 	else
 	{
 		env->first_var = var_next;
@@ -64,7 +64,7 @@ void	ft_disconnect_env_var(t_env *env, t_var *var)
 	var->prev = NULL;
 }
 
-void	ft_disconect_token(t_token *token)
+void	ft_disconnect_token(t_token *token)
 {
 	token->next = NULL;
 	token->prev = NULL;

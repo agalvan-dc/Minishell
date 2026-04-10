@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 int     ft_single_tokenizer(t_cmd *cmd, char *line, int index)
 {
@@ -26,13 +26,13 @@ void    ft_double_tokenization(t_env *env, t_cmd *cmd, char *content)
     {
         if (is_variable_word(content, index))
         {
-            new_i = ft_vars_tokenization(env, cmd, content, i);
-            i = new_i;
+            new_i = ft_vars_tokenization(env, cmd, content, index);
+            index = new_i;
         }
         else
         {
-            new_i = ft_string_extraction(env, cmd, content, i);
-            i = new_i;
+            new_i = ft_string_extraction(env, cmd, content, index);
+            index = new_i;
         }
         index++;
     }

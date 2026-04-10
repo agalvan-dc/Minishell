@@ -1,6 +1,8 @@
 #ifndef TOKEN_H
 #define TOKEN_H
 
+#include "class.h"
+
 #define TOKEN_NULL 0
 #define TOKEN_BLANK 1
 #define TOKEN_WORD 2
@@ -38,8 +40,14 @@ t_word	*ft_init_word(char *content, int id);
 t_cmd	*ft_init_cmd(char *content, int id);
 
 void	ft_tokenization(t_env *env, char *line);
-int		ft_single_tokenization(t_cmd *cmd char *line, int start, int index);
+int		ft_single_tokenization(t_cmd *cmd, char *line, int start, int index);
 t_token	*ft_cmd_tokenization(char *word, int fd);
+t_token	*ft_word_tokenizer(char *content, int id);
+int		ft_next_file_tokenizer(t_env *env, char *line, int index);
+void	ft_word_arg_tokenizer(t_env *env, t_cmd *cmd, char *content);
+t_token	*ft_file_tokenizer(char *name, int id);
+int		ft_blank_arg_tokenizer(t_env *env, t_cmd *cmd, char *line, int index);
+
 
 int		ft_cmd_tokenizer(t_env *env, char *line, char *content, int index);
 t_arg	*ft_arg_tokenizer(char *line, int start, int end, int fd);

@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	ft_close_fd_cmd(t_cmd *cmd)
 {

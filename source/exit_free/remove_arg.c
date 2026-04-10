@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	ft_remove_arg(t_arg *arg)
 {
@@ -57,8 +57,8 @@ void    ft_remove_arg_index(t_cmd *cmd, t_arg *arg)
 
 void	ft_remove_env_vars(t_env *env)
 {
-	if	(env->vars)
-		ft_free_array(env->env_vars);
+	if	(env->env_vars)
+		free_array(env->env_vars);
 	env->env_vars = NULL;
 }
 

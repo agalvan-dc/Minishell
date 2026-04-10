@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void    ft_print_heredoc_info(t_redir *redir, t_cmd *prev_cmd)
 {
@@ -12,7 +12,7 @@ void    ft_print_heredoc_info(t_redir *redir, t_cmd *prev_cmd)
 	ft_printf(" | type : [%d]\n", redir->type);
 	ft_printf(" | cmd_in : [%s]\n", prev_cmd_name);
 	ft_printf(" | fd_in : [%d]\n", redir->fd_in);
-	ft_printf(" | LIMITER : [%s]\n", redir->limiter);
+	ft_printf(" | LIMITER : [%s]\n", redir->delimiter);
 	ft_printf(" ----------------\n");
 }
 

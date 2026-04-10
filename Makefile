@@ -13,12 +13,12 @@ SRC += $(wildcard source/exit_free/*.c)
 SRC += $(wildcard source/get/*.c)
 SRC += $(wildcard source/init/*.c)
 SRC += $(wildcard source/is/*.c)
+SRC += $(wildcard source/parser/*.c)
 SRC += $(wildcard source/parsing/*.c)
 SRC += $(wildcard source/processing/*.c)
 SRC += $(wildcard source/redirection/*.c)
 SRC += $(wildcard source/tokenization/*.c)
 SRC += $(wildcard source/verbose/*.c)
-SRC += $(wildcard source//*.c)
 
 HEADER = header/class.h \
 		header/execution.h \
@@ -53,11 +53,23 @@ ifeq ($(UNAME), linux)
 	NPROC := $(shell nproc)
 
 else
-	NPROC := $(shell sysctl -n hw.ncpu)
-	FLAGS += -I$(HOME)/.brew/opt/readline/include
-	READLINE += -L$(HOME)/.brew/opt/readline/lib
-
+    READLINE_PATH = $(shell brew --prefix readline)
+    FLAGS += -I$(READLINE_PATH)/include
+    READLINE += -L$(READLINE_PATH)/lib
 endif
+
+# === Convert all .c to .o with flags and header === # 
+%.o : %.c
+			@$(CC) $(FLAGS) -c $< -o $@
+
+$(NAME) : 	    $(OBJS)
+				@echo "==== Create all .o ===="
+				@echo "==== Compiling all .c ===="
+				@echo "==== Compiling libft ===="
+				@$(MAKE) -C source/libft
+				@echo "==== Compiling Minishell ===="
+				@$(CC) $(OBJS) $(FLAGS) $(READLINE) $(LIBFT) -o $(NAME)
+				@cat "$(TEMPLATE)"		
 
 all : $(NAME)
 

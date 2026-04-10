@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 int		is_blank(char c)
 {
@@ -18,7 +18,7 @@ int		is_blank_arg(t_env *env, char *s, int i)
 
 int		is_blank_before_redir(char *s, int i)
 {
-	if (is_blank(c) && is_separator(s, i + 1))
+	if (is_blank(s[i]) && is_separator(s, i + 1))
 	{
 		while (s[i] && is_blank(s[i]))
 		{

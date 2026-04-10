@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 //review
 int		ft_double_quote_detection(char *line, int index)
 {
@@ -42,7 +42,7 @@ char	*ft_get_content_double(char *line, int start, int *index)
 		content = ft_get_rest_single_quote(line, start, *index, "\"");
 	else
 	{
-		content = ft_substr(line, start, *index);	
+		content = malloc_substrcpy(line, start, *index);	
 		(*index)++;
 	}
 	return (content);
@@ -54,9 +54,9 @@ char	*ft_get_rest_single_quote(char *line, int start, int end, char *quote)
 	char	*heredoc;
 	char	*dup;
 	
-	content = ft_substr(line, start, end);
+	content = malloc_substrcpy(line, start, end);
 	heredoc = ft_heredoc_not_finish(quote);
-	dup = ft_strdup(content);
+	dup = malloc_strcpy(content);
 	
 	free(content);
 	content = ft_strjoin(dup, heredoc);

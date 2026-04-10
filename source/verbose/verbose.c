@@ -1,16 +1,16 @@
-#define "../minishell.h"
+#include "../../minishell.h"
 
 void	ft_ask_verbose(t_env *env)
 {
 	char	answer;
 
-	printf("Minishell mode verbose [Y/N] ?");
+	ft_printf("Minishell mode verbose [Y/N] ?");
 	read(0, &answer, 1);
 	if (answer == -1)
 		return ;
 	if (answer == 'Y' || answer == 'y')
 	{
-		printf("--- Minishell mode verbose activate ---\n");
+		ft_printf("--- Minishell mode verbose activate ---\n");
 		env->verbose = 1;
 	}
 	else if (answer == 'N' || answer == 'n')

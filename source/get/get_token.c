@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 t_token	*ft_get_first_token(t_env *env)
 {

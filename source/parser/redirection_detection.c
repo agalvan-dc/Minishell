@@ -1,13 +1,13 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 int		ft_redirection_detection(char *line, int index)
 {
 	int 	start;
 
 	start = index;
-	while (ft_line_isnot_finished(line, index))
+	while (!(line_is_finish(line, index)))
 	{
-		if (!(ft_line_isnot_finished(line, index)))
+		if (line_is_finish(line, index))
 			return (index - 1);
 		index++;
 	}
@@ -20,7 +20,7 @@ int		ft_limiter_detection(char *line, int index)
 {
 	while (line[index])
 	{
-		if (is_blank(line[index]) || is_separator(line[index]))
+		if (is_blank(line[index]) || is_separator(line, index))
 			return (index - 1);
 		else if (is_double_quote(line[index]))
 			index = ft_double_quote_detection(line, index);

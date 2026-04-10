@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 int		ft_cmd_tokenizer(t_env *env, char *line, char *content, int index)
 {
@@ -22,8 +22,8 @@ t_arg	*ft_arg_tokenizer(char *line, int start, int end, int fd)
 	if (!line)
 		content = NULL;
 	else
-		content = ft_substr(line, start, end);
-	arg = ft_create_arg(content, id);
+		content = malloc_substrcpy(line, start, end);
+	arg = ft_create_arg(content, fd);
 	return (arg);
 }
 
@@ -58,7 +58,7 @@ int		ft_vars_tokenization(t_env *env, t_cmd *cmd, char *line, int index)
 	t_arg	*arg;
 
 	new_i = ft_variable_detection(line, index + 1);
-	name = ft_substr(line, index, new_i);
+	name = malloc_substrcpy(line, index, new_i);
 	if (is_variable_exist(env, name))
 	{
 		arg = ft_create_arg(name, TOKEN_VARIABLE);

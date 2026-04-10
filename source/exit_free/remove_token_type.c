@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	ft_remove_token_cmd(t_cmd *cmd)
 {
@@ -27,9 +27,9 @@ void	ft_remove_token_redir(t_redir *redir)
 	if (redir->content)
 		free(redir->content);
 	redir->content = NULL;
-	if (redir->limiter)
-		free(redir->limiter);
-	redir->limiter = NULL;
+	if (redir->delimiter)
+		free(redir->delimiter);
+	redir->delimiter = NULL;
 	free(redir);
 }
 
@@ -40,10 +40,8 @@ void	ft_remove_token_file(t_file *file)
 	if (file->name)
 		free(file->name);
 	file->name = NULL;
-	if (file->limiter)
-		free(file->limiter);
-	file->limiter = NULL;
-	free(file);
+	if (file)
+		free(file);
 }
 
 void	ft_remove_token_word(t_word *word)

@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 int		ft_arg_redirect_extraction(t_token *token, t_env *env, char *line, int i)
 {
@@ -15,12 +15,11 @@ int     ft_word_arg_extraction(t_env *env, t_cmd *cmd, char *line, int index)
     int     start;
 
     start = index;
-    while (line[index] && !is_word_argument_separator(env, line, index))
+    while (line[index] && !(is_word_arg_sep(env, line, index)))
         index++;
-    content = ft_substr(line, start, index - 1);
+    content = malloc_substrcpy(line, start, index - 1);
     ft_word_arg_tokenizer(env, cmd, content);
-    free(content);
-    return (index - 1);
+    return (index);
 }
 
 int     ft_string_extraction(t_env *env, t_cmd *cmd, char *line, int index)
@@ -50,7 +49,7 @@ int		ft_limiter_extraction(t_redir *redir, char *line, int i)
 		if (!(is_blank(line[i])))
 		{
 			new_i = ft_limiter_detection(line, i);
-			redir->limiter = ft_substr(line, i, new_i);
+			redir->delimiter = ft_substr(line, i, new_i);
 		}
 		i++;
 	}

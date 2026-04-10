@@ -30,4 +30,8 @@ void	ft_print_pipe_info(t_redir *redir, t_cmd *prev_cmd, t_cmd *next_cmd);
 void	ft_print_chained_list(t_env *env);
 void	ft_print_token(t_token *token);
 
+void	ft_print_all_env_export_var_fd(t_env *env, int fd);
+void	ft_print_all_env_var_fd(t_env *env, int fd);
+void	ft_print_env_var_fd(t_var *var, int fd);
+
 #endif

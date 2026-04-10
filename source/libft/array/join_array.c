@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../libft.h"
 
 void	copy_dimensions(char **array, char **new_array, int y, int *i)
 {

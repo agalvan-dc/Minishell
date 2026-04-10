@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 t_token		*ft_get_first_token_redirection(t_env *env)
 {
@@ -52,7 +52,7 @@ int			ft_get_nbr_pipes(t_env *env)
 	cont = 0;
 	token = ft_get_first_token(env);
 	if (!token)
-		return (NULL);
+		return (0);
 	while (token)
 	{
 		if (is_token_pipe(token))

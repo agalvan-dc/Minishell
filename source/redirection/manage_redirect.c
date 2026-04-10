@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	ft_open_next_file_with_flags(t_token *token, t_file *file)
 {
@@ -28,7 +28,7 @@ void	ft_manage_fd_heredoc(t_token *token)
 
 	redir = ft_get_class(token);
 	prev_cmd = ft_get_prev_cmd(token);
-	tmp_file_name = ft_heredoc_prompt(redir->limiter);
+	tmp_file_name = ft_heredoc_prompt(redir->delimiter);
 	fd_tmp = open(tmp_file_name, O_RDONLY, 0777);
 	redir->tmp_file = ft_init_file(tmp_file_name, fd_tmp);
 	if (prev_cmd)
@@ -45,12 +45,13 @@ void	ft_manage_fd_pipe(t_token *token)
 	next_cmd = ft_get_next_cmd(token);
 	if (!next_cmd || !prev_cmd)
 		return ;
-	pipe(fd);
+	if (pipe(fd) == -1)
+		return ;
 	ft_change_fd_cmd(prev_cmd, prev_cmd->fd_in, fd[1]);
 	ft_change_fd_cmd(next_cmd, fd[0], next_cmd->fd_out);
 }
 
-void	manage_fd_basic_redirection(t_token *token)
+void	ft_manage_fd_basic_redir(t_token *token)
 {
 	t_cmd	*prev_cmd;
 	t_file	*next_file;

@@ -1,6 +1,6 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
-int		check_error_token_cmd(t_token *token)
+int		ft_check_error_token_cmd(t_token *token)
 {
 	int		res;
 	t_cmd	*cmd;

@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 t_token		*ft_get_first_token_cmd(t_env *env)
 {
@@ -53,7 +53,7 @@ t_cmd		*ft_get_prev_cmd(t_token *token)
 	while (token)
 	{
 		if (is_token_cmd(token))
-			return (get_class(token))
+			return (ft_get_class(token));
 		token = token->prev;
 	}
 	return (NULL);

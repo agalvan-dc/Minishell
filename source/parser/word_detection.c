@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 int		ft_word_detection(t_env *env, char *line, int index)
 {
@@ -6,10 +6,10 @@ int		ft_word_detection(t_env *env, char *line, int index)
 	{
 		if (is_delimiter(env, line, index))	
 			return (index - 1);
-		if (is_double_quotes(line[index]))
-			index = double_quote_detection(line, index);
+		if (is_double_quote(line[index]))
+			index = ft_double_quote_detection(line, index);
 		if (is_single_quote(line[index]))
-			index = single_quote_detection(line, index);
+			index = ft_single_quote_detection(line, index);
 		index++;
 	}
 	return (index);
@@ -58,4 +58,5 @@ int		ft_blank_escape(char *line, int index)
 			return (index);
 		index++;
 	}
+	return (index);
 }

@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	ft_print_token(t_token *token)
 {
@@ -25,7 +25,7 @@ void	ft_print_chained_list(t_env *env)
 	ft_printf("==== Parsing ====\n");
 	while (iter)
 	{
-		print_token(iter);
+		ft_print_token(iter);
 		iter = iter->next;
 	}
 	ft_printf("=========\n");

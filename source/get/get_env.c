@@ -1,11 +1,9 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 char	**ft_get_env_var(t_env *env)
 {
-	if (env->env_vars)
-		ft_remove_env_vars(env);
-	env->vars = ft_var_list_to_array(env);
-	return (env_vars);
+	env->env_vars = ft_var_list_to_array(env);
+	return (env->env_vars);
 }
 
 char	**ft_get_env_bins(t_env *env)

@@ -1,15 +1,15 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	ft_execute_line(t_env *env, char *line)
 {
 	ft_parsing(env, line);
 	ft_check_error_parsing(env);
 
-	if (ft_doesnt_have_error_parsing(env))
+	if (ft_doesnt_have_error_parsing(env) == 1)
 	{
 		ft_processing_cmd(env);
 		ft_processing_redir(env);
-		if (ft_doesnt_have_error_processing)
+		if (ft_doesnt_have_error_processing(env) == 1)
 			ft_execution(env);
 	}
 	ft_reset_counter_error(env);

@@ -1,4 +1,4 @@
-#include "../minishell"
+#include "../../minishell.h"
 
 void	ft_reset_counter_error(t_env *env)
 {

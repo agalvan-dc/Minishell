@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../../minishell.h"
 
 t_token	*ft_get_next_token_cmd(t_token *token)
 {
@@ -36,25 +36,25 @@ t_token	*ft_get_next_token_bin(t_token *token)
 	return (NULL);
 }
 
-t_token	*ft_get_next_token_file(t_token *token)
+t_file	*ft_get_next_token_file(t_token *token)
 {
 	token = token->next;
 	while (token)
 	{
 		if (is_token_file(token))
-			return (token);
+			return (ft_get_class(token));
 		token = token->next;
 	}
 	return (NULL);
 }
 
-t_token	*ft_get_next_cmd(t_token *token)
+t_cmd	*ft_get_next_cmd(t_token *token)
 {
 	token = token->next;
 	while (token)
 	{
 		if (is_token_cmd(token))
-			return (token);
+			return (ft_get_class(token));
 		token = token->next;
 	}
 	return (NULL);
