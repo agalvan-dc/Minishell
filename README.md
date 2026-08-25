@@ -1,6 +1,4 @@
-Aquí tienes el `README.md` completo, manteniendo todo tu contenido intacto y sustituyendo únicamente los bloques de los diagramas por su versión nativa en Mermaid para que se rendericen perfectamente en GitHub:
-
-[source: 2]*This project has been created as part of the 42 curriculum by agalvan-.*
+*This project has been created as part of the 42 curriculum by agalvan-.*
 
 # Minishell
 
