@@ -10,8 +10,6 @@ Minishell features a complete execution pipeline capable of reading user input, 
 
 Here is the expanded section detailing shell theory, tokenization, and parsing to include in your `README.md`.
 
-Since I cannot generate and save a physical image file (like a `.png` or `.jpg`) directly to your repository, I have implemented the Execution Pipeline Overview using a **Mermaid.js diagram**. GitHub natively renders Mermaid code blocks as clean, visual graphs, making it the perfect solution for README documentation.
-
 ---
 
 ## Shell Theory and Core Concepts
