@@ -414,30 +414,31 @@ Minishell/
 
 To ensure zero memory leaks and strict compliance with project constraints, every allocated memory block follows a clear ownership cycle:
 
-```graph TD
-    A([Start REPL Loop]) --> B[1. readline() allocates dynamic input string]
+```mermaid
+graph TD
+    A([Start REPL Loop]) --> B[1. readline allocates dynamic input string]
     
-    B --> C{Is Input Empty / EOF?}
-    C -- Yes (EOF) --> D[Free Env List & Exit Shell]
-    C -- No --> E[2. Token Allocation: ft_calloc & ft_strdup]
+    B --> C{Is Input Empty or EOF?}
+    C -- Yes --> D[Free Env List and Exit Shell]
+    C -- No --> E[2. Token Allocation: calloc and strdup]
     
     E --> F{Syntax Check Passed?}
     F -- No --> G[Abort Cycle]
     
-    F -- Yes --> H[3. Command Nodes & char** Arrays Allocated]
-    H --> I[Execute Commands & Open FDs]
+    F -- Yes --> H[3. Command Nodes and Arrays Allocated]
+    H --> I[Execute Commands and Open FDs]
     I --> J[4. Full Execution Cleanup]
     
     G --> K[Free Lexer Tokens]
     J --> K
     
-    K --> L[Free flattened char** arguments]
+    K --> L[Free flattened arguments array]
     L --> M[Close duplicated File Descriptors]
     M --> N[Unlink temporary heredoc files]
     N --> O[Free raw input string]
     
     O --> P([Return to Start for Next Input])
-    ```
+```
 
 ---
 
