@@ -8,7 +8,6 @@
 
 Minishell features a complete execution pipeline capable of reading user input, parsing single and double quotes, expanding environment variables, handling input/output redirections (`<`, `>`, `<<`, `>>`), setting up inter-process communication via pipes (`|`), managing background/foreground processes, handling interactive signal states, and running both standard system binaries and built-in commands.
 
-Here is the expanded section detailing shell theory, tokenization, and parsing to include in your `README.md`.
 
 ---
 
