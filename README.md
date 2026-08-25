@@ -90,15 +90,42 @@ The shell operates as an interactive REPL (Read-Eval-Print Loop). Input strings 
 
 ### Execution Pipeline Overview
 
-```mermaid
-graph TD
-    A[User Input] --> B[1. Lexical Analysis & Tokenization<br/>- Split input into discreet tokens<br/>- Identify commands, args, pipes, redirections]
-    B --> C[2. Parsing & Quote Handling<br/>- Validate syntax integrity<br/>- Classify token types<br/>- Handle single and double quotes]
-    C --> D[3. Variable Expansion & Processing<br/>- Expand environment variables $VAR, $?<br/>- Concatenate adjacent tokens]
-    D --> E[4. Redirection & Heredoc Handling<br/>- Evaluate input/output redirections <, >, >><br/>- Process heredocs << into temporary descriptors]
-    E --> F[5. Execution Engine<br/>- If Built-in: Execute directly<br/>- If Pipeline: fork, pipe, dup2, execve<br/>- Collect exit status with waitpid]
-
-```
+```graph TD
+    A([1. readline: Wait for User Input]) --> B[2. Lexical Analysis]
+    B --> C[Tokenize: Identify Words, Pipes, Quotes, Redirections]
+    
+    C --> D{3. Is Syntax Valid?}
+    D -- No (e.g. '||', '> <') --> E[Print Syntax Error to STDERR]
+    
+    D -- Yes --> F[4. Parsing & Quote Handling]
+    F --> G{Has $ Variables?}
+    
+    G -- Yes --> H[Expand Variables against Env List]
+    G -- No --> I[5. Concatenate Adjacent Words]
+    H --> I
+    
+    I --> J{Has Redirections?}
+    J -- Yes (<, >, >>) --> K[Open Files & configure flags]
+    J -- Heredoc (<<) --> L[Prompt Heredoc & write to tmp file/pipe]
+    K --> M
+    L --> M
+    
+    J -- No --> M{6. Execution Type?}
+    
+    M -- Single Built-in --> N[Execute directly in Parent Context]
+    M -- Pipeline or External --> O[fork() Child Processes]
+    
+    O --> P[pipe() & dup2() File Descriptors]
+    P --> Q[execve() System Binary via PATH]
+    
+    N --> R[7. Collect Return Code]
+    Q --> S[waitpid() to monitor Child Exit]
+    S --> R
+    
+    R --> T[Update global/env status $?]
+    T --> U([8. Free iteration memory and loop])
+    E --> U
+     ```
 
 ---
 
@@ -386,13 +413,30 @@ Minishell/
 
 To ensure zero memory leaks and strict compliance with project constraints, every allocated memory block follows a clear ownership cycle:
 
-```mermaid
-graph TD
-    A[1. Prompt Input readline<br/>- Dynamic heap allocation returned by readline] --> B[2. Lexing & Parsing Node Allocation<br/>- Token structures allocated via ft_calloc<br/>- String duplicates allocated via ft_strdup]
-    B --> C[3. Execution Transformation<br/>- Argument lists flattened into char ** arrays]
-    C --> D[4. Full Cleanup Cycle<br/>- Free raw input line string<br/>- Traverse token tree and release nodes<br/>- Free converted char ** argument arrays<br/>- Close all duplicated file descriptors<br/>- Unlink temporary heredoc files]
-
-```
+```graph TD
+    A([Start REPL Loop]) --> B[1. readline() allocates dynamic input string]
+    
+    B --> C{Is Input Empty / EOF?}
+    C -- Yes (EOF) --> D[Free Env List & Exit Shell]
+    C -- No --> E[2. Token Allocation: ft_calloc & ft_strdup]
+    
+    E --> F{Syntax Check Passed?}
+    F -- No --> G[Abort Cycle]
+    
+    F -- Yes --> H[3. Command Nodes & char** Arrays Allocated]
+    H --> I[Execute Commands & Open FDs]
+    I --> J[4. Full Execution Cleanup]
+    
+    G --> K[Free Lexer Tokens]
+    J --> K
+    
+    K --> L[Free flattened char** arguments]
+    L --> M[Close duplicated File Descriptors]
+    M --> N[Unlink temporary heredoc files]
+    N --> O[Free raw input string]
+    
+    O --> P([Return to Start for Next Input])
+    ```
 
 ---
 
