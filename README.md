@@ -96,37 +96,37 @@ graph TD
     B --> C[Tokenize: Identify Words, Pipes, Quotes, Redirections]
     
     C --> D{3. Is Syntax Valid?}
-    D -- No (e.g. '||', '> <') --> E[Print Syntax Error to STDERR]
+    D -- No syntax error --> E[Print Syntax Error to STDERR]
     
-    D -- Yes --> F[4. Parsing & Quote Handling]
-    F --> G{Has $ Variables?}
+    D -- Yes --> F[4. Parsing and Quote Handling]
+    F --> G{Has Env Variables?}
     
     G -- Yes --> H[Expand Variables against Env List]
     G -- No --> I[5. Concatenate Adjacent Words]
     H --> I
     
     I --> J{Has Redirections?}
-    J -- Yes (<, >, >>) --> K[Open Files & configure flags]
-    J -- Heredoc (<<) --> L[Prompt Heredoc & write to tmp file/pipe]
+    J -- Yes --> K[Open Files and configure flags]
+    J -- Heredoc --> L[Prompt Heredoc and write to tmp file]
     K --> M
     L --> M
     
     J -- No --> M{6. Execution Type?}
     
     M -- Single Built-in --> N[Execute directly in Parent Context]
-    M -- Pipeline or External --> O[fork() Child Processes]
+    M -- Pipeline or External --> O[fork Child Processes]
     
-    O --> P[pipe() & dup2() File Descriptors]
-    P --> Q[execve() System Binary via PATH]
+    O --> P[pipe and dup2 File Descriptors]
+    P --> Q[execve System Binary via PATH]
     
     N --> R[7. Collect Return Code]
-    Q --> S[waitpid() to monitor Child Exit]
+    Q --> S[waitpid to monitor Child Exit]
     S --> R
     
-    R --> T[Update global/env status $?]
+    R --> T[Update global status]
     T --> U([8. Free iteration memory and loop])
     E --> U
-     ```
+```
 
 ---
 
