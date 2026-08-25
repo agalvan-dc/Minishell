@@ -46,32 +46,6 @@ While tokenization identifies the "words," parsing attempts to understand the "s
 * **Quote Removal:** Once expansions are complete, the parser strips the outer single and double quotes, passing only the literal inner string to the execution engine.
 
 
-## Execution Pipeline Visual Diagram
-
-```mermaid
-graph TD
-    A[User Input String] --> B[Lexical Analysis / Tokenizer]
-    B --> C{Syntax Valid?}
-    C -- No --> D[Print Syntax Error]
-    C -- Yes --> E[Parser & Quote Handling]
-    
-    E --> F[Variable Expansion]
-    F --> G[Setup Redirections & Pipes]
-    
-    G --> H{Is Built-in?}
-    H -- Yes, Single CMD --> I[Execute in Parent Process]
-    H -- No / Pipeline --> J[fork Child Process]
-    
-    J --> K[dup2 File Descriptors]
-    K --> L[execve System Binary]
-    L --> M[waitpid for Exit Status]
-    I --> N[Update Status $?]
-    M --> N
-    
-    N --> O[Return to Prompt]
-
-```
-
 ---
 
 ## Instructions
@@ -123,50 +97,48 @@ The shell operates as an interactive REPL (Read-Eval-Print Loop). Input strings 
 
 ### Execution Pipeline Overview
 
-```
- +-------------------------------------------------------+
- |                     User Input                        |
- +-------------------------------------------------------+
-                             |
-                             v
- +-------------------------------------------------------+
- |  1. Lexical Analysis & Tokenization                   |
- |     - Split input into discreet tokens                |
- |     - Identify commands, args, pipes, redirections    |
- +-------------------------------------------------------+
-                             |
-                             v
- +-------------------------------------------------------+
- |  2. Parsing & Quote Handling                          |
- |     - Validate syntax integrity                       |
- |     - Classify token types                            |
- |     - Handle single (') and double (") quotes         |
- +-------------------------------------------------------+
-                             |
-                             v
- +-------------------------------------------------------+
- |  3. Variable Expansion & Processing                   |
- |     - Expand environment variables ($VAR, $?)         |
- |     - Concatenate adjacent tokens                     |
- +-------------------------------------------------------+
-                             |
-                             v
- +-------------------------------------------------------+
- |  4. Redirection & Heredoc Handling                    |
- |     - Evaluate input/output redirections (<, >, >>)   |
- |     - Process heredocs (<<) into temporary descriptors|
- +-------------------------------------------------------+
-                             |
-                             v
- +-------------------------------------------------------+
- |  5. Execution Engine                                  |
- |     - If Built-in (parent context): Execute directly  |
- |     - If Pipeline: fork(), pipe(), dup2(), execve()   |
- |     - Collect exit status with waitpid()              |
- +-------------------------------------------------------+
-
-```
-
+<pre style="background-color: #0d1117; color: #c9d1d9; padding: 20px; border-radius: 8px; border: 1px solid #30363d; font-family: monospace; line-height: 1.2;">
+<span style="color: #58a6ff;">+-------------------------------------------------------+</span>
+<span style="color: #58a6ff;">|</span>                     <span style="color: #3fb950; font-weight: bold;">User Input</span>                        <span style="color: #58a6ff;">|</span>
+<span style="color: #58a6ff;">+-------------------------------------------------------+</span>
+                             <span style="color: #8b949e;">|</span>
+                             <span style="color: #8b949e;">v</span>
+<span style="color: #58a6ff;">+-------------------------------------------------------+</span>
+<span style="color: #58a6ff;">|</span>  <span style="color: #d2a8ff; font-weight: bold;">1. Lexical Analysis & Tokenization</span>                   <span style="color: #58a6ff;">|</span>
+<span style="color: #58a6ff;">|</span>     - Split input into discreet tokens                <span style="color: #58a6ff;">|</span>
+<span style="color: #58a6ff;">|</span>     - Identify commands, args, pipes, redirections    <span style="color: #58a6ff;">|</span>
+<span style="color: #58a6ff;">+-------------------------------------------------------+</span>
+                             <span style="color: #8b949e;">|</span>
+                             <span style="color: #8b949e;">v</span>
+<span style="color: #58a6ff;">+-------------------------------------------------------+</span>
+<span style="color: #58a6ff;">|</span>  <span style="color: #d2a8ff; font-weight: bold;">2. Parsing & Quote Handling</span>                          <span style="color: #58a6ff;">|</span>
+<span style="color: #58a6ff;">|</span>     - Validate syntax integrity                       <span style="color: #58a6ff;">|</span>
+<span style="color: #58a6ff;">|</span>     - Classify token types                            <span style="color: #58a6ff;">|</span>
+<span style="color: #58a6ff;">|</span>     - Handle single (') and double (") quotes         <span style="color: #58a6ff;">|</span>
+<span style="color: #58a6ff;">+-------------------------------------------------------+</span>
+                             <span style="color: #8b949e;">|</span>
+                             <span style="color: #8b949e;">v</span>
+<span style="color: #58a6ff;">+-------------------------------------------------------+</span>
+<span style="color: #58a6ff;">|</span>  <span style="color: #d2a8ff; font-weight: bold;">3. Variable Expansion & Processing</span>                   <span style="color: #58a6ff;">|</span>
+<span style="color: #58a6ff;">|</span>     - Expand environment variables ($VAR, $?)         <span style="color: #58a6ff;">|</span>
+<span style="color: #58a6ff;">|</span>     - Concatenate adjacent tokens                     <span style="color: #58a6ff;">|</span>
+<span style="color: #58a6ff;">+-------------------------------------------------------+</span>
+                             <span style="color: #8b949e;">|</span>
+                             <span style="color: #8b949e;">v</span>
+<span style="color: #58a6ff;">+-------------------------------------------------------+</span>
+<span style="color: #58a6ff;">|</span>  <span style="color: #d2a8ff; font-weight: bold;">4. Redirection & Heredoc Handling</span>                    <span style="color: #58a6ff;">|</span>
+<span style="color: #58a6ff;">|</span>     - Evaluate input/output redirections (<, >, >>)   <span style="color: #58a6ff;">|</span>
+<span style="color: #58a6ff;">|</span>     - Process heredocs (<<) into temporary descriptors<span style="color: #58a6ff;">|</span>
+<span style="color: #58a6ff;">+-------------------------------------------------------+</span>
+                             <span style="color: #8b949e;">|</span>
+                             <span style="color: #8b949e;">v</span>
+<span style="color: #58a6ff;">+-------------------------------------------------------+</span>
+<span style="color: #58a6ff;">|</span>  <span style="color: #d2a8ff; font-weight: bold;">5. Execution Engine</span>                                  <span style="color: #58a6ff;">|</span>
+<span style="color: #58a6ff;">|</span>     - If Built-in (parent context): Execute directly  <span style="color: #58a6ff;">|</span>
+<span style="color: #58a6ff;">|</span>     - If Pipeline: fork(), pipe(), dup2(), execve()   <span style="color: #58a6ff;">|</span>
+<span style="color: #58a6ff;">|</span>     - Collect exit status with waitpid()              <span style="color: #58a6ff;">|</span>
+<span style="color: #58a6ff;">+-------------------------------------------------------+</span>
+</pre>
 ---
 
 ## Theoretical Foundation and Implementation Mechanics
