@@ -90,7 +90,7 @@ The shell operates as an interactive REPL (Read-Eval-Print Loop). Input strings 
 
 ### Execution Pipeline Overview
 
-```graph TD
+```mermaid
     A([1. readline: Wait for User Input]) --> B[2. Lexical Analysis]
     B --> C[Tokenize: Identify Words, Pipes, Quotes, Redirections]
     
@@ -125,7 +125,7 @@ The shell operates as an interactive REPL (Read-Eval-Print Loop). Input strings 
     R --> T[Update global/env status $?]
     T --> U([8. Free iteration memory and loop])
     E --> U
-     ```
+    ```
 
 ---
 
