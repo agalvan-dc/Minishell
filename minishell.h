@@ -42,7 +42,7 @@ void	ft_update_var_status_process(t_env *env, int status);
 void	ft_change_or_create_var(t_env *env, char *name, char *value, int fd);
 int		ft_assign_env_var_id(char *value);
 void	ft_create_chained_var(t_env *env, char **env_variable);
-void	ft_add_new_env_var(t_env *env, t_var *new);
+void	ft_add_new_env_var(t_env *env, t_var *new_env);
 char	**ft_add_env_var(char **var, char *variable);
 void	ft_change_env_var_value(t_var *var, char *new_value);
 void	ft_change_env_var_value_with_name(t_env *env, char *name, char *vallue);

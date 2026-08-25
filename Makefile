@@ -1,103 +1,92 @@
+NAME        = minishell
 
-NAME = minishell
+SRC_DIR     = source
+INC_DIR     = source/header
+LIBFT_DIR   = source/libft
+LIBFT       = $(LIBFT_DIR)/libft.a
 
-SRC = $(wildcard *.c)
 
-SRC += $(wildcard source/built_in/*.c)
-SRC += $(wildcard source/concatenate/*.c)
-SRC += $(wildcard source/detection/*.c)
-SRC += $(wildcard source/env/*.c)
-SRC += $(wildcard source/error/*.c)
-SRC += $(wildcard source/execution/*.c)
-SRC += $(wildcard source/exit_free/*.c)
-SRC += $(wildcard source/get/*.c)
-SRC += $(wildcard source/init/*.c)
-SRC += $(wildcard source/is/*.c)
-SRC += $(wildcard source/parser/*.c)
-SRC += $(wildcard source/parsing/*.c)
-SRC += $(wildcard source/processing/*.c)
-SRC += $(wildcard source/redirection/*.c)
-SRC += $(wildcard source/tokenization/*.c)
-SRC += $(wildcard source/verbose/*.c)
+SRC         = main.c \
+              $(wildcard $(SRC_DIR)/built_in/*.c) \
+              $(wildcard $(SRC_DIR)/concatenate/*.c) \
+              $(wildcard $(SRC_DIR)/detection/*.c) \
+              $(wildcard $(SRC_DIR)/env/*.c) \
+              $(wildcard $(SRC_DIR)/error/*.c) \
+              $(wildcard $(SRC_DIR)/execution/*.c) \
+              $(wildcard $(SRC_DIR)/exit_free/*.c) \
+              $(wildcard $(SRC_DIR)/get/*.c) \
+              $(wildcard $(SRC_DIR)/init/*.c) \
+              $(wildcard $(SRC_DIR)/is/*.c) \
+              $(wildcard $(SRC_DIR)/parser/*.c) \
+              $(wildcard $(SRC_DIR)/processing/*.c) \
+              $(wildcard $(SRC_DIR)/redirection/*.c) \
+              $(wildcard $(SRC_DIR)/tokenization/*.c) \
+              $(wildcard $(SRC_DIR)/verbose/*.c)
 
-HEADER = header/class.h \
-		header/execution.h \
-		header/free.h \
-		header/get.h \
-		header/is.h \
-		header/token.h \
-		header/verbose.h \
+OBJS        = $(SRC:.c=.o)
 
-TEMPLATE  = source/header/header.txt
+HEADERS     = $(INC_DIR)/class.h \
+              $(INC_DIR)/execution.h \
+              $(INC_DIR)/free.h \
+              $(INC_DIR)/get.h \
+              $(INC_DIR)/is.h \
+              $(INC_DIR)/token.h \
+              $(INC_DIR)/verbose.h
 
-EXE = @./$(NAME)
-LIBFT = source/libft/libft.a
+TEMPLATE    = source/header/header.txt
 
-SANITIZE = -fsanitize=address
-LEAKS = -fsanitize=leak
-DEBUGGER = lldb
+CC          = gcc
+CFLAGS      = -Wall -Wextra -Werror -g3 -I$(INC_DIR) -I$(LIBFT_DIR)
+READLINE_LNK = -lreadline
 
-RM_FILE = /bin/rm -rf
-
-OBJS = $(SRC:.c=.o)
-CC ?= gcc
-FLAGS = -g3
-FLAGS += -Wall -Wextra -Werror
-FLAGS += $(SANITIZE)
-READLINE = -lreadline
-MAKE = make -s
-
-UNAME = $(shell uname -s)
-
-ifeq ($(UNAME), linux)
-	NPROC := $(shell nproc)
-
-else
-    READLINE_PATH = $(shell brew --prefix readline)
-    FLAGS += -I$(READLINE_PATH)/include
-    READLINE += -L$(READLINE_PATH)/lib
+# OS Compatibility for Readline
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S), Linux)
+    NPROC := $(shell nproc 2>/dev/null || echo 1)
+    MAKEFLAGS += -j$(NPROC)
+else ifeq ($(UNAME_S), Darwin)
+    READLINE_PATH = $(shell brew --prefix readline 2>/dev/null)
+    ifneq ($(READLINE_PATH),)
+        CFLAGS        += -I$(READLINE_PATH)/include
+        READLINE_LNK  += -L$(READLINE_PATH)/lib
+    endif
 endif
 
-# === Convert all .c to .o with flags and header === # 
-%.o : %.c
-			@$(CC) $(FLAGS) -c $< -o $@
+RM          = rm -rf
 
-$(NAME) : 	    $(OBJS)
-				@echo "==== Create all .o ===="
-				@echo "==== Compiling all .c ===="
-				@echo "==== Compiling libft ===="
-				@$(MAKE) -C source/libft
-				@echo "==== Compiling Minishell ===="
-				@$(CC) $(OBJS) $(FLAGS) $(READLINE) $(LIBFT) -o $(NAME)
-				@cat "$(TEMPLATE)"		
+all: $(NAME)
 
-all : $(NAME)
+%.o: %.c $(HEADERS)
+	@$(CC) $(CFLAGS) -c $< -o $@
 
-clean :
-		@echo "==== Remove all Libft .o ===="
-		@$(MAKE) clean -C source/libft
-		@echo "==== Remove all minishell .o ===="
-		@$(RM_FILE) $(OBJS)
+$(LIBFT):
+	@make -s -C $(LIBFT_DIR)
 
-fclean : clean
-			@$(MAKE) fclean -C source/libft
-			@$(RM_FILE) $(NAME)
+$(NAME): $(LIBFT) $(OBJS)
+	@echo "==== Compiling Minishell ===="
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(READLINE_LNK) -o $(NAME)
+	@if [ -f "$(TEMPLATE)" ]; then cat "$(TEMPLATE)"; fi
 
-debug :		$(OBJS)
-			@echo "==== Mode debug activate ===="
-			@$(CC) $(OBJS) $(FLAGS) $(READLINE) $(SANITIZE) $(LIBFT) -o $(NAME)
-			$(DEBUGGER) $(NAME)	
-			@cat "$(TEMPLATE)"
+clean:
+	@echo "==== Removing Object Files ===="
+	@make clean -s -C $(LIBFT_DIR)
+	@$(RM) $(OBJS)
 
-sanitize :	$(OBJS)
-			@echo "==== Mode sanitize activate ===="
-			@$(CC) $(OBJS) $(FLAGS) $(READLINE) $(SANITIZE) $(LIBFT) -o $(NAME)
-			@cat "$(TEMPLATE)"
+fclean: clean
+	@echo "==== Removing Executables ===="
+	@make fclean -s -C $(LIBFT_DIR)
+	@$(RM) $(NAME)
 
-leak :		$(OBJS)
-			@echo "==== Mode leak activate ===="
-			@$(CC) $(OBJS) $(FLAGS) $(READLINE) $(SANITIZE) $(LIBFT) -o $(NAME)
-			@cat "$(TEMPLATE)"
+re: fclean all
 
-re : fclean all
-.PHONY : all clean fclean debug sanitize leak re
+ 
+debug: CFLAGS += -g3
+debug: re
+
+sanitize: CFLAGS += -fsanitize=address -g3
+sanitize: re
+
+leak: CFLAGS += -fsanitize=leak -g3
+leak: re
+
+.PHONY: all clean fclean re debug sanitize leak
