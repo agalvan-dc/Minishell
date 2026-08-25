@@ -1,10 +1,12 @@
-*This project has been created as part of the 42 curriculum by agalvan-.*
+Aquí tienes el `README.md` completo, manteniendo todo tu contenido intacto y sustituyendo únicamente los bloques de los diagramas por su versión nativa en Mermaid para que se rendericen perfectamente en GitHub:
+
+[source: 2]*This project has been created as part of the 42 curriculum by agalvan-.*
 
 # Minishell
 
 ## Description
 
-**Minishell** is a custom UNIX command-line interpreter developed in C as a core milestone of the 42 curriculum[cite: 1]. The primary objective of this project is to recreate a fully functional shell modeled after GNU Bash[cite: 1]. Developing a shell requires a deep understanding of low-level system calls, process creation and synchronization, file descriptor manipulation, signal handling, and complex lexical and syntactic parsing[cite: 1].
+**Minishell** is a custom UNIX command-line interpreter developed in C as a core milestone of the 42 curriculum. The primary objective of this project is to recreate a fully functional shell modeled after GNU Bash. Developing a shell requires a deep understanding of low-level system calls, process creation and synchronization, file descriptor manipulation, signal handling, and complex lexical and syntactic parsing.
 
 Minishell features a complete execution pipeline capable of reading user input, parsing single and double quotes, expanding environment variables, handling input/output redirections (`<`, `>`, `<<`, `>>`), setting up inter-process communication via pipes (`|`), managing background/foreground processes, handling interactive signal states, and running both standard system binaries and built-in commands.
 
@@ -21,11 +23,7 @@ A shell is a command-line interpreter that acts as the primary interface between
 The theoretical foundation of a UNIX shell relies on two main pillars:
 
 * **Process Management:** The shell uses `fork()` to clone its own process. The parent process uses `wait()` or `waitpid()` to monitor the child, while the child uses `execve()` to replace its memory space with the requested binary program.
-
-
 * **Inter-Process Communication (IPC) and I/O:** Every process starts with three default file descriptors: standard input (0), standard output (1), and standard error (2). A shell manipulates these streams using `pipe()` to pass data between concurrent processes and `dup2()` to redirect inputs and outputs to physical files.
-
-
 
 ## The Tokenization Process
 
@@ -41,10 +39,7 @@ While tokenization identifies the "words," parsing attempts to understand the "s
 
 * **Syntax Checking:** The parser ensures operators are used legally. For example, it throws a syntax error if a pipeline operator (`|`) lacks a preceding or succeeding command, or if a redirection (`>`) lacks a target file.
 * **Variable Expansion:** It detects `TOKEN_WORD` entries containing unescaped `$` symbols and substitutes them with their corresponding values from the environment linked list.
-
-
 * **Quote Removal:** Once expansions are complete, the parser strips the outer single and double quotes, passing only the literal inner string to the execution engine.
-
 
 ---
 
@@ -71,6 +66,7 @@ make fclean
 # Recompile the project
 make re
 
+
 ```
 
 ### Execution
@@ -80,12 +76,14 @@ Once compiled, launch the interactive prompt:
 ```bash
 ./minishell
 
+
 ```
 
 To run with verbose debugging modes activated (if compiled with debug flags or verbose utilities):
 
 ```bash
 ./minishell --verbose
+
 
 ```
 
@@ -97,48 +95,16 @@ The shell operates as an interactive REPL (Read-Eval-Print Loop). Input strings 
 
 ### Execution Pipeline Overview
 
-<pre style="background-color: #0d1117; color: #c9d1d9; padding: 20px; border-radius: 8px; border: 1px solid #30363d; font-family: monospace; line-height: 1.2;">
-<span style="color: #58a6ff;">+-------------------------------------------------------+</span>
-<span style="color: #58a6ff;">|</span>                     <span style="color: #3fb950; font-weight: bold;">User Input</span>                        <span style="color: #58a6ff;">|</span>
-<span style="color: #58a6ff;">+-------------------------------------------------------+</span>
-                             <span style="color: #8b949e;">|</span>
-                             <span style="color: #8b949e;">v</span>
-<span style="color: #58a6ff;">+-------------------------------------------------------+</span>
-<span style="color: #58a6ff;">|</span>  <span style="color: #d2a8ff; font-weight: bold;">1. Lexical Analysis & Tokenization</span>                   <span style="color: #58a6ff;">|</span>
-<span style="color: #58a6ff;">|</span>     - Split input into discreet tokens                <span style="color: #58a6ff;">|</span>
-<span style="color: #58a6ff;">|</span>     - Identify commands, args, pipes, redirections    <span style="color: #58a6ff;">|</span>
-<span style="color: #58a6ff;">+-------------------------------------------------------+</span>
-                             <span style="color: #8b949e;">|</span>
-                             <span style="color: #8b949e;">v</span>
-<span style="color: #58a6ff;">+-------------------------------------------------------+</span>
-<span style="color: #58a6ff;">|</span>  <span style="color: #d2a8ff; font-weight: bold;">2. Parsing & Quote Handling</span>                          <span style="color: #58a6ff;">|</span>
-<span style="color: #58a6ff;">|</span>     - Validate syntax integrity                       <span style="color: #58a6ff;">|</span>
-<span style="color: #58a6ff;">|</span>     - Classify token types                            <span style="color: #58a6ff;">|</span>
-<span style="color: #58a6ff;">|</span>     - Handle single (') and double (") quotes         <span style="color: #58a6ff;">|</span>
-<span style="color: #58a6ff;">+-------------------------------------------------------+</span>
-                             <span style="color: #8b949e;">|</span>
-                             <span style="color: #8b949e;">v</span>
-<span style="color: #58a6ff;">+-------------------------------------------------------+</span>
-<span style="color: #58a6ff;">|</span>  <span style="color: #d2a8ff; font-weight: bold;">3. Variable Expansion & Processing</span>                   <span style="color: #58a6ff;">|</span>
-<span style="color: #58a6ff;">|</span>     - Expand environment variables ($VAR, $?)         <span style="color: #58a6ff;">|</span>
-<span style="color: #58a6ff;">|</span>     - Concatenate adjacent tokens                     <span style="color: #58a6ff;">|</span>
-<span style="color: #58a6ff;">+-------------------------------------------------------+</span>
-                             <span style="color: #8b949e;">|</span>
-                             <span style="color: #8b949e;">v</span>
-<span style="color: #58a6ff;">+-------------------------------------------------------+</span>
-<span style="color: #58a6ff;">|</span>  <span style="color: #d2a8ff; font-weight: bold;">4. Redirection & Heredoc Handling</span>                    <span style="color: #58a6ff;">|</span>
-<span style="color: #58a6ff;">|</span>     - Evaluate input/output redirections (<, >, >>)   <span style="color: #58a6ff;">|</span>
-<span style="color: #58a6ff;">|</span>     - Process heredocs (<<) into temporary descriptors<span style="color: #58a6ff;">|</span>
-<span style="color: #58a6ff;">+-------------------------------------------------------+</span>
-                             <span style="color: #8b949e;">|</span>
-                             <span style="color: #8b949e;">v</span>
-<span style="color: #58a6ff;">+-------------------------------------------------------+</span>
-<span style="color: #58a6ff;">|</span>  <span style="color: #d2a8ff; font-weight: bold;">5. Execution Engine</span>                                  <span style="color: #58a6ff;">|</span>
-<span style="color: #58a6ff;">|</span>     - If Built-in (parent context): Execute directly  <span style="color: #58a6ff;">|</span>
-<span style="color: #58a6ff;">|</span>     - If Pipeline: fork(), pipe(), dup2(), execve()   <span style="color: #58a6ff;">|</span>
-<span style="color: #58a6ff;">|</span>     - Collect exit status with waitpid()              <span style="color: #58a6ff;">|</span>
-<span style="color: #58a6ff;">+-------------------------------------------------------+</span>
-</pre>
+```mermaid
+graph TD
+    A[User Input] --> B[1. Lexical Analysis & Tokenization<br/>- Split input into discreet tokens<br/>- Identify commands, args, pipes, redirections]
+    B --> C[2. Parsing & Quote Handling<br/>- Validate syntax integrity<br/>- Classify token types<br/>- Handle single and double quotes]
+    C --> D[3. Variable Expansion & Processing<br/>- Expand environment variables $VAR, $?<br/>- Concatenate adjacent tokens]
+    D --> E[4. Redirection & Heredoc Handling<br/>- Evaluate input/output redirections <, >, >><br/>- Process heredocs << into temporary descriptors]
+    E --> F[5. Execution Engine<br/>- If Built-in: Execute directly<br/>- If Pipeline: fork, pipe, dup2, execve<br/>- Collect exit status with waitpid]
+
+```
+
 ---
 
 ## Theoretical Foundation and Implementation Mechanics
@@ -155,15 +121,11 @@ Lexical analysis is the initial phase where an uninterrupted input string read f
 * `TOKEN_HEREDOC`: Here-document operator `<<`.
 * `TOKEN_APPEND`: Append output redirection `>>`.
 * `TOKEN_ENV_VAR`: Environment variable expression starting with `$`.
-
-
 * **Implementation Details**:
 * Located under `source/tokenization/`.
 * `tokenizer.c` scans characters sequentially, respecting state machines for single and double quote bounders.
 * `create_token.c` allocates linked-list nodes storing raw string fragments, token type identifiers, and positional flags.
 * `connect.c` stitches token nodes into a doubly linked sequence.
-
-
 
 ### 2. Syntax Parsing and Word Detection
 
@@ -172,14 +134,10 @@ The parser processes the linear array of tokens to construct an executable abstr
 * **Quoting Rules**:
 * **Single Quotes (`'`)**: Suppress all variable expansions and special character evaluations. Every character inside single quotes is treated literally.
 * **Double Quotes (`"`)**: Preserve literal string interpretation while allowing environment variable expansion via `$`.
-
-
 * **Concatenation and Word Boundary Processing**:
 * Words like `"Hello "`$USER are merged post-expansion into single argument strings.
 * `source/parser/quote_detection.c` tracks active quote states using state flags (`IN_SINGLE_QUOTE`, `IN_DOUBLE_QUOTE`).
 * `source/parser/word_detection.c` splits tokens along whitespace outside valid quotes.
-
-
 
 ### 3. Environment Variables and Expansion
 
@@ -192,8 +150,6 @@ Environment variables are stored as a dynamic doubly linked list in memory rathe
 * `$?` is a special case expanded by `source/execution/status.c` into the exit status integer of the last executed foreground command.
 * Unset or undefined variables resolve to empty strings without raising syntax errors.
 
-
-
 ### 4. File Descriptors, Redirections, and Pipes
 
 Redirections and pipelines manipulate standard file descriptors: Standard Input (`0` / `STDIN_FILENO`), Standard Output (`1` / `STDOUT_FILENO`), and Standard Error (`2` / `STDERR_FILENO`).
@@ -203,15 +159,11 @@ Redirections and pipelines manipulate standard file descriptors: Standard Input 
 * **Output Redirection (`>`)**: Opens/creates file with `O_WRONLY | O_CREAT | O_TRUNC` and uses `dup2(fd, STDOUT_FILENO)`.
 * **Append Redirection (`>>`)**: Opens/creates file with `O_WRONLY | O_CREAT | O_APPEND`.
 * **Here-Document (`<<`)**: Spawns an interactive read loop using `readline()` until a specified delimiter line is matched. The collected lines are piped into a temporary file descriptor or pipe buffer passed as `STDIN` to the command.
-
-
 * **Pipelines (`|`)**:
 * For $N$ commands connected by pipes, $N-1$ pipe pairs are created via `pipe(int pipefd[2])`.
 * `pipefd[0]` serves as the read end; `pipefd[1]` serves as the write end.
 * Foreground processes are created via `fork()`.
 * Parent process closes unused pipe ends to ensure EOF (End of File) signals are transmitted properly across child processes.
-
-
 
 ### 5. Execution Engine and System Binaries
 
@@ -220,13 +172,9 @@ Command execution is managed by `source/execution/execution.c`:
 * **Path Resolution**:
 * Absolute paths (`/bin/ls`) or relative paths (`./minishell`) are validated directly via `access(path, X_OK)`.
 * Command names (`ls`) trigger a lookup in the `PATH` environment variable. The PATH string is split by `:` delimiters, and candidate directory paths are probed sequentially (`/usr/bin/ls`, `/bin/ls`).
-
-
 * **Execution Dispatch**:
 * Commands are passed to `execve(const char *pathname, char *const argv[], char *const envp[])` inside child processes.
 * Parent waits for child execution completion via `waitpid()` and translates status codes via `WIFEXITED` and `WEXITSTATUS`.
-
-
 
 ### 6. Built-in Commands
 
@@ -251,8 +199,6 @@ Signal handling relies on standard POSIX signal handlers implemented with `sigac
 * `SIGINT` (`Ctrl+C`): Displays a new prompt line without terminating.
 * `SIGQUIT` (`Ctrl+\`): Ignored (`SIG_IGN`).
 * `EOF` (`Ctrl+D`): Signals end of file to `readline()`, exiting the shell.
-
-
 * **Child Execution Mode**: Signals are reset to default behavior (`SIG_DFL`) within child processes before calling `execve()`.
 
 ---
@@ -286,6 +232,7 @@ Minishell/
     ├── redirection/
     ├── tokenization/
     └── verbose/
+
 
 ```
 
@@ -361,8 +308,6 @@ Minishell/
 * `get_token.c`: Retrieves token sequences matching specified filters.
 * `get.c`: General struct getter utilities.
 
-
-
 ### `source/header/`
 
 * Internal modular header definitions grouping prototypes logically:
@@ -374,8 +319,6 @@ Minishell/
 * `token.h`: Token definitions.
 * `verbose.h`: Verbose logger declarations.
 * `header.txt`: ASCII art header string.
-
-
 
 ### `source/init/`
 
@@ -393,8 +336,6 @@ Minishell/
 * `is_variable.c`: Identifies valid environment variable naming patterns.
 * `is_blank.c`, `is_fd.c`, `is_file.c`, `is_finish.c`, `is_line.c`, `is_same.c`, `is_separator.c`, `is_token.c`, `is_token_cmd.c`, `is_token_redir.c`, `have.c`, `have_cmd.c`, `is.c`.
 
-
-
 ### `source/libft/`
 
 * Custom support library tailored for memory management, string manipulation, formatting, and file I/O:
@@ -407,8 +348,6 @@ Minishell/
 * `memory/`: Low-level byte operations (`ft_memset`, `ft_memcpy`, `ft_calloc`, `ft_bzero`).
 * `printf/`: Custom formatted printing implementation (`ft_printf`, `ft_printf_fd`).
 * `verbose/`: Standard error output writers (`ft_putstr_fd`, `ft_putendl_fd`).
-
-
 
 ### `source/parser/`
 
@@ -446,42 +385,17 @@ Minishell/
 * Debugging framework outputting internal state inspection logs:
 * `verbose.c`, `verbose_token.c`, `verbose_cmd.c`, `verbose_env.c`, `verbose_redirect.c`, `verbose_class.c`, `verbose_env_var.c`, `verbose_env_var_fd.c`, `verbose_basic_redir.c`.
 
-
-
 ---
 
 ## Memory and Cleanup Lifecycle
 
 To ensure zero memory leaks and strict compliance with project constraints, every allocated memory block follows a clear ownership cycle:
 
-```
- +-------------------------------------------------------+
- | 1. Prompt Input (readline)                            |
- |    - Dynamic heap allocation returned by readline()   |
- +-------------------------------------------------------+
-                             |
-                             v
- +-------------------------------------------------------+
- | 2. Lexing & Parsing Node Allocation                   |
- |    - Token structures allocated via ft_calloc()       |
- |    - String duplicates allocated via ft_strdup()      |
- +-------------------------------------------------------+
-                             |
-                             v
- +-------------------------------------------------------+
- | 3. Execution Transformation                           |
- |    - Argument lists flattened into char ** arrays     |
- +-------------------------------------------------------+
-                             |
-                             v
- +-------------------------------------------------------+
- | 4. Full Cleanup Cycle                                 |
- |    - Free raw input line string                       |
- |    - Traverse token tree and release nodes            |
- |    - Free converted char ** argument arrays           |
- |    - Close all duplicated file descriptors            |
- |    - Unlink temporary heredoc files                   |
- +-------------------------------------------------------+
+```mermaid
+graph TD
+    A[1. Prompt Input readline<br/>- Dynamic heap allocation returned by readline] --> B[2. Lexing & Parsing Node Allocation<br/>- Token structures allocated via ft_calloc<br/>- String duplicates allocated via ft_strdup]
+    B --> C[3. Execution Transformation<br/>- Argument lists flattened into char ** arrays]
+    C --> D[4. Full Cleanup Cycle<br/>- Free raw input line string<br/>- Traverse token tree and release nodes<br/>- Free converted char ** argument arrays<br/>- Close all duplicated file descriptors<br/>- Unlink temporary heredoc files]
 
 ```
 
@@ -505,6 +419,4 @@ In compliance with 42 curriculum guidelines, Artificial Intelligence (Large Lang
 * **Debugging & Edge Case Discovery**: Analyzing signal edge cases (e.g., heredoc termination via `Ctrl+C`) and file descriptor leak conditions.
 * **Code Verification**: Reviewing edge-case syntax rules for double quote variable expansion.
 * **Documentation**: Assisting in structuring and generating the comprehensive technical project documentation.
-
-
 * **Verification**: All AI-assisted designs and code structures were validated, manually tested against Bash behaviors, and verified for compliance.
