@@ -2,21 +2,15 @@
 
 void	ft_open_next_file_with_flags(t_token *token, t_file *file)
 {
+	if (file->fd > 2)
+	    close(file->fd);
+
 	if (is_token_input_chevron(token))
-	{
-		close(file->fd);
 		file->fd = open(file->name, O_RDONLY);
-	}
 	else if (is_token_output_chevron(token))
-	{
-		close(file->fd);
 		file->fd = open(file->name, O_WRONLY | O_TRUNC);
-	}
 	else if (is_token_append_chevron(token))
-	{
-		close(file->fd);
 		file->fd = open(file->name, O_WRONLY | O_APPEND);
-	}
 }
 
 void	ft_manage_fd_heredoc(t_token *token)

@@ -1,5 +1,4 @@
-
-#include  "../libft.h"
+#include "../libft.h"
 
 void	count_putstr_fd(char *str, int *count, int fd)
 {
@@ -8,7 +7,8 @@ void	count_putstr_fd(char *str, int *count, int fd)
 	i = 0;
 	if (!str)
 	{
-		write(1, "(null)", 6);
+		write(fd, "(null)", 6);
+		*count += 6;
 		return ;
 	}
 	while (str[i])
@@ -25,7 +25,7 @@ void	count_putnbr_fd(int number, int *count, int fd)
 	if (number < 0)
 	{
 		count_putchar_fd('-', count, fd);
-		nbr = (unsigned int)number * -1;
+		nbr = (unsigned int)(number * -1);
 	}
 	else
 		nbr = (unsigned int)number;

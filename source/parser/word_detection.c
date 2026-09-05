@@ -12,7 +12,7 @@ int		ft_word_detection(t_env *env, char *line, int index)
 			index = ft_single_quote_detection(line, index);
 		index++;
 	}
-	return (index);
+	return (index - 1);
 }
 
 int		ft_word_arg_detection(t_env *env, char *line, int index)
@@ -40,7 +40,7 @@ int		ft_file_detection(char *line, int index)
 		}
 		index++;
 	}
-	return (index);
+	return (index - 1);
 }
 
 int		ft_blank_detection(char *line, int index)

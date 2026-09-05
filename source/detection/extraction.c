@@ -19,7 +19,7 @@ int     ft_word_arg_extraction(t_env *env, t_cmd *cmd, char *line, int index)
         index++;
     content = malloc_substrcpy(line, start, index - 1);
     ft_word_arg_tokenizer(env, cmd, content);
-    return (index);
+    return (index - 1);
 }
 
 int     ft_string_extraction(t_env *env, t_cmd *cmd, char *line, int index)

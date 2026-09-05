@@ -2,11 +2,12 @@
 
 void	ft_ask_verbose(t_env *env)
 {
+	int	boo;
 	char	answer;
 
 	ft_printf("Minishell mode verbose [Y/N] ?");
-	read(0, &answer, 1);
-	if (answer == -1)
+	boo = read(0, &answer, 1);
+	if (boo == -1)
 		return ;
 	if (answer == 'Y' || answer == 'y')
 	{

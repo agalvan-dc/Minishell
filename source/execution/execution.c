@@ -34,7 +34,9 @@ void	ft_execution(t_env *env)
 		token = ft_get_next_token_cmd(token);
 	}
 	ft_close_all_fd(env);
+	ft_use_signal_exec();
 	status = ft_wait_all_pid(env);
+	ft_use_signal();
 	status = ft_get_last_status(status, status_built);
 	ft_update_var_status_process(env, status);
 	if (env->verbose == 1)

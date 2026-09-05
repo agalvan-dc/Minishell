@@ -14,7 +14,10 @@ void	ft_prompt(t_env *env)
 			return ;
 		}
 		if (!(line_is_empty(read_line)))
+		{
+			ft_use_signal_exec();
 			ft_execute_line(env, read_line);
+		}
 		free(read_line);
 	}
 }

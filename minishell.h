@@ -15,7 +15,7 @@
 #include <dirent.h>
 #include <sys/ioctl.h>
 #include <termios.h>
-#include <curses.h>
+//#include <curses.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 
@@ -38,6 +38,7 @@ t_line	*ft_init_line(char *content);
 void	ft_add_signal_env_var(t_env *env);
 void	ft_add_line_to_env(t_env *env, char *content);
 void	ft_update_var_status_process(t_env *env, int status);
+void	ft_sigint_handler(int sig);
 
 void	ft_change_or_create_var(t_env *env, char *name, char *value, int fd);
 int		ft_assign_env_var_id(char *value);
@@ -58,6 +59,7 @@ int		ft_line_is_empty(char *line);
 int		ft_return_last_backslash_index(char *line);
 
 void	ft_use_signal(void);
+void	ft_use_signal_exec(void);
 void	ft_call_prompt(int key);
 void	ft_pass(int key);
 void	ft_exit_prompt(int key);

@@ -32,7 +32,7 @@ int		ft_test_bin_access(char **bins, char *word)
 
 int		ft_test_absolute_bin_access(char *path)
 {
-	if (access(path, X_OK & F_OK) == 0)
+	if (access(path, X_OK | F_OK) == 0)
 		return (1);
 	return (0);
 }

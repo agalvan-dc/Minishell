@@ -52,7 +52,7 @@ void    ft_remove_arg_index(t_cmd *cmd, t_arg *arg)
         cmd->first_arg = iter->next;
     if (iter->next)
         iter->next->prev = iter->prev;
-	ft_remove_arg(iter);
+    ft_remove_arg(iter);
 }
 
 void	ft_remove_env_vars(t_env *env)
