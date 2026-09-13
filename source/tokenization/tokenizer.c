@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokenizer.c                                        :+:      :+:    :+:   */
+/*                                                      +:+/:+          :+:   */
+/*   By: agalvan- <agalvan-@student.42madrid.c          +#+  :+:       +#:    */
+/*                                                      +#+#+#+#+#+   +#+     */
+/*   Created: 2026/09/13 00:35:08 by agalvan-           #+#    #+#            */
+/*   Updated: 2026/09/13 02:09:14 by agalvan-           ###   ########.fr     */
+/*                                                                            */
+/* ************************************************************************** */
 #include "../../minishell.h"
 
 t_token		*ft_word_tokenizer(char *content, int id)
@@ -13,7 +24,7 @@ void	ft_word_arg_tokenizer(t_env *env, t_cmd *cmd, char *content)
 	t_arg	*arg;
 
 	if (is_valid_variable(env, content))
-		arg = ft_create_arg(content, TOKEN_VARIABLE);
+		arg = ft_create_arg(content + 1, TOKEN_VARIABLE);
 	else
 		arg = ft_create_arg(content, TOKEN_WORD);
 	ft_add_arg_list(cmd, arg);

@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   quote_detection.c                                  :+:      :+:    :+:   */
+/*                                                      +:+/:+          :+:   */
+/*   By: agalvan- <agalvan-@student.42madrid.c          +#+  :+:       +#:    */
+/*                                                      +#+#+#+#+#+   +#+     */
+/*   Created: 2026/09/13 00:35:08 by agalvan-           #+#    #+#            */
+/*   Updated: 2026/09/13 02:09:14 by agalvan-           ###   ########.fr     */
+/*                                                                            */
+/* ************************************************************************** */
 #include "../../minishell.h"
 //review
 int		ft_double_quote_detection(char *line, int index)
@@ -42,7 +53,7 @@ char	*ft_get_content_double(char *line, int start, int *index)
 		content = ft_get_rest_single_quote(line, start, *index, "\"");
 	else
 	{
-		content = malloc_substrcpy(line, start, *index);	
+		content = malloc_substrcpy(line, start, *index - 1);	
 		(*index)++;
 	}
 	return (content);

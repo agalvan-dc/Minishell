@@ -1,19 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirection_detection.c                            :+:      :+:    :+:   */
+/*                                                      +:+/:+          :+:   */
+/*   By: agalvan- <agalvan-@student.42madrid.c          +#+  :+:       +#:    */
+/*                                                      +#+#+#+#+#+   +#+     */
+/*   Created: 2026/09/13 00:35:08 by agalvan-           #+#    #+#            */
+/*   Updated: 2026/09/13 02:09:14 by agalvan-           ###   ########.fr     */
+/*                                                                            */
+/* ************************************************************************** */
 #include "../../minishell.h"
 
 int		ft_redirection_detection(char *line, int index)
 {
-	int 	start;
-
-	start = index;
-	while (!(line_is_finish(line, index)))
-	{
-		if (line_is_finish(line, index))
-			return (index - 1);
-		index++;
-	}
-	if (index == ft_strlen(line) && is_redirection(line, index - 1))
-		return (index - 1);
-	return (start);
+	if (is_heredoc(line, index) || is_append_chevron(line, index))
+		return (index + 1);
+	return (index);
 }
 
 int		ft_limiter_detection(char *line, int index)

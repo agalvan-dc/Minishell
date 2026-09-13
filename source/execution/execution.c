@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execution.c                                        :+:      :+:    :+:   */
+/*                                                      +:+/:+          :+:   */
+/*   By: agalvan- <agalvan-@student.42madrid.c          +#+  :+:       +#:    */
+/*                                                      +#+#+#+#+#+   +#+     */
+/*   Created: 2026/09/13 00:35:08 by agalvan-           #+#    #+#            */
+/*   Updated: 2026/09/13 02:09:14 by agalvan-           ###   ########.fr     */
+/*                                                                            */
+/* ************************************************************************** */
 #include "../../minishell.h"
 
 int		ft_execute_cmd(t_env *env, t_token *token)
@@ -13,6 +24,7 @@ int		ft_execute_cmd(t_env *env, t_token *token)
 		var = ft_get_env_var(env);
 		ft_bin_execution(env, cmd, var);
 		free_array(var);
+		env->env_vars = NULL;
 	}
 	else if (is_cmd_builtin(cmd))
 		status_built = ft_builtin_execution(env, cmd);

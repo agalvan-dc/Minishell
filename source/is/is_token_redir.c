@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   is_token_redir.c                                   :+:      :+:    :+:   */
+/*                                                      +:+/:+          :+:   */
+/*   By: agalvan- <agalvan-@student.42madrid.c          +#+  :+:       +#:    */
+/*                                                      +#+#+#+#+#+   +#+     */
+/*   Created: 2026/09/13 00:35:08 by agalvan-           #+#    #+#            */
+/*   Updated: 2026/09/13 02:09:14 by agalvan-           ###   ########.fr     */
+/*                                                                            */
+/* ************************************************************************** */
 #include "../../minishell.h"
 
 int		is_token_input_chevron(t_token *token)
@@ -13,7 +24,7 @@ int		is_token_append_chevron(t_token *token)
 {
 	if (!token)
 		return (0);
-	if (token->id == TOKEN_OUTPUT_CHEVRON)
+	if (token->id == TOKEN_APPEND_CHEVRON)
 		return (1);
 	return (0);
 }

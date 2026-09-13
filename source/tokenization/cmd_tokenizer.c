@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cmd_tokenizer.c                                    :+:      :+:    :+:   */
+/*                                                      +:+/:+          :+:   */
+/*   By: agalvan- <agalvan-@student.42madrid.c          +#+  :+:       +#:    */
+/*                                                      +#+#+#+#+#+   +#+     */
+/*   Created: 2026/09/13 00:35:08 by agalvan-           #+#    #+#            */
+/*   Updated: 2026/09/13 02:09:14 by agalvan-           ###   ########.fr     */
+/*                                                                            */
+/* ************************************************************************** */
 #include "../../minishell.h"
 
 int		ft_cmd_tokenizer(t_env *env, char *line, char *content, int index)
@@ -24,6 +35,7 @@ t_arg	*ft_arg_tokenizer(char *line, int start, int end, int fd)
 	else
 		content = malloc_substrcpy(line, start, end);
 	arg = ft_create_arg(content, fd);
+	free(content);
 	return (arg);
 }
 
@@ -58,11 +70,12 @@ int		ft_vars_tokenization(t_env *env, t_cmd *cmd, char *line, int index)
 	t_arg	*arg;
 
 	new_i = ft_variable_detection(line, index + 1);
-	name = malloc_substrcpy(line, index, new_i);
+	name = malloc_substrcpy(line, index + 1, new_i);
 	if (is_variable_exist(env, name))
 	{
 		arg = ft_create_arg(name, TOKEN_VARIABLE);
 		ft_add_arg_list(cmd, arg);
+		free(name);
 	}
 	else
 		free(name);

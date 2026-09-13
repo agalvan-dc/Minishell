@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_env_var.c                                   :+:      :+:    :+:   */
+/*                                                      +:+/:+          :+:   */
+/*   By: agalvan- <agalvan-@student.42madrid.c          +#+  :+:       +#:    */
+/*                                                      +#+#+#+#+#+   +#+     */
+/*   Created: 2026/09/13 00:35:08 by agalvan-           #+#    #+#            */
+/*   Updated: 2026/09/13 02:09:14 by agalvan-           ###   ########.fr     */
+/*                                                                            */
+/* ************************************************************************** */
 #include "../../minishell.h"
 
 void	ft_create_chained_var(t_env *env, char **env_variable)
@@ -25,7 +36,7 @@ void	ft_add_new_env_var(t_env *env, t_var *new)
 	last_var = ft_get_last_env_var(env);
 	if (!last_var)
 		return ;
-	ft_connect_new_var(last_var, new, NULL);
+	ft_connect_new_var(new, last_var, NULL);
 	new->index = last_var->index + 1;
 }
 

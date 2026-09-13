@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   extraction.c                                       :+:      :+:    :+:   */
+/*                                                      +:+/:+          :+:   */
+/*   By: agalvan- <agalvan-@student.42madrid.c          +#+  :+:       +#:    */
+/*                                                      +#+#+#+#+#+   +#+     */
+/*   Created: 2026/09/13 00:35:08 by agalvan-           #+#    #+#            */
+/*   Updated: 2026/09/13 02:09:14 by agalvan-           ###   ########.fr     */
+/*                                                                            */
+/* ************************************************************************** */
 #include "../../minishell.h"
 
 int		ft_arg_redirect_extraction(t_token *token, t_env *env, char *line, int i)
@@ -19,6 +30,7 @@ int     ft_word_arg_extraction(t_env *env, t_cmd *cmd, char *line, int index)
         index++;
     content = malloc_substrcpy(line, start, index - 1);
     ft_word_arg_tokenizer(env, cmd, content);
+    free(content);
     return (index - 1);
 }
 
@@ -39,19 +51,18 @@ int     ft_string_extraction(t_env *env, t_cmd *cmd, char *line, int index)
 int		ft_limiter_extraction(t_redir *redir, char *line, int i)
 {
 	int		new_i;
-	int		start;
 
-	start = i;
 	if (is_finish(line[i]))
-		return (start);
+		return (i);
 	while (line[i])
 	{
 		if (!(is_blank(line[i])))
 		{
 			new_i = ft_limiter_detection(line, i);
 			redir->delimiter = ft_substr(line, i, new_i);
+			return (new_i);
 		}
 		i++;
 	}
-	return (start);
+	return (i);
 }

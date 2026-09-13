@@ -1,19 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   verbose.c                                          :+:      :+:    :+:   */
+/*                                                      +:+/:+          :+:   */
+/*   By: agalvan- <agalvan-@student.42madrid.c          +#+  :+:       +#:    */
+/*                                                      +#+#+#+#+#+   +#+     */
+/*   Created: 2026/09/13 00:35:08 by agalvan-           #+#    #+#            */
+/*   Updated: 2026/09/13 02:09:14 by agalvan-           ###   ########.fr     */
+/*                                                                            */
+/* ************************************************************************** */
 #include "../../minishell.h"
+
+static int	is_yes_answer(char *answer)
+{
+	if (answer[0] == 'Y' || answer[0] == 'y')
+		return (1);
+	return (0);
+}
 
 void	ft_ask_verbose(t_env *env)
 {
-	int	boo;
-	char	answer;
+	char	*answer;
 
-	ft_printf("Minishell mode verbose [Y/N] ?");
-	boo = read(0, &answer, 1);
-	if (boo == -1)
+	if (!isatty(STDIN_FILENO))
 		return ;
-	if (answer == 'Y' || answer == 'y')
+	ft_printf("Minishell mode verbose [Y/N] ? ");
+	answer = readline(NULL);
+	if (!answer)
+		return ;
+	if (is_yes_answer(answer))
 	{
 		ft_printf("--- Minishell mode verbose activate ---\n");
 		env->verbose = 1;
 	}
-	else if (answer == 'N' || answer == 'n')
-		env->verbose = 0;
+	free(answer);
 }

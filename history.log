@@ -161,3 +161,80 @@ systemctl status ssh
 systemctl status docker
 top
 exit
+echo hola
+exit
+echo $HOME
+echo $PATH
+echo $NOEXISTE
+ls -l | wc -l
+echo $?
+echo "$HOME"
+echo a "$HOME" b
+echo a "$HOME" b
+echo a "$HOME" b
+echo a "$HOME" b
+echo a "$HOME" b
+echo "$HOME"
+echo "$HOME"
+echo "$HOME"
+echo "$HOME"
+echo "$HOME"
+echo "$HOME"
+echo a "$HOME" b
+echo hola "$USER" fin
+echo "x" "y$HOME" z
+echo $PWD
+echo $HOME $PATH
+echo $HOME
+echo "$USER"
+echo a "$HOME" b
+ls -l | wc -l
+echo $?
+echo $NOEXISTE
+true
+ls -l | wc -l
+echo $?
+echo b >> /tmp/opencode/t1.txt
+cat /tmp/opencode/t1.txt
+cat << F
+echo a "$HOME" b
+exit
+echo a "$HOME" b
+echo $PWD
+exit
+echo $HOME
+echo "$USER"
+echo a "$HOME" b
+echo $NOEXISTE
+ls -l | wc -l
+echo $?
+echo ok
+echo x > /tmp/opencode/t2.txt
+echo y >> /tmp/opencode/t2.txt
+cat /tmp/opencode/t2.txt
+cat << F
+ls -l | wc -l
+echo fin
+sleep 3
+echo surv
+echo $HOME
+echo "$USER" y
+echo $NOEXISTE
+echo $?
+ls -l | wc -l
+echo a | echo b
+echo x | cat | wc -c
+echo 1 > /tmp/opencode/r.txt
+echo 2 >> /tmp/opencode/r.txt
+cat < /tmp/opencode/r.txt
+cat << E
+sleep 3
+echo alive
+cd /tmp/opencode
+export FOO=hola
+echo $FOO
+ls /nope
+echo $?
+false
+echo $?
+exit 3

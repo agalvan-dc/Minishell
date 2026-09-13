@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
+/*                                                      +:+/:+          :+:   */
+/*   By: agalvan- <agalvan-@student.42madrid.c          +#+  :+:       +#:    */
+/*                                                      +#+#+#+#+#+   +#+     */
+/*   Created: 2026/09/13 00:35:08 by agalvan-           #+#    #+#            */
+/*   Updated: 2026/09/13 02:09:14 by agalvan-           ###   ########.fr     */
+/*                                                                            */
+/* ************************************************************************** */
 #include "../../minishell.h"
 
 int		ft_compare_line(char *line, char *limiter, int fd_tmp)
@@ -8,6 +19,7 @@ int		ft_compare_line(char *line, char *limiter, int fd_tmp)
 		return (1);
 	}
 	ft_putstr_fd(line, fd_tmp);
+	ft_putstr_fd("\n", fd_tmp);
 	free(line);
 	return (0);
 }

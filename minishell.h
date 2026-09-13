@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                      +:+/:+          :+:   */
+/*   By: agalvan- <agalvan-@student.42madrid.c          +#+  :+:       +#:    */
+/*                                                      +#+#+#+#+#+   +#+     */
+/*   Created: 2026/09/13 00:35:08 by agalvan-           #+#    #+#            */
+/*   Updated: 2026/09/13 02:09:14 by agalvan-           ###   ########.fr     */
+/*                                                                            */
+/* ************************************************************************** */
 #ifndef MINISHELL_H
 #define MINISHELL_H
 
@@ -60,10 +71,7 @@ int		ft_return_last_backslash_index(char *line);
 
 void	ft_use_signal(void);
 void	ft_use_signal_exec(void);
-void	ft_call_prompt(int key);
-void	ft_pass(int key);
-void	ft_exit_prompt(int key);
-void	ft_stop_prompt(int key);
+void	ft_sigint_handler(int key);
 
 
 void	ft_write_line(char *line, int fd);

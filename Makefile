@@ -43,7 +43,6 @@ READLINE_LNK = -lreadline
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S), Linux)
     NPROC := $(shell nproc 2>/dev/null || echo 1)
-    MAKEFLAGS += -j$(NPROC)
 else ifeq ($(UNAME_S), Darwin)
     READLINE_PATH = $(shell brew --prefix readline 2>/dev/null)
     ifneq ($(READLINE_PATH),)

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   verbose_env_var.c                                  :+:      :+:    :+:   */
+/*   remove_arg.c                                       :+:      :+:    :+:   */
 /*                                                      +:+/:+          :+:   */
 /*   By: agalvan- <agalvan-@student.42madrid.c          +#+  :+:       +#:    */
 /*                                                      +#+#+#+#+#+   +#+     */
@@ -11,41 +11,52 @@
 /* ************************************************************************** */
 #include "../../minishell.h"
 
-void	ft_print_env_var(t_var *var)
+void	ft_remove_arg(t_arg *arg)
 {
-	if (!var || !var->name)
-		return ;
-	if (!var->value)
-		ft_printf("%s\n", var->name);
-	else
-		ft_printf("%s=%s\n", var->name, var->value);
+	if (arg->content)
+		free(arg->content);
+	arg->content = NULL;
+	free(arg);
 }
 
-void	ft_print_all_env_var(t_env *env)
+void	ft_remove_arg_in_cmd(t_cmd *cmd, t_arg *arg)
 {
-	t_var	*var;
-
-	var = ft_get_first_env_var(env);
-	if (!var)
+	if (!arg)
 		return ;
-	while (var)
+	if (cmd->first_arg == arg)
+		cmd->first_arg = arg->next;
+	ft_disconnect_args(arg);
+	ft_remove_arg(arg);
+}
+
+void	ft_remove_arg_index(t_cmd *cmd, t_arg *arg)
+{
+	ft_remove_arg_in_cmd(cmd, arg);
+}
+
+void	ft_remove_all_arg(t_cmd *cmd)
+{
+	t_arg	*iter;
+	t_arg	*next;
+
+	if (!cmd)
+		return ;
+	iter = cmd->first_arg;
+	while (iter)
 	{
-		if (var->id == VALUE)
-			ft_print_env_var(var);
-		var = var->next;
+		next = iter->next;
+		ft_remove_arg(iter);
+		iter = next;
 	}
+	cmd->first_arg = NULL;
+	if (cmd->args)
+		free_array(cmd->args);
+	cmd->args = NULL;
 }
 
-void	ft_print_all_env_export_var(t_env *env)
+void	ft_remove_env_vars(t_env *env)
 {
-	t_var	*var;
-
-	 var = ft_get_first_env_var(env);
-    if (!var)
-        return ;
-    while (var)
-    {
-        ft_print_env_var(var);
-        var = var->next;
-    }
+	if (env->env_vars)
+		free_array(env->env_vars);
+	env->env_vars = NULL;
 }

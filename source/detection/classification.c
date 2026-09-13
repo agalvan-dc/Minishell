@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   classification.c                                   :+:      :+:    :+:   */
+/*                                                      +:+/:+          :+:   */
+/*   By: agalvan- <agalvan-@student.42madrid.c          +#+  :+:       +#:    */
+/*                                                      +#+#+#+#+#+   +#+     */
+/*   Created: 2026/09/13 00:35:08 by agalvan-           #+#    #+#            */
+/*   Updated: 2026/09/13 02:09:14 by agalvan-           ###   ########.fr     */
+/*                                                                            */
+/* ************************************************************************** */
 #include "../../minishell.h"
 
 int		ft_redir_classification(t_env *env, char *line, int i)
@@ -27,6 +38,7 @@ int		ft_word_classification(t_env *env, char *line, int i)
 		token = ft_word_tokenizer(content, TOKEN_WORD);
 		ft_add_token_list(env, token);
 	}
+	free(content);
 	return (new_i);
 }
 

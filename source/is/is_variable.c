@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   is_variable.c                                      :+:      :+:    :+:   */
+/*                                                      +:+/:+          :+:   */
+/*   By: agalvan- <agalvan-@student.42madrid.c          +#+  :+:       +#:    */
+/*                                                      +#+#+#+#+#+   +#+     */
+/*   Created: 2026/09/13 00:35:08 by agalvan-           #+#    #+#            */
+/*   Updated: 2026/09/13 02:09:14 by agalvan-           ###   ########.fr     */
+/*                                                                            */
+/* ************************************************************************** */
 #include "../../minishell.h"
 
 int		is_variable_word(char *s, int i)
@@ -18,20 +29,15 @@ int		is_variable_exist(t_env *env, char *name)
 char	*var_name_extraction(char *s, int i)
 {
 	int		start;
+	int		end;
 
-	start = i;
-	if (s[i] == '$')
+	if (s[i] != '$')
 		return (NULL);
-	i++;
-	while (s[i])
-	{
-		if (is_var_delimiter(s, i))
-			return (malloc_substrcpy(s, start, i - 1));
-		i++;
-	}
-	if (is_var_delimiter(s, i))
-		return (malloc_substrcpy(s, start, i - 1));
-	return (NULL);
+	start = i + 1;
+	end = start;
+	while (s[end] && !(is_var_delimiter(s, end)))
+		end++;
+	return (malloc_substrcpy(s, start, end - 1));
 }
 
 int		is_variable(t_env *env, char *s, int i)

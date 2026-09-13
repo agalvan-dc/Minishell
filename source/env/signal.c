@@ -1,27 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signal.c                                           :+:      :+:    :+:   */
+/*                                                      +:+/:+          :+:   */
+/*   By: agalvan- <agalvan-@student.42madrid.c          +#+  :+:       +#:    */
+/*                                                      +#+#+#+#+#+   +#+     */
+/*   Created: 2026/09/13 00:35:08 by agalvan-           #+#    #+#            */
+/*   Updated: 2026/09/13 02:09:14 by agalvan-           ###   ########.fr     */
+/*                                                                            */
+/* ************************************************************************** */
 #include "../../minishell.h"
-
-void    ft_call_prompt(int key)
-{
-	(void)key;
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	write(1, "\n", 1);
-	rl_redisplay();
-	ft_update_var_status_process(g_env, 130);
-}
-
-void	ft_pass(int key)
-{
-	(void)key;
-	rl_redisplay();
-}
-
-void	ft_exit_prompt(int key)
-{
-	(void)key;
-	printf("Exit...\n");
-	exit(0);
-}
 
 void	ft_add_signal_env_var(t_env *env)
 {
@@ -35,13 +23,31 @@ void	ft_add_signal_env_var(t_env *env)
 	ft_add_new_env_var(env, signal_var);
 }
 
-void    ft_use_signal(void)
+void	ft_sigint_handler(int sig)
 {
-    signal(SIGINT, ft_sigint_handler);
-    signal(SIGQUIT, SIG_IGN);
+	(void)sig;
+	ft_update_var_status_process(g_env, 130);
+	if (g_env)
+		g_env->error_processing = 1;
+	write(1, "\n", 1);
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
 }
 
-void    ft_use_signal_exec(void)
+void	ft_use_signal(void)
+{
+	struct sigaction	sa;
+
+	rl_catch_signals = 0;
+	ft_bzero(&sa, sizeof(sa));
+	sa.sa_handler = ft_sigint_handler;
+	sigemptyset(&sa.sa_mask);
+	sigaction(SIGINT, &sa, NULL);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+void	ft_use_signal_exec(void)
 {
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);

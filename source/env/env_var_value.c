@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env_var_value.c                                    :+:      :+:    :+:   */
+/*                                                      +:+/:+          :+:   */
+/*   By: agalvan- <agalvan-@student.42madrid.c          +#+  :+:       +#:    */
+/*                                                      +#+#+#+#+#+   +#+     */
+/*   Created: 2026/09/13 00:35:08 by agalvan-           #+#    #+#            */
+/*   Updated: 2026/09/13 02:09:14 by agalvan-           ###   ########.fr     */
+/*                                                                            */
+/* ************************************************************************** */
 #include "../../minishell.h"
 
 void    ft_change_env_var_value(t_var *var, char *new_value)
@@ -16,15 +27,4 @@ void	ft_change_env_var_value_with_name(t_env *env, char *name, char *value)
 	if (!var)
 		return ;
 	ft_change_env_var_value(var, value);
-}
-
-void ft_sigint_handler(int sig)
-{
-    (void)sig;
-    write(1, "\n", 1);
-    rl_on_new_line();
-    rl_replace_line("", 0);
-    rl_redisplay();
-    if (g_env)
-	ft_update_var_status_process(g_env, 130);
 }

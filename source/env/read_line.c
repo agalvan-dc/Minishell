@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_line.c                                        :+:      :+:    :+:   */
+/*                                                      +:+/:+          :+:   */
+/*   By: agalvan- <agalvan-@student.42madrid.c          +#+  :+:       +#:    */
+/*                                                      +#+#+#+#+#+   +#+     */
+/*   Created: 2026/09/13 00:35:08 by agalvan-           #+#    #+#            */
+/*   Updated: 2026/09/13 02:09:14 by agalvan-           ###   ########.fr     */
+/*                                                                            */
+/* ************************************************************************** */
 #include "../../minishell.h"
 
 void	ft_execute_line(t_env *env, char *line)
@@ -72,6 +83,8 @@ char	*ft_get_line(void)
 	struct	termios	attributes;
 	char	*line;
 
+	ft_bzero(&saved, sizeof(saved));
+	ft_bzero(&attributes, sizeof(attributes));
 	tcgetattr(STDIN_FILENO, &saved);
 	tcgetattr(STDIN_FILENO, &attributes);
 	attributes.c_lflag &= ~ECHOCTL;

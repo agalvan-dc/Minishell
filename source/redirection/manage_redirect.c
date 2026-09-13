@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   manage_redirect.c                                  :+:      :+:    :+:   */
+/*                                                      +:+/:+          :+:   */
+/*   By: agalvan- <agalvan-@student.42madrid.c          +#+  :+:       +#:    */
+/*                                                      +#+#+#+#+#+   +#+     */
+/*   Created: 2026/09/13 00:35:08 by agalvan-           #+#    #+#            */
+/*   Updated: 2026/09/13 02:09:14 by agalvan-           ###   ########.fr     */
+/*                                                                            */
+/* ************************************************************************** */
 #include "../../minishell.h"
 
 void	ft_open_next_file_with_flags(t_token *token, t_file *file)
@@ -8,9 +19,9 @@ void	ft_open_next_file_with_flags(t_token *token, t_file *file)
 	if (is_token_input_chevron(token))
 		file->fd = open(file->name, O_RDONLY);
 	else if (is_token_output_chevron(token))
-		file->fd = open(file->name, O_WRONLY | O_TRUNC);
+		file->fd = open(file->name, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 	else if (is_token_append_chevron(token))
-		file->fd = open(file->name, O_WRONLY | O_APPEND);
+		file->fd = open(file->name, O_WRONLY | O_APPEND | O_CREAT, 0644);
 }
 
 void	ft_manage_fd_heredoc(t_token *token)

@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bin_processing.c                                   :+:      :+:    :+:   */
+/*                                                      +:+/:+          :+:   */
+/*   By: agalvan- <agalvan-@student.42madrid.c          +#+  :+:       +#:    */
+/*                                                      +#+#+#+#+#+   +#+     */
+/*   Created: 2026/09/13 00:35:08 by agalvan-           #+#    #+#            */
+/*   Updated: 2026/09/13 02:09:14 by agalvan-           ###   ########.fr     */
+/*                                                                            */
+/* ************************************************************************** */
 #include "../../minishell.h"
 
 char	**ft_append_bin_name_in_args(char **args, char *name)
@@ -9,7 +20,7 @@ char	**ft_append_bin_name_in_args(char **args, char *name)
 	else
 	{
 		new_args = ft_arrayjoin_str(args, name, 0);
-		free(args);
+		free_array(args);
 	}
 	return (new_args);
 }
