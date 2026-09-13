@@ -13,6 +13,8 @@ int		ft_arg_extraction(t_env *env, t_cmd *cmd, char *line, int index)
 	while (!(line_is_finish(line, index)) && !(is_separator(line, index)))
 	{
 		index = ft_blank_detection(line, index);
+		if (line_is_finish(line, index))
+		    break;
 		new_index = ft_arg_classification(env, cmd, line, index);
 		index = new_index;
 		index++;

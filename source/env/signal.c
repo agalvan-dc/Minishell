@@ -37,6 +37,12 @@ void	ft_add_signal_env_var(t_env *env)
 
 void    ft_use_signal(void)
 {
-    signal(SIGQUIT, ft_pass);
-    signal(SIGINT, ft_call_prompt);
+    signal(SIGINT, ft_sigint_handler);
+    signal(SIGQUIT, SIG_IGN);
+}
+
+void    ft_use_signal_exec(void)
+{
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 }

@@ -27,7 +27,7 @@ void    ft_print_args(t_cmd *cmd)
 		return ;
 	while (iter)
 	{
-		ft_printf("	[%d][%d : [%s]\n]", i, iter->id, iter->content);
+		ft_printf("	[%d][%d] : [%s]\n]", i, iter->id, iter->content);
 		i++;
 		iter = iter->next;
 	}

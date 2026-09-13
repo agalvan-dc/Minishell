@@ -84,3 +84,80 @@ echo sigue en pie
 cat history.log
 env
 exit
+ls
+pwd
+cat main.c
+cat main.c
+ls
+cat > text.txt
+ls
+cat main.c
+cat > test.txt
+ls
+ls -a
+ls
+ls
+ls
+cat
+pwd
+cd src
+ls
+cat main.c
+ls 
+ls -a
+vim main....c
+nvim main.c
+cat > text.txt
+cat
+ls
+ls -a
+ls
+ls -a
+cat > test.txt
+ls
+cat main.c
+ls -a
+ls
+pwd
+ls -a
+ls -a
+vim main.c
+cat > test.txt
+ls -a
+cat > test.txt
+ls -a
+cat > text.txt
+ls -a
+cat > text.txt
+ls -a
+ls -a
+cd source
+ls
+make clean
+ls
+cat > text.txt
+ls
+make clean
+ls -a
+cat > args.txt
+ls
+cat main.c
+exit
+ls -a
+ls
+cat main.c
+make clean
+ls
+vim main.c 
+pwd
+env
+clear
+tree
+touch test
+ls
+rm test 
+ls
+systemctl status ssh
+systemctl status docker
+top
+exit

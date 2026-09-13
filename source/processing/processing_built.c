@@ -9,7 +9,9 @@ void    ft_processing_exit(t_cmd *cmd)
 	{
 		ft_putstr_fd("Too many argument\n", 2);
 		ft_remove_all_arg(cmd);
+		return ;
 	}
+	exit(0);
 }
 
 void    ft_processing_echo(t_cmd *cmd)
