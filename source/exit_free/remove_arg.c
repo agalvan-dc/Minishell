@@ -32,26 +32,26 @@ void	ft_remove_all_arg(t_cmd *cmd)
 	cmd->first_arg = NULL;
 }
 
-void    ft_remove_arg_index(t_cmd *cmd, t_arg *arg)
+void	ft_remove_arg_index(t_cmd *cmd, t_arg *arg)
 {
-    t_arg   *iter;
-    int     i;
+	t_arg	*iter;
+	int		i;
 
-    i = 1;
-    iter = cmd->first_arg;
-    while (iter && i < arg->index)
-    {
-        iter = iter->next;
-        i++;
-    }
-    if (!iter)
-        return ;
-    if (iter->prev)
-        iter->prev->next = iter->next;
-    else
-        cmd->first_arg = iter->next;
-    if (iter->next)
-        iter->next->prev = iter->prev;
+	i = 1;
+	iter = cmd->first_arg;
+	while (iter && i < arg->index)
+	{
+		iter = iter->next;
+		i++;
+	}
+	if (!iter)
+		return ;
+	if (iter->prev)
+		iter->prev->next = iter->next;
+	else
+		cmd->first_arg = iter->next;
+	if (iter->next)
+		iter->next->prev = iter->prev;
 	ft_remove_arg(iter);
 }
 

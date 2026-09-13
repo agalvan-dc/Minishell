@@ -6,6 +6,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stddef.h>
+#include <limits.h>
 # include <stdarg.h>
 
 typedef struct s_list

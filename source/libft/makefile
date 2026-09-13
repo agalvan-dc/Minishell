@@ -67,13 +67,13 @@ BONUS			= chained_list/ft_lstnew.c \
 
 BONUS_OBJS		= $(BONUS:.c=.o)
 
-FLAGS 			= -Wall -Wextra -Werror -I.
+FLAGS 			= -Wall -Wextra -Werror -fPIE -I.
 
 $(NAME) : $(OBJS)
-				@ar src  $(NAME) $(OBJS)
+				@ar rcs  $(NAME) $(OBJS)
 
 %.o: %.c
-	@clang -c $(FLAGS) -o $@ $^
+	@$(CC) -c $(FLAGS) -o $@ $^
 
 all : $(NAME)
 
