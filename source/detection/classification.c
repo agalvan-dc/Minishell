@@ -61,8 +61,12 @@ t_token	*ft_cmd_classification(t_env *env, char *content)
 int		ft_arg_classification(t_env *env, t_cmd *cmd, char *line, int i)
 {
 	int		new_i;
+	int		glued;
+	t_arg	*last;
 
 	new_i = i;
+	glued = (i > 0 && !is_blank(line[i - 1]));
+	last = ft_get_last_arg(cmd);
 	if (is_blank_arg(env, line, i))
 		new_i = ft_blank_arg_tokenizer(env, cmd, line, i);
 	else if (is_single_quote(line[i]))
@@ -73,5 +77,7 @@ int		ft_arg_classification(t_env *env, t_cmd *cmd, char *line, int i)
 		new_i = ft_var_tokenizer(env, cmd, line, i);
 	else if (is_word(env, line, i))
 		new_i = ft_word_arg_extraction(env, cmd, line, i);
+	if (glued && last != ft_get_last_arg(cmd))
+		ft_get_last_arg(cmd)->glued = 1;
 	return (new_i);
 }

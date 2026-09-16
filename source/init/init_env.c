@@ -26,6 +26,7 @@ t_file	*ft_init_file(char *name, int fd)
 t_env	*ft_init_env(char **env_var)
 {
 	t_env	*env;
+	char	*current_path;
 
 	env = (t_env *)ft_calloc(1, sizeof(t_env));
 	if (!env)
@@ -33,6 +34,14 @@ t_env	*ft_init_env(char **env_var)
 	ft_create_chained_var(env, env_var);
 	ft_add_signal_env_var(env);
 	free_array(env_var);
+	current_path = ft_get_current_path();
+	if (current_path)
+	{
+		env->history_path = ft_strjoin(current_path, "/history.log");
+		free(current_path);
+	}
+	else
+		env->history_path = ft_strdup("history.log");
 	g_env = env;
 	return (env);
 }

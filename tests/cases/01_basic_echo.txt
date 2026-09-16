@@ -1,0 +1,14 @@
+echo hello world
+echo a  b   c
+echo 'single quoted'
+echo "double quoted"
+echo 'a b' 'c  d'
+export FOO=test
+echo "FOO=$FOO"
+echo '$FOO'
+echo "FOO=$FOO.txt"
+unset FOO
+echo "FOO=$FOO"
+export FOO=test
+echo "$FOO$FOO"
+echo "pre-$FOO-suffix"

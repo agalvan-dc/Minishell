@@ -238,3 +238,2062 @@ echo $?
 false
 echo $?
 exit 3
+ls -a
+ls
+ls -aç
+ls -a
+exit
+ls
+cd ..
+ls
+cd 
+cat main.c
+ls -ll
+ls -a
+exit
+y
+ls -a
+ls -a
+ls -a
+ls -a
+ls -a
+ls -a
+ls -a
+ls -a
+ls -a
+ls -a
+exit
+echo hello world
+echo \$HOME
+ls -la | grep .git
+env | head -2
+cd ..
+ls -a
+echo hello world
+echo $HOME
+env | head -2
+cd ..
+ls -a
+echo hello world
+echo $HOME
+env | head -2
+pwd
+export MYVAR=test
+echo $MYVAR
+cat < Makefile | wc -l
+exit
+ls
+exit
+ls -a
+echo hello world
+echo $HOME
+env | head -2
+pwd
+export MYVAR=test
+echo $MYVAR
+cat < Makefile | wc -l
+cd ..
+ls -a
+echo hello world
+echo $HOME
+env | head -2
+pwd
+export MYVAR=test
+echo $MYVAR
+cat < Makefile | wc -l
+cd /tmp
+ls -a
+echo hello world
+echo $HOME
+env | head -2
+pwd
+export MYVAR=test
+echo $MYVAR
+cat < Makefile | wc -l
+cd /tmp
+echo hello world
+exit
+ls -a
+echo hello
+exit
+ls -a | wc -l
+cat << EOF
+export FOO=bar
+echo $FOO
+cd /tmp
+ls -a
+echo hello world foo
+echo $HOME
+ls -la | grep -c total
+pwd
+export MYVAR=abc
+echo $MYVAR
+cat < Makefile | wc -l
+cd /tmp
+foo bar
+exit
+ls
+exit
+ls -a
+ls -l
+cd ..
+pwd
+echo "hello world"
+exit
+cd /tmp/mstest/a
+echo hola > /tmp/t1.txt
+echo mundo >> /tmp/t1.txt
+cat /tmp/t1.txt
+cat < /tmp/t1.txt
+echo "a b" \c
+cat << END
+exit
+echo "hola $USER"
+echo 'adios'
+ls -l | wc -l
+echo fin > /tmp/vg_out.txt
+cat /tmp/vg_out.txt
+export FOO=bar
+echo $FOO
+cd /tmp
+echo "hola $USER"
+echo 'adios'
+ls -l | wc -l
+echo fin > /tmp/vg_out.txt
+cat /tmp/vg_out.txt
+export FOO=bar
+echo $FOO
+cd /tmp
+echo "hola $USER"
+echo 'adios'
+ls -l | wc -l
+echo fin > /tmp/vg_out.txt
+cat /tmp/vg_out.txt
+export FOO=bar
+echo $FOO
+cd /tmp
+echo 'adios'
+exit
+echo "hola $USER"
+echo 'adios'
+ls -l | wc -l
+echo fin > /tmp/vg_out.txt
+cat /tmp/vg_out.txt
+export FOO=bar
+echo $FOO
+cd /tmp
+pwd
+cd -
+exit
+cd /tmp/clean/a/b
+rmdir ../b
+pwd
+cd -
+pwd
+exit
+cd /tmp/clean/a/b
+rmdir ../b
+pwd
+cd -
+pwd
+exit
+echo "hola $USER"
+echo 'adios'
+echo 'single'quote'concat'
+echo "doble""concat" word
+echo hi
+exit
+pwd
+exit
+echo 'hola'
+exit
+echo "hola $USER"
+echo "hola $USER"
+printf "[%s]\n" "hola $USER"
+exit
+echo "hola $USER"
+echo "$USER"
+echo "hola mundo"
+echo "a"
+echo ""
+echo 'literal $USER'
+echo 'c d'
+exit
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+echo "mi=$MI twice "
+unset MI
+echo done
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+echo "mi=$MI twice "
+unset MI
+echo done
+echo 'single'quote'concat'
+echo "hola $USER"
+echo "mi=$USER fin"
+echo 'literal $USER'
+echo '$USER'
+echo "doble
+export FOO=bar
+echo "FOO=$FOO"
+exit
+echo "doble
+echo 'single'quote'concat'
+echo "hola $USER"
+echo "mi=$USER fin"
+echo 'literal $USER'
+echo '$USER'
+export FOO=bar
+echo "FOO=$FOO"
+unset FOO
+echo "FOO=$FOO"
+export FOO=bar2
+echo "$FOO"
+echo "A\"B"
+echo "multi word  spacing"
+ls > /tmp/redir1.txt
+cat < /tmp/redir1.txt > /tmp/redir2.txt
+cat /tmp/redir2.txt
+echo hola >> /tmp/redir1.txt
+cat /tmp/redir1.txt
+cat << EOF
+env | wc -l
+env | grep PATH | cat | wc -c
+echo 'a b' 'c  d'
+echo a b  c
+exit
+echo hi
+cat << EOF
+echo after
+ls > /tmp/r1.txt
+cat < /tmp/r1.txt > /tmp/r2.txt
+cat /tmp/r2.txt
+echo end
+echo hola >> /tmp/r1.txt
+cat /tmp/r1.txt
+wc -l << EOF
+cat << EOF
+cat << EOF
+echo after
+cat << EOF
+ls /tmp
+cat << EOF
+echo after
+cat << EOF
+echo after
+cat << EOF
+echo after
+cat << EOF
+echo after
+cat << EOF
+echo after
+cat << EOF
+echo after
+cat << EOF
+echo after
+cat << EOF
+echo after
+cat << EOF
+echo after
+cat << EOF
+echo after
+echo -n hi
+echo -n -n x
+echo 'single'quote'concat'
+echo mi=$USER
+echo mi=$USER.txt
+echo $USER$HISTSIZE
+echo a"b"c
+echo 'x'"y"
+echo a b  c
+echo "FOO=bar"
+export AA=hola
+echo "$AA"mundo
+echo "unset var=$AA"
+echo 'a b' 'c  d'
+exit
+echo mi=$USER.txt
+echo "mi=$USER.txt"
+echo $USER.txt
+echo a"b"c
+echo '$USER.txt'
+echo "$USER"".txt"
+echo "$USER"".txt"
+echo "a""b"
+echo "a" "b"
+echo "x"c"y"
+echo '$USER'foo
+echo foo'$USER'
+echo "$HISTSIZE"x
+echo x"y"
+exit
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+echo 'single'quote'concat'
+echo mi=$USER.txt
+echo a"b"c
+echo "A\"B"
+cd /tmp/clean/a/b
+rmdir ../b
+pwd
+cd -
+pwd
+echo "hola $USER"
+ls > /tmp/r1.txt
+cat < /tmp/r1.txt > /tmp/r2.txt
+cat /tmp/r2.txt > /dev/null
+cat << EOF
+env | wc -l
+exit
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+echo 'single'quote'concat'
+echo mi=$USER.txt
+echo a"b"c
+echo "A\"B"
+cd /tmp/clean/a/b
+rmdir ../b
+pwd
+cd -
+pwd
+echo "hola $USER"
+ls > /tmp/r1.txt
+cat < /tmp/r1.txt > /tmp/r2.txt
+cat /tmp/r2.txt > /dev/null
+cat << EOF
+env | wc -l
+exit
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+echo 'single'quote'concat'
+echo mi=$USER.txt
+echo a"b"c
+echo "A\"B"
+cd /tmp/clean/a/b
+rmdir ../b
+pwd
+cd -
+pwd
+echo "hola $USER"
+ls > /tmp/r1.txt
+cat < /tmp/r1.txt > /tmp/r2.txt
+cat /tmp/r2.txt > /dev/null
+cat << EOF
+env | wc -l
+exit
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+echo 'single'quote'concat'
+echo mi=$USER.txt
+echo a"b"c
+echo "A\"B"
+cd /tmp/clean/a/b
+rmdir ../b
+pwd
+cd -
+pwd
+echo "hola $USER"
+ls > /tmp/r1.txt
+cat < /tmp/r1.txt > /tmp/r2.txt
+cat /tmp/r2.txt > /dev/null
+cat << EOF
+env | wc -l
+exit
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+echo 'single'quote'concat'
+echo mi=$USER.txt
+echo a"b"c
+echo "A\"B"
+cd /tmp/clean/a/b
+rmdir ../b
+pwd
+cd -
+pwd
+echo "hola $USER"
+ls > /tmp/r1.txt
+cat < /tmp/r1.txt > /tmp/r2.txt
+cat /tmp/r2.txt > /dev/null
+cat << EOF
+env | wc -l
+exit
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+echo 'single'quote'concat'
+echo mi=$USER.txt
+echo a"b"c
+echo "A\"B"
+cd /tmp/clean/a/b
+rmdir ../b
+pwd
+cd -
+pwd
+echo "hola $USER"
+ls > /tmp/r1.txt
+cat < /tmp/r1.txt > /tmp/r2.txt
+cat /tmp/r2.txt > /dev/null
+cat << EOF
+env | wc -l
+exit
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+echo 'single'quote'concat'
+echo mi=$USER.txt
+echo a"b"c
+echo "A\"B"
+cd /tmp/clean/a/b
+rmdir ../b
+pwd
+cd -
+pwd
+echo "hola $USER"
+ls > /tmp/r1.txt
+cat < /tmp/r1.txt > /tmp/r2.txt
+cat /tmp/r2.txt > /dev/null
+cat << EOF
+env | wc -l
+exit
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+echo 'single'quote'concat'
+echo mi=$USER.txt
+echo a"b"c
+echo "A\"B"
+cd /tmp/clean/a/b
+rmdir ../b
+pwd
+cd -
+pwd
+echo "hola $USER"
+ls > /tmp/r1.txt
+cat < /tmp/r1.txt > /tmp/r2.txt
+cat /tmp/r2.txt > /dev/null
+cat << EOF
+env | wc -l
+exit
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+echo 'single'quote'concat'
+echo mi=$USER.txt
+echo a"b"c
+echo "A\"B"
+cd /tmp/clean/a/b
+rmdir ../b
+pwd
+cd -
+pwd
+echo "hola $USER"
+ls > /tmp/r1.txt
+cat < /tmp/r1.txt > /tmp/r2.txt
+cat /tmp/r2.txt > /dev/null
+cat << EOF
+env | wc -l
+exit
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+echo 'single'quote'concat'
+echo mi=$USER.txt
+echo a"b"c
+echo "A\"B"
+cd /tmp/clean/a/b
+rmdir ../b
+pwd
+cd -
+pwd
+echo "hola $USER"
+ls > /tmp/r1.txt
+cat < /tmp/r1.txt > /tmp/r2.txt
+cat /tmp/r2.txt > /dev/null
+cat << EOF
+env | wc -l
+exit
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+echo 'single'quote'concat'
+echo mi=$USER.txt
+echo a"b"c
+echo "A\"B"
+cd /tmp/clean/a/b
+rmdir ../b
+pwd
+cd -
+pwd
+echo "hola $USER"
+ls > /tmp/r1.txt
+cat < /tmp/r1.txt > /tmp/r2.txt
+cat /tmp/r2.txt > /dev/null
+cat << EOF
+env | wc -l
+exit
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+echo 'single'quote'concat'
+echo mi=$USER.txt
+echo a"b"c
+echo "A\"B"
+cd /tmp/clean/a/b
+rmdir ../b
+pwd
+cd -
+pwd
+echo "hola $USER"
+ls > /tmp/r1.txt
+cat < /tmp/r1.txt > /tmp/r2.txt
+cat /tmp/r2.txt > /dev/null
+cat << EOF
+env | wc -l
+exit
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+echo 'single'quote'concat'
+echo mi=$USER.txt
+echo a"b"c
+echo "A\"B"
+cd /tmp/clean/a/b
+rmdir ../b
+pwd
+cd -
+pwd
+echo "hola $USER"
+ls > /tmp/r1.txt
+cat < /tmp/r1.txt > /tmp/r2.txt
+cat /tmp/r2.txt > /dev/null
+cat << EOF
+env | wc -l
+exit
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+echo 'single'quote'concat'
+echo mi=$USER.txt
+echo a"b"c
+echo "A\"B"
+cd /tmp/clean/a/b
+rmdir ../b
+pwd
+cd -
+pwd
+echo "hola $USER"
+ls > /tmp/r1.txt
+cat < /tmp/r1.txt > /tmp/r2.txt
+cat /tmp/r2.txt > /dev/null
+cat << EOF
+env | wc -l
+exit
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+echo 'single'quote'concat'
+echo mi=$USER.txt
+echo a"b"c
+echo "A\"B"
+cd /tmp/clean/a/b
+rmdir ../b
+pwd
+cd -
+pwd
+echo "hola $USER"
+ls > /tmp/r1.txt
+cat < /tmp/r1.txt > /tmp/r2.txt
+cat /tmp/r2.txt > /dev/null
+cat << EOF
+env | wc -l
+exit
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+echo 'single'quote'concat'
+echo mi=$USER.txt
+echo a"b"c
+echo "A\"B"
+cd /tmp/clean/a/b
+rmdir ../b
+pwd
+cd -
+pwd
+echo "hola $USER"
+ls > /tmp/r1.txt
+cat < /tmp/r1.txt > /tmp/r2.txt
+cat /tmp/r2.txt > /dev/null
+cat << EOF
+env | wc -l
+exit
+cd /tmp/clean/a/b
+rmdir ../b
+cd -
+cat << EOF
+cd -
+cat << EOF
+ls > /tmp/r1.txt
+cat < /tmp/r1.txt > /tmp/r2.txt
+cat /tmp/r2.txt > /dev/null
+cat << EOF
+echo "A\"B"
+cat << EOF
+cat << EOF
+env | wc -l
+ls > /tmp/r1.txt
+cat << EOF
+cat < /tmp/r1.txt > /tmp/r2.txt
+cat << EOF
+cat /tmp/r2.txt > /dev/null
+cat << EOF
+ls > /tmp/r1.txt
+cat < /tmp/r1.txt > /tmp/r2.txt
+cat << EOF
+cat < /tmp/r1.txt > /tmp/r2.txt
+echo done
+cat < /tmp/r1.txt > /tmp/r2.txt
+echo done
+cat < /tmp/r1.txt
+echo ---
+echo hi > /tmp/r3.txt
+cat /tmp/r3.txt
+Y
+cat < /tmp/r1.txt > /tmp/r2.txt
+exit
+cat < /tmp/r1.txt > /tmp/r2.txt
+exit
+cat < /tmp/r1.txt > /tmp/r2.txt
+cat /tmp/r2.txt
+cat < /tmp/r1.txt
+ls > /tmp/r1.txt 2>/dev/null
+cat < /tmp/r1.txt
+echo "a" > /tmp/r3.txt
+echo "b" >> /tmp/r3.txt
+cat /tmp/r3.txt
+env | grep PATH | cat | wc -c
+cat << EOF
+exit
+ls > /tmp/x.txt
+cat /tmp/x.txt
+exit
+ls > /tmp/r1.txt 2>/dev/null
+cat /tmp/r1.txt
+exit
+cat < /tmp/r1.txt > /tmp/r2.txt
+cat /tmp/r2.txt
+cat < /tmp/r1.txt
+ls > /tmp/r1.txt
+cat < /tmp/r1.txt
+echo "a" > /tmp/r3.txt
+echo "b" >> /tmp/r3.txt
+cat /tmp/r3.txt
+env | grep PATH | cat | wc -c
+cat << EOF
+exit
+cat < /tmp/r1.txt > /tmp/r2.txt
+cat /tmp/r2.txt
+cat < /tmp/r1.txt
+ls > /tmp/r1.txt
+cat < /tmp/r1.txt
+echo "a" > /tmp/r3.txt
+echo "b" >> /tmp/r3.txt
+cat /tmp/r3.txt
+env | grep PATH | cat | wc -c
+cat << EOF
+exit
+echo "aaa" > /tmp/r1.txt
+cat < /tmp/r1.txt > /tmp/r2.txt
+cat /tmp/r2.txt
+echo "bbb" >> /tmp/r2.txt
+cat /tmp/r2.txt
+cat << EOF
+env | grep PATH | cat | wc -c
+exit
+echo "aaa" > /tmp/r1.txt
+cat < /tmp/r1.txt > /tmp/r2.txt
+cat /tmp/r2.txt
+echo "bbb" >> /tmp/r2.txt
+cat /tmp/r2.txt
+cat << EOF
+env | grep PATH | cat | wc -c
+exit
+cat << EOF
+exit
+wc -l << EOF
+exit
+echo "aaa" > /tmp/r1.txt
+cat < /tmp/r1.txt > /tmp/r2.txt
+cat /tmp/r2.txt
+echo "bbb" >> /tmp/r2.txt
+cat /tmp/r2.txt
+cat << EOF
+env | grep PATH | cat | wc -c
+exit
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+echo 'single'quote'concat'
+echo mi=$USER.txt
+echo a"b"c
+echo "$USER"".txt"
+echo "$AA"mundo
+echo -n hi
+echo
+cd /tmp/clean/a/b
+rmdir ../b
+pwd
+cd -
+pwd
+ls > /tmp/r1.txt
+cat < /tmp/r1.txt > /tmp/r2.txt
+cat /tmp/r2.txt
+echo x >> /tmp/r2.txt
+cat /tmp/r2.txt
+cat << EOF
+cat << EOF2 | wc -l
+one
+two
+three
+EOF2
+exit
+cat << EOF2 | wc -l
+cat << EOF2 | wc -l
+cat << EOF2 | wc -l
+cat > /tmp/p.txt | wc -c
+cat << EOF2 | wc -l
+cat > /tmp/p.txt | wc -c
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+echo 'single'quote'concat'
+echo mi=$USER.txt
+echo a"b"c
+echo "$USER"".txt"
+echo "$AA"mundo
+echo -n hi
+echo
+cd /tmp/clean/a/b
+rmdir ../b
+pwd
+cd -
+pwd
+ls > /tmp/r1.txt
+cat < /tmp/r1.txt > /tmp/r2.txt
+cat /tmp/r2.txt
+echo x >> /tmp/r2.txt
+cat /tmp/r2.txt
+cat << EOF
+env | grep PATH | cat | wc -c
+exit
+echo "A\"B"
+echo "back\\slash"
+echo "\$USER"
+echo "A\\B\"C"
+echo "var_${USER}"
+echo "$USER\"X"
+echo "A"B"|wc -c
+echo "A\"B"|wc -c
+exit
+echo "A\"B" | wc -c
+exit
+echo "A\"B"
+exit
+echo "AB"|wc -c
+exit
+echo "$USER\\"X"
+echo "var_${USER}"
+echo "A\\"B"|wc -c
+echo "$USER\"X"
+echo "A\"B"|wc -c
+exit
+echo "var_${USER}"
+echo "A\"B"|wc -c
+exit
+echo "A\"B"|wc -c
+exit
+echo one; echo two
+exit
+echo "doble
+cd /tmp/minishell_tests/01_basic_echo
+echo hello world
+echo a  b   c
+echo 'single quoted'
+echo "double quoted"
+echo 'a b' 'c  d'
+export FOO=test
+echo "FOO=$FOO"
+echo '$FOO'
+echo "FOO=$FOO.txt"
+unset FOO
+echo "FOO=$FOO"
+export FOO=test
+echo "$FOO$FOO"
+echo "pre-$FOO-suffix"
+cd /tmp/minishell_tests/02_quotes
+echo 'single'
+echo "double"
+echo "escaped \" quote"
+echo don't
+echo "back\slash"
+echo "dollar \$HOME"
+echo "tab\there"
+echo 'single "inside"'
+echo "double 'inside'"
+cd /tmp/minishell_tests/03_concat
+export V=val
+echo 'single'quote'concat'
+echo "double"quote"concat"
+echo a"b"c
+echo x"$V"x
+echo "$V"mundo
+echo pre-"$V"-post
+echo 'a'"b"'c'
+cd /tmp/minishell_tests/04_redir
+echo one > r.txt
+cat r.txt
+echo two >> r.txt
+cat r.txt
+echo three > r.txt
+cat < r.txt
+cat < r.txt > r2.txt
+cat r2.txt
+rm -f r.txt r2.txt
+cd /tmp/minishell_tests/05_heredoc
+cat << END
+wc -l << END
+cat << END | wc -l
+cd /tmp/minishell_tests/06_pipeline
+export P=path
+env | grep P
+echo abc | cat
+env | grep P | cat
+env | grep P | cat | wc -l
+cd /tmp/minishell_tests/07_cd_edge
+mkdir -p sub/a
+cd sub/a
+pwd
+cd ..
+pwd
+cd sub/a
+rmdir ../a
+pwd
+cd -
+pwd
+cd /tmp/minishell_tests/08_exit_status
+true
+echo $?
+false
+echo $?
+echo -n hi
+cd /tmp/minishell_tests/01_basic_echo
+echo hello world
+echo a  b   c
+echo 'single quoted'
+echo "double quoted"
+echo 'a b' 'c  d'
+export FOO=test
+echo "FOO=$FOO"
+echo '$FOO'
+echo "FOO=$FOO.txt"
+unset FOO
+echo "FOO=$FOO"
+export FOO=test
+echo "$FOO$FOO"
+echo "pre-$FOO-suffix"
+cd /tmp/minishell_tests/02_quotes
+echo 'single'
+echo "double"
+echo "escaped \" quote"
+echo "don't"
+echo "back\slash"
+echo "dollar \$HOME"
+echo "tab\there"
+echo 'single "inside"'
+echo "double 'inside'"
+cd /tmp/minishell_tests/03_concat
+export V=val
+echo 'single'quote'concat'
+echo "double"quote"concat"
+echo a"b"c
+echo x"$V"x
+echo "$V"mundo
+echo pre-"$V"-post
+echo 'a'"b"'c'
+cd /tmp/minishell_tests/04_redir
+echo one > r.txt
+cat r.txt
+echo two >> r.txt
+cat r.txt
+echo three > r.txt
+cat < r.txt
+cat < r.txt > r2.txt
+cat r2.txt
+rm -f r.txt r2.txt
+cd /tmp/minishell_tests/05_heredoc
+cat << END
+wc -l << END
+cat << END | wc -l
+cd /tmp/minishell_tests/06_pipeline
+export P=path
+echo "$P"
+echo abc | cat
+echo "$P" | cat
+echo "$P" | cat | wc -l
+cd /tmp/minishell_tests/07_cd_edge
+mkdir -p sub/a
+cd sub/a
+pwd
+cd ..
+pwd
+cd sub/a
+rmdir ../a
+pwd
+cd -
+pwd
+cd /tmp/minishell_tests/08_exit_status
+true
+echo $?
+false
+echo $?
+echo -n hi
+cd sub/a
+pwd
+cd ..
+pwd
+cd sub/a
+pwd
+exit
+cd /tmp/minishell_tests/07_cd_edge
+mkdir -p sub/a
+cd sub/a
+pwd
+cd ..
+pwd
+cd sub/a
+rmdir ../a
+pwd
+cd -
+pwd
+exit
+cd /tmp/minishell_tests/01_basic_echo
+echo hello world
+echo a  b   c
+echo 'single quoted'
+echo "double quoted"
+echo 'a b' 'c  d'
+export FOO=test
+echo "FOO=$FOO"
+echo '$FOO'
+echo "FOO=$FOO.txt"
+unset FOO
+echo "FOO=$FOO"
+export FOO=test
+echo "$FOO$FOO"
+echo "pre-$FOO-suffix"
+cd /tmp/minishell_tests/02_quotes
+echo 'single'
+echo "double"
+echo "escaped \" quote"
+echo "don't"
+echo "back\slash"
+echo "dollar \$HOME"
+echo "tab\there"
+echo 'single "inside"'
+echo "double 'inside'"
+cd /tmp/minishell_tests/03_concat
+export V=val
+echo 'single'quote'concat'
+echo "double"quote"concat"
+echo a"b"c
+echo x"$V"x
+echo "$V"mundo
+echo pre-"$V"-post
+echo 'a'"b"'c'
+cd /tmp/minishell_tests/04_redir
+echo one > r.txt
+cat r.txt
+echo two >> r.txt
+cat r.txt
+echo three > r.txt
+cat < r.txt
+cat < r.txt > r2.txt
+cat r2.txt
+rm -f r.txt r2.txt
+cd /tmp/minishell_tests/05_heredoc
+cat << END
+wc -l << END
+cat << END | wc -l
+cd /tmp/minishell_tests/06_pipeline
+export P=path
+echo "$P"
+echo abc | cat
+echo "$P" | cat
+echo "$P" | cat | wc -l
+cd /tmp/minishell_tests/07_cd_edge
+mkdir -p sub/a
+cd sub/a
+pwd
+cd ..
+pwd
+cd a
+rmdir ../a
+pwd
+cd -
+pwd
+cd /tmp/minishell_tests/08_exit_status
+true
+echo $?
+false
+echo $?
+echo -n hi
+cd /tmp/minishell_tests/01_basic_echo
+echo hello world
+echo a  b   c
+echo 'single quoted'
+echo "double quoted"
+echo 'a b' 'c  d'
+export FOO=test
+echo "FOO=$FOO"
+echo '$FOO'
+echo "FOO=$FOO.txt"
+unset FOO
+echo "FOO=$FOO"
+export FOO=test
+echo "$FOO$FOO"
+echo "pre-$FOO-suffix"
+cd /tmp/minishell_tests/01_basic_echo
+echo hello world
+echo a  b   c
+echo 'single quoted'
+echo "double quoted"
+echo 'a b' 'c  d'
+export FOO=test
+echo "FOO=$FOO"
+echo '$FOO'
+echo "FOO=$FOO.txt"
+unset FOO
+echo "FOO=$FOO"
+export FOO=test
+echo "$FOO$FOO"
+echo "pre-$FOO-suffix"
+cd /tmp/minishell_tests/02_quotes
+echo 'single'
+echo "double"
+echo "escaped \" quote"
+echo "don't"
+echo "back\slash"
+echo "dollar \$HOME"
+echo "tab\there"
+echo 'single "inside"'
+echo "double 'inside'"
+cd /tmp/minishell_tests/02_quotes
+echo 'single'
+echo "double"
+echo "escaped \" quote"
+echo "don't"
+echo "back\slash"
+echo "dollar \$HOME"
+echo "tab\there"
+echo 'single "inside"'
+echo "double 'inside'"
+cd /tmp/minishell_tests/03_concat
+export V=val
+echo 'single'quote'concat'
+echo "double"quote"concat"
+echo a"b"c
+echo x"$V"x
+echo "$V"mundo
+echo pre-"$V"-post
+echo 'a'"b"'c'
+cd /tmp/minishell_tests/03_concat
+export V=val
+echo 'single'quote'concat'
+echo "double"quote"concat"
+echo a"b"c
+echo x"$V"x
+echo "$V"mundo
+echo pre-"$V"-post
+echo 'a'"b"'c'
+cd /tmp/minishell_tests/04_redir
+echo one > r.txt
+cat r.txt
+echo two >> r.txt
+cat r.txt
+echo three > r.txt
+cat < r.txt
+cat < r.txt > r2.txt
+cat r2.txt
+rm -f r.txt r2.txt
+cd /tmp/minishell_tests/04_redir
+echo one > r.txt
+cat r.txt
+echo two >> r.txt
+cat r.txt
+echo three > r.txt
+cat < r.txt
+cat < r.txt > r2.txt
+cat r2.txt
+rm -f r.txt r2.txt
+cd /tmp/minishell_tests/05_heredoc
+cat << END
+wc -l << END
+cat << END | wc -l
+cd /tmp/minishell_tests/05_heredoc
+cat << END
+wc -l << END
+cat << END | wc -l
+cd /tmp/minishell_tests/06_pipeline
+export P=path
+echo "$P"
+echo abc | cat
+echo "$P" | cat
+echo "$P" | cat | wc -l
+cd /tmp/minishell_tests/06_pipeline
+export P=path
+echo "$P"
+echo abc | cat
+echo "$P" | cat
+echo "$P" | cat | wc -l
+cd /tmp/minishell_tests/07_cd_edge
+mkdir -p sub/a
+cd sub/a
+pwd
+cd ..
+pwd
+cd a
+rmdir ../a
+pwd
+cd -
+pwd
+cd /tmp/minishell_tests/07_cd_edge
+mkdir -p sub/a
+cd sub/a
+pwd
+cd ..
+pwd
+cd a
+rmdir ../a
+pwd
+cd -
+pwd
+cd /tmp/minishell_tests/08_exit_status
+true
+echo $?
+false
+echo $?
+cd /tmp/minishell_tests/08_exit_status
+true
+echo $?
+false
+echo $?
+cd /tmp/minishell_tests/09_unset_reuse
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+export MI=otro
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+cd /tmp/minishell_tests/09_unset_reuse
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+export MI=otro
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+echo -n hi
+cd /tmp/minishell_tests/01_basic_echo
+echo hello world
+echo a  b   c
+echo 'single quoted'
+echo "double quoted"
+echo 'a b' 'c  d'
+export FOO=test
+echo "FOO=$FOO"
+echo '$FOO'
+echo "FOO=$FOO.txt"
+unset FOO
+echo "FOO=$FOO"
+export FOO=test
+echo "$FOO$FOO"
+echo "pre-$FOO-suffix"
+cd /tmp/minishell_tests/01_basic_echo
+echo hello world
+echo a  b   c
+echo 'single quoted'
+echo "double quoted"
+echo 'a b' 'c  d'
+export FOO=test
+echo "FOO=$FOO"
+echo '$FOO'
+echo "FOO=$FOO.txt"
+unset FOO
+echo "FOO=$FOO"
+export FOO=test
+echo "$FOO$FOO"
+echo "pre-$FOO-suffix"
+cd /tmp/minishell_tests/02_quotes
+echo 'single'
+echo "double"
+echo "escaped \" quote"
+echo "don't"
+echo "back\slash"
+echo "dollar \$HOME"
+echo "tab\there"
+echo 'single "inside"'
+echo "double 'inside'"
+cd /tmp/minishell_tests/02_quotes
+echo 'single'
+echo "double"
+echo "escaped \" quote"
+echo "don't"
+echo "back\slash"
+echo "dollar \$HOME"
+echo "tab\there"
+echo 'single "inside"'
+echo "double 'inside'"
+cd /tmp/minishell_tests/03_concat
+export V=val
+echo 'single'quote'concat'
+echo "double"quote"concat"
+echo a"b"c
+echo x"$V"x
+echo "$V"mundo
+echo pre-"$V"-post
+echo 'a'"b"'c'
+cd /tmp/minishell_tests/03_concat
+export V=val
+echo 'single'quote'concat'
+echo "double"quote"concat"
+echo a"b"c
+echo x"$V"x
+echo "$V"mundo
+echo pre-"$V"-post
+echo 'a'"b"'c'
+cd /tmp/minishell_tests/04_redir
+echo one > r.txt
+cat r.txt
+echo two >> r.txt
+cat r.txt
+echo three > r.txt
+cat < r.txt
+cat < r.txt > r2.txt
+cat r2.txt
+rm -f r.txt r2.txt
+cd /tmp/minishell_tests/04_redir
+echo one > r.txt
+cat r.txt
+echo two >> r.txt
+cat r.txt
+echo three > r.txt
+cat < r.txt
+cat < r.txt > r2.txt
+cat r2.txt
+rm -f r.txt r2.txt
+cd /tmp/minishell_tests/05_heredoc
+cat << END
+wc -l << END
+cat << END | wc -l
+cd /tmp/minishell_tests/05_heredoc
+cat << END
+wc -l << END
+cat << END | wc -l
+cd /tmp/minishell_tests/06_pipeline
+export P=path
+echo "$P"
+echo abc | cat
+echo "$P" | cat
+echo "$P" | cat | wc -l
+cd /tmp/minishell_tests/06_pipeline
+export P=path
+echo "$P"
+echo abc | cat
+echo "$P" | cat
+echo "$P" | cat | wc -l
+cd /tmp/minishell_tests/07_cd_edge
+mkdir -p sub/a
+cd sub/a
+pwd
+cd ..
+pwd
+cd a
+rmdir ../a
+pwd
+cd -
+pwd
+cd /tmp/minishell_tests/07_cd_edge
+mkdir -p sub/a
+cd sub/a
+pwd
+cd ..
+pwd
+cd a
+rmdir ../a
+pwd
+cd -
+pwd
+cd /tmp/minishell_tests/08_exit_status
+true
+echo $?
+false
+echo $?
+cd /tmp/minishell_tests/08_exit_status
+true
+echo $?
+false
+echo $?
+cd /tmp/minishell_tests/09_unset_reuse
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+export MI=otro
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+cd /tmp/minishell_tests/09_unset_reuse
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+export MI=otro
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+echo -n hi
+cd /tmp/minishell_tests/01_basic_echo
+echo hello world
+echo a  b   c
+echo 'single quoted'
+echo "double quoted"
+echo 'a b' 'c  d'
+export FOO=test
+echo "FOO=$FOO"
+echo '$FOO'
+echo "FOO=$FOO.txt"
+unset FOO
+echo "FOO=$FOO"
+export FOO=test
+echo "$FOO$FOO"
+echo "pre-$FOO-suffix"
+cd /tmp/minishell_tests/01_basic_echo
+echo hello world
+echo a  b   c
+echo 'single quoted'
+echo "double quoted"
+echo 'a b' 'c  d'
+export FOO=test
+echo "FOO=$FOO"
+echo '$FOO'
+echo "FOO=$FOO.txt"
+unset FOO
+echo "FOO=$FOO"
+export FOO=test
+echo "$FOO$FOO"
+echo "pre-$FOO-suffix"
+cd /tmp/minishell_tests/02_quotes
+echo 'single'
+echo "double"
+echo "escaped \" quote"
+echo "don't"
+echo "back\slash"
+echo "dollar \$HOME"
+echo "tab\there"
+echo 'single "inside"'
+echo "double 'inside'"
+cd /tmp/minishell_tests/02_quotes
+echo 'single'
+echo "double"
+echo "escaped \" quote"
+echo "don't"
+echo "back\slash"
+echo "dollar \$HOME"
+echo "tab\there"
+echo 'single "inside"'
+echo "double 'inside'"
+cd /tmp/minishell_tests/03_concat
+export V=val
+echo 'single'quote'concat'
+echo "double"quote"concat"
+echo a"b"c
+echo x"$V"x
+echo "$V"mundo
+echo pre-"$V"-post
+echo 'a'"b"'c'
+cd /tmp/minishell_tests/03_concat
+export V=val
+echo 'single'quote'concat'
+echo "double"quote"concat"
+echo a"b"c
+echo x"$V"x
+echo "$V"mundo
+echo pre-"$V"-post
+echo 'a'"b"'c'
+cd /tmp/minishell_tests/04_redir
+echo one > r.txt
+cat r.txt
+echo two >> r.txt
+cat r.txt
+echo three > r.txt
+cat < r.txt
+cat < r.txt > r2.txt
+cat r2.txt
+rm -f r.txt r2.txt
+cd /tmp/minishell_tests/04_redir
+echo one > r.txt
+cat r.txt
+echo two >> r.txt
+cat r.txt
+echo three > r.txt
+cat < r.txt
+cat < r.txt > r2.txt
+cat r2.txt
+rm -f r.txt r2.txt
+cd /tmp/minishell_tests/05_heredoc
+cat << END
+wc -l << END
+cat << END | wc -l
+cd /tmp/minishell_tests/05_heredoc
+cat << END
+wc -l << END
+cat << END | wc -l
+cd /tmp/minishell_tests/06_pipeline
+export P=path
+echo "$P"
+echo abc | cat
+echo "$P" | cat
+echo "$P" | cat | wc -l
+cd /tmp/minishell_tests/06_pipeline
+export P=path
+echo "$P"
+echo abc | cat
+echo "$P" | cat
+echo "$P" | cat | wc -l
+cd /tmp/minishell_tests/07_cd_edge
+mkdir -p sub/a
+cd sub/a
+pwd
+cd ..
+pwd
+cd a
+rmdir ../a
+pwd
+cd -
+pwd
+cd /tmp/minishell_tests/07_cd_edge
+mkdir -p sub/a
+cd sub/a
+pwd
+cd ..
+pwd
+cd a
+rmdir ../a
+pwd
+cd -
+pwd
+cd /tmp/minishell_tests/08_exit_status
+true
+echo $?
+false
+echo $?
+cd /tmp/minishell_tests/08_exit_status
+true
+echo $?
+false
+echo $?
+cd /tmp/minishell_tests/09_unset_reuse
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+export MI=otro
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+cd /tmp/minishell_tests/09_unset_reuse
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+export MI=otro
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+echo -n hi
+cat > text.txt
+ls
+cat text.txt 
+exit
+echo hi
+exit
+echo hi
+echo hi
+exit
+cd /tmp/minishell_tests/01_basic_echo
+echo hello world
+echo a  b   c
+echo 'single quoted'
+echo "double quoted"
+echo 'a b' 'c  d'
+export FOO=test
+echo "FOO=$FOO"
+echo '$FOO'
+echo "FOO=$FOO.txt"
+unset FOO
+echo "FOO=$FOO"
+export FOO=test
+echo "$FOO$FOO"
+echo "pre-$FOO-suffix"
+cd /tmp/minishell_tests/02_quotes
+echo 'single'
+echo "double"
+echo "escaped \" quote"
+echo "don't"
+echo "back\slash"
+echo "dollar \$HOME"
+echo "tab\there"
+echo 'single "inside"'
+echo "double 'inside'"
+cd /tmp/minishell_tests/03_concat
+export V=val
+echo 'single'quote'concat'
+echo "double"quote"concat"
+echo a"b"c
+echo x"$V"x
+echo "$V"mundo
+echo pre-"$V"-post
+echo 'a'"b"'c'
+cd /tmp/minishell_tests/04_redir
+echo one > r.txt
+cat r.txt
+echo two >> r.txt
+cat r.txt
+echo three > r.txt
+cat < r.txt
+cat < r.txt > r2.txt
+cat r2.txt
+rm -f r.txt r2.txt
+cd /tmp/minishell_tests/05_heredoc
+cat << END
+wc -l << END
+cat << END | wc -l
+cd /tmp/minishell_tests/06_pipeline
+export P=path
+echo "$P"
+echo abc | cat
+echo "$P" | cat
+echo "$P" | cat | wc -l
+cd /tmp/minishell_tests/07_cd_edge
+mkdir -p sub/a
+cd sub/a
+pwd
+cd ..
+pwd
+cd a
+rmdir ../a
+pwd
+cd -
+pwd
+cd /tmp/minishell_tests/08_exit_status
+true
+echo $?
+false
+echo $?
+cd /tmp/minishell_tests/09_unset_reuse
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+export MI=otro
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+cd /tmp/minishell_tests/10_file_ops
+mkdir -p work
+touch work/a.txt
+echo hello > work/b.txt
+cat work/b.txt
+cd work/
+pwd
+cd ..
+rm work/a.txt
+ls work
+rm -r work/
+cat > test.txt
+echo -n hi
+echo hi
+exit
+echo hi
+exit
+cd /
+cd /nonexistent_path_xyz
+cd /nonexistent_path_xyz/
+pwd
+rm /nonexistent_file_xyz
+rm -r /nonexistent_dir_xyz/
+cd /tmp
+cat < /dev/null > /tmp/minishell_tests/no_crash/a.txt
+rm -f /tmp/minishell_tests/no_crash/a.txt
+cat > /tmp/minishell_tests/no_crash/b.txt
+cd /tmp/minishell_tests/01_basic_echo
+echo hello world
+echo a  b   c
+echo 'single quoted'
+echo "double quoted"
+echo 'a b' 'c  d'
+export FOO=test
+echo "FOO=$FOO"
+echo '$FOO'
+echo "FOO=$FOO.txt"
+unset FOO
+echo "FOO=$FOO"
+export FOO=test
+echo "$FOO$FOO"
+echo "pre-$FOO-suffix"
+cd /tmp/minishell_tests/01_basic_echo
+echo hello world
+echo a  b   c
+echo 'single quoted'
+echo "double quoted"
+echo 'a b' 'c  d'
+export FOO=test
+echo "FOO=$FOO"
+echo '$FOO'
+echo "FOO=$FOO.txt"
+unset FOO
+echo "FOO=$FOO"
+export FOO=test
+echo "$FOO$FOO"
+echo "pre-$FOO-suffix"
+cd /tmp/minishell_tests/02_quotes
+echo 'single'
+echo "double"
+echo "escaped \" quote"
+echo "don't"
+echo "back\slash"
+echo "dollar \$HOME"
+echo "tab\there"
+echo 'single "inside"'
+echo "double 'inside'"
+cd /tmp/minishell_tests/02_quotes
+echo 'single'
+echo "double"
+echo "escaped \" quote"
+echo "don't"
+echo "back\slash"
+echo "dollar \$HOME"
+echo "tab\there"
+echo 'single "inside"'
+echo "double 'inside'"
+cd /tmp/minishell_tests/03_concat
+export V=val
+echo 'single'quote'concat'
+echo "double"quote"concat"
+echo a"b"c
+echo x"$V"x
+echo "$V"mundo
+echo pre-"$V"-post
+echo 'a'"b"'c'
+cd /tmp/minishell_tests/03_concat
+export V=val
+echo 'single'quote'concat'
+echo "double"quote"concat"
+echo a"b"c
+echo x"$V"x
+echo "$V"mundo
+echo pre-"$V"-post
+echo 'a'"b"'c'
+cd /tmp/minishell_tests/04_redir
+echo one > r.txt
+cat r.txt
+echo two >> r.txt
+cat r.txt
+echo three > r.txt
+cat < r.txt
+cat < r.txt > r2.txt
+cat r2.txt
+rm -f r.txt r2.txt
+cd /tmp/minishell_tests/04_redir
+echo one > r.txt
+cat r.txt
+echo two >> r.txt
+cat r.txt
+echo three > r.txt
+cat < r.txt
+cat < r.txt > r2.txt
+cat r2.txt
+rm -f r.txt r2.txt
+cd /tmp/minishell_tests/05_heredoc
+cat << END
+wc -l << END
+cat << END | wc -l
+cd /tmp/minishell_tests/05_heredoc
+cat << END
+wc -l << END
+cat << END | wc -l
+cd /tmp/minishell_tests/06_pipeline
+export P=path
+echo "$P"
+echo abc | cat
+echo "$P" | cat
+echo "$P" | cat | wc -l
+cd /tmp/minishell_tests/06_pipeline
+export P=path
+echo "$P"
+echo abc | cat
+echo "$P" | cat
+echo "$P" | cat | wc -l
+cd /tmp/minishell_tests/07_cd_edge
+mkdir -p sub/a
+cd sub/a
+pwd
+cd ..
+pwd
+cd a
+rmdir ../a
+pwd
+cd -
+pwd
+cd /tmp/minishell_tests/07_cd_edge
+mkdir -p sub/a
+cd sub/a
+pwd
+cd ..
+pwd
+cd a
+rmdir ../a
+pwd
+cd -
+pwd
+cd /tmp/minishell_tests/08_exit_status
+true
+echo $?
+false
+echo $?
+cd /tmp/minishell_tests/08_exit_status
+true
+echo $?
+false
+echo $?
+cd /tmp/minishell_tests/09_unset_reuse
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+export MI=otro
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+cd /tmp/minishell_tests/09_unset_reuse
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+export MI=otro
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+cd /tmp/minishell_tests/10_file_ops
+mkdir -p work
+touch work/a.txt
+echo hello > work/b.txt
+cat work/b.txt
+cd work/
+pwd
+cd ..
+rm work/a.txt
+ls work
+rm -r work/
+cat > test.txt
+cd /tmp/minishell_tests/10_file_ops
+mkdir -p work
+touch work/a.txt
+echo hello > work/b.txt
+cat work/b.txt
+cd work/
+pwd
+cd ..
+rm work/a.txt
+ls work
+rm -r work/
+cat > test.txt
+echo -n hi
+echo hi
+exit
+echo hi
+exit
+cd /
+cd /nonexistent_path_xyz
+cd /nonexistent_path_xyz/
+pwd
+rm /nonexistent_file_xyz
+rm -r /nonexistent_dir_xyz/
+cd /tmp
+cat < /dev/null > /tmp/minishell_tests/no_crash/a.txt
+rm -f /tmp/minishell_tests/no_crash/a.txt
+cat > /tmp/minishell_tests/no_crash/b.txt
+cd /
+cd /nonexistent_path_xyz
+cd /nonexistent_path_xyz/
+pwd
+rm /nonexistent_file_xyz
+rm -r /nonexistent_dir_xyz/
+cd /tmp
+cat < /dev/null > /tmp/minishell_tests/no_crash/a.txt
+rm -f /tmp/minishell_tests/no_crash/a.txt
+cat > /tmp/minishell_tests/no_crash/b.txt
+cd /tmp/minishell_tests/01_basic_echo
+echo hello world
+echo a  b   c
+echo 'single quoted'
+echo "double quoted"
+echo 'a b' 'c  d'
+export FOO=test
+echo "FOO=$FOO"
+echo '$FOO'
+echo "FOO=$FOO.txt"
+unset FOO
+echo "FOO=$FOO"
+export FOO=test
+echo "$FOO$FOO"
+echo "pre-$FOO-suffix"
+cd /tmp/minishell_tests/02_quotes
+echo 'single'
+echo "double"
+echo "escaped \" quote"
+echo "don't"
+echo "back\slash"
+echo "dollar \$HOME"
+echo "tab\there"
+echo 'single "inside"'
+echo "double 'inside'"
+cd /tmp/minishell_tests/03_concat
+export V=val
+echo 'single'quote'concat'
+echo "double"quote"concat"
+echo a"b"c
+echo x"$V"x
+echo "$V"mundo
+echo pre-"$V"-post
+echo 'a'"b"'c'
+cd /tmp/minishell_tests/04_redir
+echo one > r.txt
+cat r.txt
+echo two >> r.txt
+cat r.txt
+echo three > r.txt
+cat < r.txt
+cat < r.txt > r2.txt
+cat r2.txt
+rm -f r.txt r2.txt
+cd /tmp/minishell_tests/05_heredoc
+cat << END
+wc -l << END
+cat << END | wc -l
+cd /tmp/minishell_tests/06_pipeline
+export P=path
+echo "$P"
+echo abc | cat
+echo "$P" | cat
+echo "$P" | cat | wc -l
+cd /tmp/minishell_tests/07_cd_edge
+mkdir -p sub/a
+cd sub/a
+pwd
+cd ..
+pwd
+cd a
+rmdir ../a
+pwd
+cd -
+pwd
+cd /tmp/minishell_tests/08_exit_status
+true
+echo $?
+false
+echo $?
+cd /tmp/minishell_tests/09_unset_reuse
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+export MI=otro
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+cd /tmp/minishell_tests/10_file_ops
+mkdir -p work
+touch work/a.txt
+echo hello > work/b.txt
+cat work/b.txt
+cd work/
+pwd
+cd ..
+rm work/a.txt
+ls work
+rm -r work/
+cat > test.txt
+echo -n hi
+echo hi
+exit
+echo hi
+exit
+cd /
+cd /nonexistent_path_xyz
+cd /nonexistent_path_xyz/
+pwd
+rm /nonexistent_file_xyz
+rm -r /nonexistent_dir_xyz/
+cd /tmp
+cat < /dev/null > /tmp/minishell_tests/no_crash/a.txt
+rm -f /tmp/minishell_tests/no_crash/a.txt
+cat > /tmp/minishell_tests/no_crash/b.txt
+cd /tmp/minishell_tests/01_basic_echo
+echo hello world
+echo a  b   c
+echo 'single quoted'
+echo "double quoted"
+echo 'a b' 'c  d'
+export FOO=test
+echo "FOO=$FOO"
+echo '$FOO'
+echo "FOO=$FOO.txt"
+unset FOO
+echo "FOO=$FOO"
+export FOO=test
+echo "$FOO$FOO"
+echo "pre-$FOO-suffix"
+cd /tmp/minishell_tests/02_quotes
+echo 'single'
+echo "double"
+echo "escaped \" quote"
+echo "don't"
+echo "back\slash"
+echo "dollar \$HOME"
+echo "tab\there"
+echo 'single "inside"'
+echo "double 'inside'"
+cd /tmp/minishell_tests/03_concat
+export V=val
+echo 'single'quote'concat'
+echo "double"quote"concat"
+echo a"b"c
+echo x"$V"x
+echo "$V"mundo
+echo pre-"$V"-post
+echo 'a'"b"'c'
+cd /tmp/minishell_tests/04_redir
+echo one > r.txt
+cat r.txt
+echo two >> r.txt
+cat r.txt
+echo three > r.txt
+cat < r.txt
+cat < r.txt > r2.txt
+cat r2.txt
+rm -f r.txt r2.txt
+cd /tmp/minishell_tests/05_heredoc
+cat << END
+wc -l << END
+cat << END | wc -l
+cd /tmp/minishell_tests/06_pipeline
+export P=path
+echo "$P"
+echo abc | cat
+echo "$P" | cat
+echo "$P" | cat | wc -l
+cd /tmp/minishell_tests/07_cd_edge
+mkdir -p sub/a
+cd sub/a
+pwd
+cd ..
+pwd
+cd a
+rmdir ../a
+pwd
+cd -
+pwd
+cd /tmp/minishell_tests/08_exit_status
+true
+echo $?
+false
+echo $?
+cd /tmp/minishell_tests/09_unset_reuse
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+export MI=otro
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+cd /tmp/minishell_tests/10_file_ops
+mkdir -p work
+touch work/a.txt
+echo hello > work/b.txt
+cat work/b.txt
+cd work/
+pwd
+cd ..
+rm work/a.txt
+ls work
+rm -r work/
+cat > test.txt
+echo -n hi
+echo hi
+exit
+echo hi
+exit
+cd /
+cd /nonexistent_path_xyz
+cd /nonexistent_path_xyz/
+pwd
+rm /nonexistent_file_xyz
+rm -r /nonexistent_dir_xyz/
+cd /tmp
+cat < /dev/null > /tmp/minishell_tests/no_crash/a.txt
+rm -f /tmp/minishell_tests/no_crash/a.txt
+cat > /tmp/minishell_tests/no_crash/b.txt

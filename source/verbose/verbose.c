@@ -11,27 +11,19 @@
 /* ************************************************************************** */
 #include "../../minishell.h"
 
-static int	is_yes_answer(char *answer)
+void	ft_ask_verbose(t_env *env, int argc, char **argv)
 {
-	if (answer[0] == 'Y' || answer[0] == 'y')
-		return (1);
-	return (0);
-}
+	int	i;
 
-void	ft_ask_verbose(t_env *env)
-{
-	char	*answer;
-
-	if (!isatty(STDIN_FILENO))
-		return ;
-	ft_printf("Minishell mode verbose [Y/N] ? ");
-	answer = readline(NULL);
-	if (!answer)
-		return ;
-	if (is_yes_answer(answer))
+	i = 1;
+	while (i < argc)
 	{
-		ft_printf("--- Minishell mode verbose activate ---\n");
-		env->verbose = 1;
+		if (ft_strlen(argv[i]) == 9 && ft_strncmp(argv[i], "--verbose", 9) == 0)
+		{
+			env->verbose = 1;
+			ft_printf("--- Minishell mode verbose activate ---\n");
+			return ;
+		}
+		i++;
 	}
-	free(answer);
 }

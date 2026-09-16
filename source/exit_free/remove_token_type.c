@@ -35,6 +35,15 @@ void	ft_remove_token_redir(t_redir *redir)
 {
 	if (!redir)
 		return ;
+	if (redir->tmp_file)
+	{
+		if (redir->tmp_file->fd > 2)
+			close(redir->tmp_file->fd);
+		if (redir->tmp_file->name)
+			free(redir->tmp_file->name);
+		free(redir->tmp_file);
+		redir->tmp_file = NULL;
+	}
 	if (redir->content)
 		free(redir->content);
 	redir->content = NULL;

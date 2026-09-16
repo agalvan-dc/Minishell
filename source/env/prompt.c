@@ -45,7 +45,9 @@ void	ft_create_history(char *line)
 	int		fd;
 
 	add_history(line);
-	fd = open("history.log", O_CREAT | O_WRONLY | O_APPEND, 0644);
+	if (!g_env || !g_env->history_path)
+		return ;
+	fd = open(g_env->history_path, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	if (fd == -1)
 		perror("Error in history");
 	ft_write_line(line, fd);

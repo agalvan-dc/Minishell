@@ -73,5 +73,8 @@ void	ft_remove_all(t_env *env)
 	ft_remove_all_token(env);
 	ft_remove_var_list(env);
 	ft_remove_all_line(env);
+	if (env->history_path)
+		free(env->history_path);
+	env->history_path = NULL;
 	free(env);
 }

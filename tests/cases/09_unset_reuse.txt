@@ -1,0 +1,8 @@
+export MI=valor
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"
+export MI=otro
+echo "mi=$MI"
+unset MI
+echo "mi=$MI"

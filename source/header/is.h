@@ -6,10 +6,9 @@
 /*   By: agalvan- <agalvan-@student.42madrid.c          +#+  :+:       +#:    */
 /*                                                      +#+#+#+#+#+   +#+     */
 /*   Created: 2026/09/13 00:35:08 by agalvan-           #+#    #+#            */
-/*   Updated: 2026/09/13 02:09:14 by agalvan-           ###   ########.fr     */
+/*   Updated: 2026/09/17 01:33:00 by agalvan-           ###   ########.fr     */
 /*                                                                            */
 /* ************************************************************************** */
-
 #ifndef IS_H
 #define IS_H
 
@@ -111,13 +110,15 @@ int		is_quote(char c);
 int		is_variable(t_env *env, char *s, int i);
 int		is_valid_variable(t_env *env, char *name);
 int		is_variable_word(char *s, int i);
-int		is_variable_exist(t_env *env, char  *name);
+int		is_variable_exist(t_env *env, char *name);
 char	*var_name_extraction(char *s, int i);
 
 int		is_same_name(char *first, char *second);
 int		is_valid_identifier(char *s);
 int		is_flag_n(char *flags);
-int     is_numeric(char *s);
-int     is_absolute_path(char *content);
+int		is_numeric(char *s);
+int		is_absolute_path(char *content);
+int		have_cmd(t_env *env);
+int		is_cmd_arg(t_env *env, char *s, int i);
 
 #endif

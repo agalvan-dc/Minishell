@@ -6,13 +6,11 @@
 /*   By: agalvan- <agalvan-@student.42madrid.c          +#+  :+:       +#:    */
 /*                                                      +#+#+#+#+#+   +#+     */
 /*   Created: 2026/09/13 00:35:08 by agalvan-           #+#    #+#            */
-/*   Updated: 2026/09/13 02:09:14 by agalvan-           ###   ########.fr     */
+/*   Updated: 2026/09/17 01:33:00 by agalvan-           ###   ########.fr     */
 /*                                                                            */
 /* ************************************************************************** */
-
 #ifndef GET_H
 #define GET_H
-
 
 #include "class.h"
 
@@ -25,11 +23,11 @@ t_var	*ft_get_last_env_var(t_env *env);
 int		ft_get_env_var_size(t_env *env);
 
 t_arg	*ft_get_first_arg(t_cmd *cmd);
+t_arg	*ft_get_last_arg(t_cmd *cmd);
 char	**ft_get_cmd_args(t_cmd *cmd);
 int		ft_get_number_args(t_cmd *cmd);
 t_arg	*ft_get_cmd_flags(t_cmd *cmd);
 char	**ft_build_cmd_args(t_cmd *cmd);
-
 
 t_token	*ft_get_first_token_cmd(t_env *env);
 t_token	*ft_get_first_token_builtin(t_env *env);

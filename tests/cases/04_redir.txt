@@ -1,0 +1,9 @@
+echo one > r.txt
+cat r.txt
+echo two >> r.txt
+cat r.txt
+echo three > r.txt
+cat < r.txt
+cat < r.txt > r2.txt
+cat r2.txt
+rm -f r.txt r2.txt

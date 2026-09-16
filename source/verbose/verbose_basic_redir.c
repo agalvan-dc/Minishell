@@ -43,7 +43,8 @@ void	ft_print_input_chevron(t_redir *redir, t_cmd *prev_cmd, t_file *next_file)
 	ft_printf(" | cmd_in : [%s]\n", prev_cmd_name);
 	ft_printf(" | fd_in : [%d]\n", redir->fd_in);
 	ft_printf(" | next_file : [%s]\n", next_file_name);
-	ft_printf(" | fd_file : [%d]\n", next_file->fd);
+	if (next_file)
+		ft_printf(" | fd_file : [%d]\n", next_file->fd);
 	ft_printf(" ----------------\n");
 }
 
@@ -63,7 +64,8 @@ void	ft_print_output_chevron(t_redir *redir, t_cmd *prev_cmd, t_file *next_file)
     ft_printf(" | cmd_in : [%s]\n", prev_cmd_name);
     ft_printf(" | fd_in : [%d]\n", redir->fd_in);
     ft_printf(" | next_file : [%s]\n", next_file_name);
-    ft_printf(" | fd_file : [%d]\n", next_file->fd);
+    if (next_file)
+        ft_printf(" | fd_file : [%d]\n", next_file->fd);
     ft_printf(" ----------------\n");
 }
 
@@ -83,6 +85,7 @@ void	 ft_print_append_chevron(t_redir *redir, t_cmd *prev_cmd, t_file *next_file
     ft_printf(" | cmd_in : [%s]\n", prev_cmd_name);
     ft_printf(" | fd_in : [%d]\n", redir->fd_in);
     ft_printf(" | next_file : [%s]\n", next_file_name);
-    ft_printf(" | fd_file : [%d]\n", next_file->fd);
+    if (next_file)
+        ft_printf(" | fd_file : [%d]\n", next_file->fd);
     ft_printf(" ----------------\n");
 }

@@ -25,8 +25,18 @@ void	ft_remove_tmp_file(t_token *token_heredoc)
 	t_file		*tmp_file;
 
 	redir = ft_get_class(token_heredoc);
+	if (!redir)
+		return ;
 	tmp_file = redir->tmp_file;
-	unlink(tmp_file->name);
+	if (!tmp_file)
+		return ;
+	if (tmp_file->fd > 2)
+		close(tmp_file->fd);
+	if (tmp_file->name)
+	{
+		unlink(tmp_file->name);
+		free(tmp_file->name);
+	}
 	free(tmp_file);
 	redir->tmp_file = NULL;
 }

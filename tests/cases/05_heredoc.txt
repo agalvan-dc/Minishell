@@ -1,0 +1,14 @@
+cat << END
+one
+two
+END
+wc -l << END
+x
+y
+z
+END
+cat << END | wc -l
+a
+b
+c
+END

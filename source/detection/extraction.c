@@ -59,7 +59,7 @@ int		ft_limiter_extraction(t_redir *redir, char *line, int i)
 		if (!(is_blank(line[i])))
 		{
 			new_i = ft_limiter_detection(line, i);
-			redir->delimiter = ft_substr(line, i, new_i);
+			redir->delimiter = ft_substr(line, i, new_i - i + 1);
 			return (new_i);
 		}
 		i++;

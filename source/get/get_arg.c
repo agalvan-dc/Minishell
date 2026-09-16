@@ -18,6 +18,18 @@ t_arg	*ft_get_first_arg(t_cmd *cmd)
 	return (NULL);
 }
 
+t_arg	*ft_get_last_arg(t_cmd *cmd)
+{
+	t_arg	*arg;
+
+	arg = ft_get_first_arg(cmd);
+	if (!arg)
+		return (NULL);
+	while (arg->next)
+		arg = arg->next;
+	return (arg);
+}
+
 char	**ft_get_cmd_args(t_cmd *cmd)
 {
 	if (!cmd->args)

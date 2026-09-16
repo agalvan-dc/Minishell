@@ -32,6 +32,10 @@ int		is_var_delimiter(char *s, int i)
 	if (is_blank(s[i]) || is_separator(s, i) || s[i] == '$' 
 	|| is_finish(s[i]) || is_quote(s[i]))
 		return (1);
+	if (s[i] == '?')
+		return (0);
+	if (!(ft_isalnum(s[i]) || s[i] == '_'))
+		return (1);
 	return (0);
 }
 

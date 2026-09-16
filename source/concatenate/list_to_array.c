@@ -58,18 +58,24 @@ char	**ft_cmd_list_to_array(t_cmd *cmd)
 		return (NULL);
 	while (arg)
 	{
-		complete[i] = malloc_strcpy(arg->content);
-		if (!(complete[i]))
+		if (arg->glued && i > 0)
+			complete[i - 1] = ft_strjoin_free_first(complete[i - 1], arg->content);
+		else
 		{
-			while (i > 0)
+			complete[i] = malloc_strcpy(arg->content);
+			if (!(complete[i]))
 			{
-				free(complete[i]);
-				i--;
+				while (i > 0)
+				{
+					i--;
+					free(complete[i]);
+				}
+				free(complete);
+				return (NULL);
 			}
-			return (NULL);
+			i++;
 		}
 		arg = arg->next;
-		i++;
 	}
 	ft_remove_all_arg(cmd);
 	complete[i] = NULL;
@@ -97,6 +103,16 @@ char	**ft_var_list_to_array(t_env *env)
 			complete[i] = ft_strjoin_char(var->name, "", '=');
 		else
 			complete[i] = ft_strjoin_char(var->name, var->value, '=');
+		if (!(complete[i]))
+		{
+			while (i > 0)
+			{
+				i--;
+				free(complete[i]);
+			}
+			free(complete);
+			return (NULL);
+		}
 		var = var->next;
 		i++;
 	}

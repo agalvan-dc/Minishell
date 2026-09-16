@@ -1,0 +1,11 @@
+mkdir -p work
+touch work/a.txt
+echo hello > work/b.txt
+cat work/b.txt
+cd work/
+pwd
+cd ..
+rm work/a.txt
+ls work
+rm -r work/
+cat > test.txt

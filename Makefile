@@ -1,10 +1,13 @@
+# =========================================================================== #
+#                                MINISHELL                                    #
+# =========================================================================== #
+
 NAME        = minishell
 
 SRC_DIR     = source
-INC_DIR     = source/header
 LIBFT_DIR   = source/libft
 LIBFT       = $(LIBFT_DIR)/libft.a
-
+BANNER      = source/header/header.txt
 
 SRC         = main.c \
               $(wildcard $(SRC_DIR)/built_in/*.c) \
@@ -24,20 +27,25 @@ SRC         = main.c \
               $(wildcard $(SRC_DIR)/verbose/*.c)
 
 OBJS        = $(SRC:.c=.o)
-
-HEADERS     = $(INC_DIR)/class.h \
-              $(INC_DIR)/execution.h \
-              $(INC_DIR)/free.h \
-              $(INC_DIR)/get.h \
-              $(INC_DIR)/is.h \
-              $(INC_DIR)/token.h \
-              $(INC_DIR)/verbose.h
-
-TEMPLATE    = source/header/header.txt
+HEADERS     = minishell.h $(wildcard $(SRC_DIR)/header/*.h)
 
 CC          = gcc
-CFLAGS      = -Wall -Wextra -Werror -g3 -I$(INC_DIR) -I$(LIBFT_DIR)
+CFLAGS      = -Wall -Wextra -Werror -g3 -I$(LIBFT_DIR)
 READLINE_LNK = -lreadline
+
+RM          = rm -rf
+
+# --------------------------------------------------------------------------- #
+#                                   COLORS                                    #
+# --------------------------------------------------------------------------- #
+ESC         = \033
+RESET       = $(ESC)[0m
+BOLD        = $(ESC)[1m
+RED         = $(ESC)[1;31m
+GREEN       = $(ESC)[1;32m
+YELLOW      = $(ESC)[1;33m
+BLUE        = $(ESC)[1;34m
+CYAN        = $(ESC)[1;36m
 
 # OS Compatibility for Readline
 UNAME_S := $(shell uname -s)
@@ -51,34 +59,48 @@ else ifeq ($(UNAME_S), Darwin)
     endif
 endif
 
-RM          = rm -rf
+# --------------------------------------------------------------------------- #
+#                                    RULES                                    #
+# --------------------------------------------------------------------------- #
+all: check $(NAME)
 
-all: $(NAME)
+# Prints the banner and checks the toolchain / dependencies before building.
+# Fails with a red message if the compiler or readline is missing.
+check:
+	@if [ -f $(BANNER) ]; then cat $(BANNER); fi
+	@command -v $(CC) >/dev/null 2>&1 || \
+		{ printf "$(RED)✘ Missing dependency: compiler '$(CC)' not found$(RESET)\n"; exit 1; }
+	@echo '#include <readline/readline.h>' \
+		| $(CC) $(CFLAGS) -E - >/dev/null 2>&1 || \
+		{ printf "$(RED)✘ Missing dependency: readline headers (install libreadline-dev)$(RESET)\n"; exit 1; }
+	@printf "$(BLUE)➜ Dependencies$(RESET)  compiler $(GREEN)ok$(RESET)  readline $(GREEN)ok$(RESET)\n"
 
 %.o: %.c $(HEADERS)
+	@printf "$(CYAN)  CC$(RESET)      $<\n"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT):
+	@printf "$(CYAN)  MAKE$(RESET)    $(LIBFT_DIR)\n"
 	@make -s -C $(LIBFT_DIR)
 
 $(NAME): $(LIBFT) $(OBJS)
-	@echo "==== Compiling Minishell ===="
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(READLINE_LNK) -o $(NAME)
-	@if [ -f "$(TEMPLATE)" ]; then cat "$(TEMPLATE)"; fi
+	@printf "$(CYAN)  LINK$(RESET)    $(NAME)\n"
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(READLINE_LNK) -o $(NAME) \
+		&& printf "$(GREEN)✔ $(BOLD)$(NAME)$(RESET)$(GREEN) compiled successfully!$(RESET)\n" \
+		|| { printf "$(RED)✘ Compilation failed: could not link $(NAME)$(RESET)\n"; exit 1; }
 
 clean:
-	@echo "==== Removing Object Files ===="
+	@printf "$(YELLOW)➜ Removing object files$(RESET)\n"
 	@make clean -s -C $(LIBFT_DIR)
 	@$(RM) $(OBJS)
 
 fclean: clean
-	@echo "==== Removing Executables ===="
+	@printf "$(YELLOW)➜ Removing executables$(RESET)\n"
 	@make fclean -s -C $(LIBFT_DIR)
 	@$(RM) $(NAME)
 
 re: fclean all
 
- 
 debug: CFLAGS += -g3
 debug: re
 
@@ -88,4 +110,4 @@ sanitize: re
 leak: CFLAGS += -fsanitize=leak -g3
 leak: re
 
-.PHONY: all clean fclean re debug sanitize leak
+.PHONY: all check clean fclean re debug sanitize leak

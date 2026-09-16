@@ -1,0 +1,10 @@
+mkdir -p sub/a
+cd sub/a
+pwd
+cd ..
+pwd
+cd a
+rmdir ../a
+pwd
+cd -
+pwd

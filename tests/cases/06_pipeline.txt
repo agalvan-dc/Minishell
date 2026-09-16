@@ -1,0 +1,5 @@
+export P=path
+echo "$P"
+echo abc | cat
+echo "$P" | cat
+echo "$P" | cat | wc -l

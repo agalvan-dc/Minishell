@@ -39,6 +39,7 @@ int		ft_single_tokenization(t_cmd *cmd, char *line, int start, int index)
 		index++;
 	}
 	arg = ft_create_arg(content, TOKEN_SINGLE_QUOTE);
+	free(content);
 	ft_add_arg_list(cmd, arg);
 	return (index);
 }

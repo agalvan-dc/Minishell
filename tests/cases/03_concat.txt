@@ -1,0 +1,8 @@
+export V=val
+echo 'single'quote'concat'
+echo "double"quote"concat"
+echo a"b"c
+echo x"$V"x
+echo "$V"mundo
+echo pre-"$V"-post
+echo 'a'"b"'c'

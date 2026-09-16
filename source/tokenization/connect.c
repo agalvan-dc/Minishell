@@ -35,6 +35,7 @@ void    ft_connect_new_var(t_var *curr_var, t_var *prev_var, t_var *next_var)
 		curr_var->prev = NULL;
 	else
 	{
+		curr_var->prev = prev_var;
 		curr_var->next = next_var;
 		prev_var->next = curr_var;
 	}

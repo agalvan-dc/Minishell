@@ -13,9 +13,6 @@
 
 void	ft_open_next_file_with_flags(t_token *token, t_file *file)
 {
-	if (file->fd > 2)
-	    close(file->fd);
-
 	if (is_token_input_chevron(token))
 		file->fd = open(file->name, O_RDONLY);
 	else if (is_token_output_chevron(token))
@@ -35,7 +32,7 @@ void	ft_manage_fd_heredoc(t_token *token)
 	prev_cmd = ft_get_prev_cmd(token);
 	tmp_file_name = ft_heredoc_prompt(redir->delimiter);
 	fd_tmp = open(tmp_file_name, O_RDONLY, 0777);
-	redir->tmp_file = ft_init_file(tmp_file_name, fd_tmp);
+	redir->tmp_file = ft_init_file(ft_strdup(tmp_file_name), fd_tmp);
 	if (prev_cmd)
 		ft_change_fd_cmd(prev_cmd, fd_tmp, prev_cmd->fd_out);
 }

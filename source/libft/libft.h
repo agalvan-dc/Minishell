@@ -119,7 +119,7 @@ int				ft_putunbr(unsigned int nb);
 int				ft_puthexa_max(unsigned int nb);
 int				ft_puthexa_min(unsigned int nb);
 int				ft_puthexa_long(unsigned long nb);
-int				ft_check_format(const char *str, va_list liste, int i);
+int				ft_check_format(const char *str, va_list *liste, int i);
 int				ft_printf(const char *str, ...);
 int				ft_printf_fd(int fd, const char *str, ...);
 int				ft_print(unsigned long nb, char *dest, char *alphabet, int i);

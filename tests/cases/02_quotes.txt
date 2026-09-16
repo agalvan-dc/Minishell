@@ -1,0 +1,9 @@
+echo 'single'
+echo "double"
+echo "escaped \" quote"
+echo "don't"
+echo "back\slash"
+echo "dollar \$HOME"
+echo "tab\there"
+echo 'single "inside"'
+echo "double 'inside'"

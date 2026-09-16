@@ -33,12 +33,12 @@ int		ft_check_error_token_heredoc(t_redir *redir)
 
 int		ft_check_error_token_pipe(t_token *token, t_redir *redir)
 {
-	if (!(is_token_cmd(token->next)) || !token->next)
+	if (!(ft_get_next_cmd(token)))
 	{
 		ft_printf("Error : [next cmd after %s not found]\n]", redir->content);
 		return (1);
 	}
-	else if (!(is_token_cmd(token->prev)) || !token->prev)
+	else if (!(ft_get_prev_cmd(token)))
 	{
 		ft_printf("Error : [prev cmd before %s not found]\n]", redir->content);
 		return (1);

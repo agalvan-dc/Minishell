@@ -21,7 +21,7 @@ void    ft_print_args_array(char **args)
 	ft_printf("	[ARGS] : [");
 	while (args[i])
 	{
-		ft_printf("%s", args[i]);
+		ft_printf("%s", args[i] ? args[i] : "(null)");
 		i++;
 	}
 	ft_printf("]\n");
@@ -38,7 +38,8 @@ void    ft_print_args(t_cmd *cmd)
 		return ;
 	while (iter)
 	{
-		ft_printf("	[%d][%d] : [%s]\n]", i, iter->id, iter->content);
+		ft_printf("	[%d][%d] : [%s]\n]", i, iter->id,
+			iter->content ? iter->content : "(null)");
 		i++;
 		iter = iter->next;
 	}
@@ -48,7 +49,8 @@ void    ft_print_args(t_cmd *cmd)
 
 void	ft_print_cmd(t_cmd *cmd, int index)
 {
-	ft_printf("[%d][%d] : [%s]\n", index, cmd->id, cmd->content);
+	ft_printf("[%d][%d] : [%s]\n", index, cmd->id,
+		cmd->content ? cmd->content : "(null)");
 	if (cmd_have_args(cmd))
 		ft_print_args(cmd);
 	else if (cmd_have_args_array(cmd))
@@ -57,9 +59,11 @@ void	ft_print_cmd(t_cmd *cmd, int index)
 
 void	ft_print_redir(t_token *token, t_redir *redir)
 {
-	ft_printf("[%d][%d] : [%s]\n", token->index, redir->type, redir->content);
+	ft_printf("[%d][%d] : [%s]\n", token->index, redir->type,
+		redir->content ? redir->content : "(null)");
 	if (redir->type == TOKEN_HEREDOC)
-		 ft_printf("	[%s][%s]\n", "TOKEN_LIMITER", redir->delimiter);
+		ft_printf("	[%s][%s]\n", "TOKEN_LIMITER",
+			redir->delimiter ? redir->delimiter : "(null)");
 	else
 	{
 		 ft_printf("	[FD_IN : %d]\n", redir->fd_in);

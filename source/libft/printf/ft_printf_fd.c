@@ -63,17 +63,17 @@ void	count_puthexa_fd(unsigned int nbr, int *count, int fd)
 		count_putchar_fd(alphabet[nbr], count, fd);
 }
 
-static int	detect_type(va_list arg, const char *str, int index, int fd)
+static int	detect_type(va_list *arg, const char *str, int index, int fd)
 {
 	int	count;
 
 	count = 0;
 	if (str[index] == 's')
-		count_putstr_fd(va_arg(arg, char *), &count, fd);
+		count_putstr_fd(va_arg((*arg), char *), &count, fd);
 	else if (str[index] == 'd')
-		count_putnbr_fd(va_arg(arg, int), &count, fd);
+		count_putnbr_fd(va_arg((*arg), int), &count, fd);
 	else if (str[index] == 'x')
-		count_puthexa_fd(va_arg(arg, unsigned int), &count, fd);
+		count_puthexa_fd(va_arg((*arg), unsigned int), &count, fd);
 	return (count);
 }
 
@@ -89,7 +89,7 @@ int	ft_printf_fd(int fd, const char *str, ...)
 	while (str[i])
 	{
 		if (str[i] == '%')
-			ret += detect_type(arg, str, ++i, fd) - 1;
+			ret += detect_type(&arg, str, ++i, fd) - 1;
 		else
 			count_putchar_fd(str[i], &ret, fd);
 		i++;

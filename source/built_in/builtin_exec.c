@@ -25,7 +25,7 @@ int		ft_builtin_execution(t_env *env, t_cmd *cmd)
 	else if (is_export(cmd))
 		status = ft_export_builtin(cmd, env);
 	else if (is_pwd(cmd))
-		status = ft_pwd(cmd);
+		status = ft_pwd(env, cmd);
 	else if (is_unset(cmd))
 		status = ft_unset(cmd, env);
 	else if (is_exit(cmd))

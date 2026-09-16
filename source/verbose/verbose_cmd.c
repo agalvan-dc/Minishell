@@ -13,19 +13,19 @@
 
 void	ft_print_cmd_info(t_cmd *cmd)
 {
-	ft_printf(" ---[%s]---\n", cmd->content);
+	ft_printf(" ---[%s]---\n", cmd->content ? cmd->content : "(null)");
 	ft_printf("");
 	if (is_cmd_bin(cmd))
 	{
-		ft_printf(" | path : [%s]\n", cmd->bin);
+		ft_printf(" | path : [%s]\n", cmd->bin ? cmd->bin : "(null)");
 		ft_printf(" | args : [");
 		print_array(cmd->args);
 		ft_printf("]\n");
 	}
 	else if (is_cmd_builtin(cmd))
 	{
-		ft_printf(" | arg : [%s]\n", cmd->arg);
-		ft_printf(" | flags : [%s]\n", cmd->flags);
+		ft_printf(" | arg : [%s]\n", cmd->arg ? cmd->arg : "(null)");
+		ft_printf(" | flags : [%s]\n", cmd->flags ? cmd->flags : "(null)");
 	}
 	ft_printf(" | fd_in : [%d]\n", cmd->fd_in);
 	ft_printf(" | fd_out : [%d]\n", cmd->fd_out);

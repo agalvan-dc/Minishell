@@ -11,9 +11,10 @@
 /* ************************************************************************** */
 #include "../../minishell.h"
 
-void    ft_processing_exit(t_cmd *cmd)
+void    ft_processing_exit(t_env *env, t_cmd *cmd)
 {
 	int		nb;
+	int		signal;
 
 	nb = ft_get_number_args(cmd);
 	if (nb > 2)
@@ -22,7 +23,13 @@ void    ft_processing_exit(t_cmd *cmd)
 		ft_remove_all_arg(cmd);
 		return ;
 	}
-	exit(0);
+	ft_putstr_fd("exit\n", 2);
+	if (cmd->arg)
+		signal = ft_atoi(cmd->arg);
+	else
+		signal = 0;
+	ft_remove_all(env);
+	exit(signal);
 }
 
 void    ft_processing_echo(t_cmd *cmd)
@@ -52,7 +59,7 @@ void    ft_choose_processing_builtin(t_env *env, t_cmd *cmd)
 	else if (is_echo(cmd))
 		ft_processing_echo(cmd);
 	else if (is_exit(cmd))
-		ft_processing_exit(cmd);
+		ft_processing_exit(env, cmd);
 }
 
 void	ft_processing_builtin(t_env *env)
