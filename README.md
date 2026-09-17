@@ -1,6 +1,29 @@
 *This project has been created as part of the 42 curriculum by agalvan-.*
 
+
+<!-- ASCII banner: the same art is printed by `make` from source/header/header.txt. -->
+<p align="center">
+<pre>
+#######################################################################
+                                  __              ___    ___
+ /'\_/`\  __          __         /\ \            /\_ \  /\_ \
+/\      \/\_\    ___ /\_\    ____\ \ \___      __\//\ \ \//\ \
+\ \ \__\ \/\ \ /' _ `\/\ \  /',__\\ \  _ `\  /'__`\\ \ \  \ \ \
+ \ \ \_/\ \ \ \/\ \/\ \ \ \/\__, `\\ \ \ \ \/\  __/ \_\ \_ \_\ \_
+  \ \_\\ \_\ \_\ \_\ \_\ \_\/\____/ \ \_\ \_\ \____\/\____\/\____\
+   \/_/ \/_/\/_/\/_/\/_/\/_/\/___/   \/_/\/_/\/____/\/____/\/____/
+
+#######################################################################
+</pre>
+</p>
+
+<p align="center">
+  <i>This project has been created as part of the 42 curriculum by agalvan-.</i>
+</p>
+
 # Minishell
+
+> *A from-scratch UNIX shell written in C: tokenizing, pipes, redirections, here-documents, signals and built-ins - one syscall at a time.*
 
 ## Description
 
@@ -155,13 +178,21 @@ Expected status: `run_tests.sh` 15/15, `hard_tests.sh` 87/87 (156/156 with `--vg
 
 The shell operates as an interactive REPL (Read-Eval-Print Loop). Input strings go through sequential pipeline stages: lexical analysis (tokenization), syntax parsing, variable expansion and quote removal, process creation and redirection setup, and command execution with status-code collection.
 
+### Architecture Diagram
+
+<p align="center">
+  <img src="source/header/diagram.png" alt="Minishell architecture overview" width="90%">
+</p>
+
+<p align="center"><sub>Minishell architecture overview, from input line to process exit (<code>source/header/diagram.png</code>).</sub></p>
+
 ### Execution Pipeline Overview
 
 ```mermaid
 flowchart TD
     A(["1. readline: wait for user input"]) --> B{"Empty line?"}
     B -- "yes" --> A
-    B -- "no" --> C["2. Split top-level ';' separators"]
+    B -- "no" --> C["2. Split top-level semicolon separators"]
     C --> D["3. Lexical analysis (tokenize)"]
     D --> E{"Syntax errors?"}
     E -- "yes" --> F["Report to stderr, keep $?"]
@@ -197,7 +228,7 @@ sequenceDiagram
     U->>RL: types a command line
     RL->>SH: char *line
     SH->>SH: ft_execute_line_semicolon()
-    loop each ';' segment
+    loop each semicolon-separated segment
         SH->>TX: ft_parsing() -> ft_tokenization()
         TX-->>SH: linked list of t_token (t_cmd / t_redir / t_arg)
         SH->>SH: ft_check_error_parsing()
@@ -341,9 +372,9 @@ The following diagram traces `ls | grep x > out`:
 ```mermaid
 sequenceDiagram
     participant SH as Minishell
-    participant P as pipe()
-    participant C1 as cmd1 (ls)
-    participant C2 as cmd2 (grep x)
+    participant P as pipe
+    participant C1 as ls
+    participant C2 as grep
     participant F as out file
 
     SH->>P: pipe(fd)
