@@ -52,7 +52,7 @@ int		ft_cd(t_cmd *cmd, t_env *env)
 		last_path = ft_get_env_var_value_with_name(env, "OLDPWD");
 		if (!last_path)
 		{
-			ft_printf("cd: OLDPWD not set\n");
+			ft_putendl_fd("minishell: cd: OLDPWD not set", 2);
 			return (1);
 		}
 		last_path = malloc_strcpy(last_path);
@@ -61,7 +61,10 @@ int		ft_cd(t_cmd *cmd, t_env *env)
 	}
 	if (chdir(path) == -1)
 	{
-		ft_printf("%s : No such file or directory\n", path);
+		ft_putstr_fd("minishell: cd: ", 2);
+		ft_putstr_fd(path, 2);
+		ft_putstr_fd(": ", 2);
+		ft_putendl_fd(strerror(errno), 2);
 		if (print_path)
 			free(last_path);
 		return (1);
@@ -117,13 +120,11 @@ int		ft_exit_builtin(t_cmd *cmd, t_env *env)
 {
 	int		signal;
 
-	ft_putstr_fd("exit", 2);
-	ft_putstr_fd("\n", 2);
 	if (!cmd->arg)
 		signal = 0;
 	else
 		signal = ft_atoi(cmd->arg);
 	ft_remove_all(env);
-	exit(signal);
+	exit((unsigned char)signal);
 	return (0);
 }

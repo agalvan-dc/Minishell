@@ -27,17 +27,10 @@ int		ft_word_classification(t_env *env, char *line, int i)
 {
 	char	*content;
 	int		new_i;
-	t_token	*token;
 
 	new_i = ft_word_detection(env, line, i);
 	content = malloc_substrcpy(line, i, new_i);
-	if (is_cmd(env, content))
-		new_i = ft_cmd_tokenizer(env, line, content, new_i + 1);
-	else
-	{
-		token = ft_word_tokenizer(content, TOKEN_WORD);
-		ft_add_token_list(env, token);
-	}
+	new_i = ft_cmd_tokenizer(env, line, content, new_i + 1);
 	free(content);
 	return (new_i);
 }

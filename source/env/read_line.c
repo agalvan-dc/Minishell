@@ -27,6 +27,39 @@ void	ft_execute_line(t_env *env, char *line)
 	ft_remove_all_token(env);
 }
 
+void	ft_execute_line_semicolon(t_env *env, char *line)
+{
+	int		i;
+	int		start;
+	char	quote;
+	char	*sub;
+
+	i = 0;
+	start = 0;
+	quote = 0;
+	while (1)
+	{
+		if (line[i] == '\0' || (quote == 0 && line[i] == ';'))
+		{
+			if (i > start)
+			{
+				sub = malloc_substrcpy(line, start, i - 1);
+				if (sub && !(line_is_empty(sub)))
+					ft_execute_line(env, sub);
+				free(sub);
+			}
+			if (line[i] == '\0')
+				break ;
+			start = i + 1;
+		}
+		else if (quote == 0 && is_quote(line[i]))
+			quote = line[i];
+		else if (quote != 0 && line[i] == quote)
+			quote = 0;
+		i++;
+	}
+}
+
 void	ft_execute_multi_line(t_env *env, t_line *line)
 {
 	while (line)

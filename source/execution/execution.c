@@ -22,7 +22,7 @@ int		ft_execute_cmd(t_env *env, t_token *token)
 	if (is_cmd_bin(cmd))
 	{
 		var = ft_get_env_var(env);
-		ft_bin_execution(env, cmd, var);
+		status_built = ft_bin_execution(env, cmd, var);
 		free_array(var);
 		env->env_vars = NULL;
 	}
@@ -55,6 +55,22 @@ void	ft_execution(t_env *env)
 		printf("======\n");
 }
 
+static void	ft_print_signal_message(int sig)
+{
+	if (sig == SIGINT || sig == SIGPIPE)
+		return ;
+	if (sig == SIGQUIT)
+		ft_putendl_fd("Quit", 2);
+	else if (sig == SIGKILL)
+		ft_putendl_fd("Killed", 2);
+	else if (sig == SIGTERM)
+		ft_putendl_fd("Terminated", 2);
+	else if (sig == SIGSEGV)
+		ft_putendl_fd("Segmentation fault", 2);
+	else if (sig == SIGABRT)
+		ft_putendl_fd("Aborted", 2);
+}
+
 int		ft_wait_all_pid(t_env *env)
 {
 	t_token		*token;
@@ -68,8 +84,13 @@ int		ft_wait_all_pid(t_env *env)
 	while (token)
 	{
 		cmd = ft_get_class(token);
-		waitpid(cmd->pid, &status, 0);
-		status = ft_convert_status_process_value(status);
+		if (cmd && cmd->pid > 0)
+		{
+			waitpid(cmd->pid, &status, 0);
+			if (WIFSIGNALED(status))
+				ft_print_signal_message(WTERMSIG(status));
+			status = ft_convert_status_process_value(status);
+		}
 		token = ft_get_next_token_bin(token);
 	}
 	return (status);

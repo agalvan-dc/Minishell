@@ -70,6 +70,7 @@ void	ft_remove_var_list(t_env *env)
 
 void	ft_remove_all(t_env *env)
 {
+	clear_history();
 	ft_remove_all_token(env);
 	ft_remove_var_list(env);
 	ft_remove_all_line(env);

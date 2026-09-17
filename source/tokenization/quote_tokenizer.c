@@ -59,6 +59,7 @@ void    ft_double_tokenization(t_env *env, t_cmd *cmd, char *content)
     int     index;
     int     new_i;
     int     start;
+    int     close_i;
     char    *result;
     char    *name;
     char    *value;
@@ -69,7 +70,25 @@ void    ft_double_tokenization(t_env *env, t_cmd *cmd, char *content)
     result = ft_strdup("");
     while (content[index])
     {
-        if (is_variable_word(content, index))
+        if (content[index] == '$' && content[index + 1] == '{')
+        {
+            close_i = index + 2;
+            while (content[close_i] && content[close_i] != '}')
+                close_i++;
+            if (close_i > index + 2)
+                name = malloc_substrcpy(content, index + 2, close_i - 1);
+            else
+                name = ft_strdup("");
+            value = ft_get_env_var_value_with_name(env, name);
+            free(name);
+            if (!value)
+                value = "";
+            tmp = ft_strjoin(result, value);
+            free(result);
+            result = tmp;
+            index = content[close_i] ? close_i + 1 : close_i;
+        }
+        else if (is_variable_word(content, index))
         {
             new_i = ft_variable_detection(content, index + 1);
             name = malloc_substrcpy(content, index + 1, new_i);

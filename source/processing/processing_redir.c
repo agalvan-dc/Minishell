@@ -20,7 +20,7 @@ void	ft_processing_redir(t_env *env)
 		token = ft_get_first_token_redirection(env);
 		while (token)
 		{
-			ft_manage_fd_for_redir(token);
+			ft_manage_fd_for_redir(env, token);
 			token = ft_get_next_token_redirection(token);
 		}
 		if (env->verbose == 1)
@@ -42,19 +42,16 @@ void	ft_change_fd_cmd(t_cmd *cmd, int fd_in, int fd_out)
 
 void	ft_redirect_cmd(t_cmd *cmd)
 {
-	int		fd_in;
-	int		fd_out;
-
-	fd_in = cmd->fd_in;
-	fd_out = cmd->fd_out;
-	if (isnot_standard_fd(fd_in))
+	if (isnot_standard_fd(cmd->fd_in))
 	{
-    	dup2(fd_in, STDIN_FILENO);
-	    close(fd_in);
+		dup2(cmd->fd_in, STDIN_FILENO);
+		close(cmd->fd_in);
+		cmd->fd_in = -1;
 	}
-	if (isnot_standard_fd(fd_out))
+	if (isnot_standard_fd(cmd->fd_out))
 	{
-    	dup2(fd_out, STDOUT_FILENO);
-    	close(fd_out);
+		dup2(cmd->fd_out, STDOUT_FILENO);
+		close(cmd->fd_out);
+		cmd->fd_out = -1;
 	}
 }

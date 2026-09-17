@@ -1,0 +1,13 @@
+cat << END > original.txt
+linea con espacios
+segunda linea
+END
+cp original.txt backup.txt
+cat original.txt
+cat backup.txt
+wc -l original.txt
+wc -c < original.txt
+cat << END | tr a-z A-Z
+minusculas
+END
+rm -f original.txt backup.txt

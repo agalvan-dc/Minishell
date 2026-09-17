@@ -14,22 +14,39 @@
 void    ft_processing_exit(t_env *env, t_cmd *cmd)
 {
 	int		nb;
-	int		signal;
+	long	signal;
+	t_arg	*arg;
+	char	*status;
 
 	nb = ft_get_number_args(cmd);
-	if (nb > 2)
+	ft_putstr_fd("exit\n", 2);
+	if (nb > 1)
 	{
-		ft_putstr_fd("Too many argument\n", 2);
-		ft_remove_all_arg(cmd);
+		ft_putendl_fd("minishell: exit: too many arguments", 2);
+		env->error_processing += 1;
+		ft_update_var_status_process(env, 1);
 		return ;
 	}
-	ft_putstr_fd("exit\n", 2);
-	if (cmd->arg)
-		signal = ft_atoi(cmd->arg);
+	if (nb == 1)
+	{
+		arg = ft_get_first_arg(cmd);
+		if (!is_numeric(arg->content))
+		{
+			ft_putstr_fd("minishell: exit: ", 2);
+			ft_putstr_fd(arg->content, 2);
+			ft_putendl_fd(": numeric argument required", 2);
+			ft_remove_all(env);
+			exit(2);
+		}
+		signal = ft_atoi(arg->content);
+	}
 	else
-		signal = 0;
+	{
+		status = ft_get_env_var_value_with_name(env, "?");
+		signal = status ? ft_atoi(status) : 0;
+	}
 	ft_remove_all(env);
-	exit(signal);
+	exit((unsigned char)signal);
 }
 
 void    ft_processing_echo(t_cmd *cmd)

@@ -27,8 +27,6 @@ void	ft_sigint_handler(int sig)
 {
 	(void)sig;
 	ft_update_var_status_process(g_env, 130);
-	if (g_env)
-		g_env->error_processing = 1;
 	write(1, "\n", 1);
 	rl_replace_line("", 0);
 	rl_on_new_line();

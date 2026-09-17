@@ -108,20 +108,24 @@ char	*mini_get_next_line(int fd)
 {
 	char	*start;
 	char	*cursor;
+	ssize_t	ret;
 
 	start = malloc(10000);
+	if (!start)
+		return (NULL);
 	cursor = start;
-	while (read(fd, cursor, 1) > 0)
+	ret = 0;
+	while ((cursor - start) < 9999 && (ret = read(fd, cursor, 1)) > 0)
 	{
 		if (*cursor == '\n')
 			break ;
 		cursor++;
 	}
-	if (cursor > start)
+	if (cursor == start && ret <= 0)
 	{
-		*cursor = 0;
-		return (start);
+		free(start);
+		return (NULL);
 	}
-	free(start);
-	return (NULL);
+	*cursor = '\0';
+	return (start);
 }

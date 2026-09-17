@@ -32,15 +32,7 @@ void	ft_word_arg_tokenizer(t_env *env, t_cmd *cmd, char *content)
 
 t_token		*ft_file_tokenizer(char *name, int id)
 {
-	t_token	*token;
-	int		fd;
-
-	fd = open(name, O_RDONLY | O_WRONLY | O_CREAT, 0777);
-	if (fd < 0)
-		ft_printf("%s : so such file or directory\n", name);
-	token = ft_create_token_file(name, fd, id);
-	close (fd);
-	return (token);
+	return (ft_create_token_file(name, -1, id));
 }
 
 int		ft_next_file_tokenizer(t_env *env, char *line, int index)

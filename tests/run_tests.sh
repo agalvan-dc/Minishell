@@ -32,16 +32,32 @@ if [ ! -x "$MINI" ]; then
 	exit 2
 fi
 
-# Normalize minishell's interactive output for comparison with bash:
+# Normalize minishell's stdout for comparison with bash:
 #  - drop lines that echo the typed command ("[Minishell]$ cmd")
 #  - drop the "Exit" trailer and the echoed "exit" line
-#  - strip heredoc / continuation prompts that live on the same line
+# The heredoc / continuation prompts are NOT stripped anymore: with stdin
+# coming from a file (non-tty) minishell must not print them, just like bash.
 normalize() {
 	awk '
 		/^\[Minishell\]\$ / { next }
 		/^Exit$/          { next }
 		/^exit$/          { next }
-		{ gsub(/(heredoc> |finish_quote> )/, ""); if ($0 != "") print }
+		{ print }
+	'
+}
+
+# Normalize stderr so minishell and bash can be compared line by line.
+# bash prefixes errors with "bash: line N: " (or plain "bash: "), while
+# minishell uses "minishell: ". Both use the same trailing ": message".
+normalize_err() {
+	awk '
+		/^exit$/ { next }
+		{
+			sub(/^bash: line [0-9]+: /, "")
+			sub(/^bash: /, "")
+			sub(/^minishell: /, "")
+			if ($0 != "") print
+		}
 	'
 }
 
@@ -59,19 +75,33 @@ run_case() {
 
 	local mini_out="$dir/minishell.out"
 	local bash_out="$dir/bash.out"
+	local mini_err="$dir/minishell.err"
+	local bash_err="$dir/bash.err"
 
-	"$MINI" < "$script" 2>/dev/null | normalize > "$mini_out"
-	bash < "$script" 2>/dev/null > "$bash_out"
+	"$MINI" < "$script" 2>"$dir/minishell.raw.err" | normalize > "$mini_out"
+	bash < "$script" > "$bash_out" 2>"$dir/bash.raw.err"
+	normalize_err < "$dir/minishell.raw.err" > "$mini_err"
+	normalize_err < "$dir/bash.raw.err" > "$bash_err"
 
-	if diff -q "$mini_out" "$bash_out" >/dev/null; then
+	local ok=1
+	if ! diff -q "$mini_out" "$bash_out" >/dev/null; then ok=0; fi
+	if ! diff -q "$mini_err" "$bash_err" >/dev/null; then ok=0; fi
+
+	if [ "$ok" = "1" ]; then
 		if [ "$VERBOSE" = "1" ]; then echo "PASS: $name"; fi
 		PASS=$((PASS + 1))
 	else
 		echo "FAIL: $name"
 		FAIL=$((FAIL + 1))
 		FAILED_CASES="$FAILED_CASES $name"
-		echo "--- minishell (expected==bash) ---"
-		diff -u "$bash_out" "$mini_out" | head -40
+		if ! diff -q "$mini_out" "$bash_out" >/dev/null; then
+			echo "--- stdout: expected(bash) vs minishell ---"
+			diff -u "$bash_out" "$mini_out" | head -40
+		fi
+		if ! diff -q "$mini_err" "$bash_err" >/dev/null; then
+			echo "--- stderr: expected(bash) vs minishell ---"
+			diff -u "$bash_err" "$mini_err" | head -40
+		fi
 	fi
 
 	if [ "$VG" = "1" ]; then

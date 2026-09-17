@@ -18,7 +18,7 @@ int		ft_test_bin_access(char **bins, char *word);
 int		ft_test_absolute_bin_access(char *path);
 char	**ft_get_list_of_bins(t_env *env);
 
-void	ft_bin_execution(t_env *env, t_cmd *cmd, char **var);
+int		ft_bin_execution(t_env *env, t_cmd *cmd, char **var);
 void	ft_execution(t_env *env);
 int		ft_execute_cmd(t_env *env, t_token *token);
 int		ft_wait_all_pid(t_env *env);

@@ -1,0 +1,10 @@
+nonexistent_command_xyz
+echo $?
+/tmp/nonexistent_path_xyz
+echo $?
+nonexistent_command_xyz arg1 arg2
+echo $?
+touch noexec_test.txt
+./noexec_test.txt
+echo $?
+rm -f noexec_test.txt

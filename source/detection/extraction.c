@@ -48,6 +48,26 @@ int     ft_string_extraction(t_env *env, t_cmd *cmd, char *line, int index)
     return (index - 1);
 }
 
+static void	ft_strip_delimiter_quotes(t_redir *redir)
+{
+	int		len;
+	char	quote;
+	char	*stripped;
+
+	len = ft_strlen(redir->delimiter);
+	if (len < 2)
+		return ;
+	quote = redir->delimiter[0];
+	if (quote != '\'' && quote != '"')
+		return ;
+	if (redir->delimiter[len - 1] != quote)
+		return ;
+	stripped = ft_substr(redir->delimiter, 1, len - 2);
+	free(redir->delimiter);
+	redir->delimiter = stripped;
+	redir->quoted = 1;
+}
+
 int		ft_limiter_extraction(t_redir *redir, char *line, int i)
 {
 	int		new_i;
@@ -60,6 +80,8 @@ int		ft_limiter_extraction(t_redir *redir, char *line, int i)
 		{
 			new_i = ft_limiter_detection(line, i);
 			redir->delimiter = ft_substr(line, i, new_i - i + 1);
+			if (redir->delimiter)
+				ft_strip_delimiter_quotes(redir);
 			return (new_i);
 		}
 		i++;

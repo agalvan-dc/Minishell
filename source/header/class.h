@@ -65,6 +65,7 @@ typedef struct s_redir
 	int		fd_in;
 	int		fd_out;
 	int		type;
+	int		quoted;
 	char	*delimiter;
 	char	*content;
 	t_file	*tmp_file;

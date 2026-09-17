@@ -28,6 +28,7 @@ void	ft_change_env_var_value_with_name(t_env *env, char *name, char *vallue);
 char	*ft_get_line(void);
 int		ft_env_have_multi_line(t_env *env);
 void	ft_execute_line(t_env *env, char *line);
+void	ft_execute_line_semicolon(t_env *env, char *line);
 void	ft_execute_multi_line(t_env *env, t_line *line);
 void	ft_prompt(t_env *env);
 void	ft_create_history(char *line);

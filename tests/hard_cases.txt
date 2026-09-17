@@ -1,0 +1,374 @@
+##### parse_vars_basic
+export A=hello
+echo "$A"
+echo '$A'
+echo $A
+echo "${A}"
+echo "x${A}y"
+
+##### parse_vars_empty
+export E=
+echo "[$E]"
+echo "$E end"
+echo pre"$E"post
+
+##### parse_vars_undefined
+unset Z
+echo "[$Z]"
+echo "$Z end"
+
+##### parse_status_basic
+true
+echo $?
+false
+echo $?
+
+##### parse_concat_quotes
+export V=val
+echo 'a'"b"
+echo x"$V"y
+echo "$V""$V"
+echo 'q'"r"'s'
+
+##### parse_escapes
+echo "a\"b"
+echo 'a"b'
+echo "dollar \$V"
+echo "back\\slash"
+echo "tab\there"
+
+##### parse_extra_spaces
+echo   a    b     c
+echo      spaced
+
+##### parse_semicolons
+echo one; echo two; echo three
+echo four ; echo five
+
+##### parse_special_chars
+echo "a|b>c<d"
+echo 'a;b&c'
+echo "paren (x)"
+
+##### parse_adjacent_quotes
+echo a'b'c"d"e
+echo ""x""
+
+##### pipe_simple
+echo hello | cat
+
+##### pipe_multi
+echo abc | cat | cat | wc -c
+
+##### pipe_grep
+printf 'alpha\nbeta\ngamma\n' | grep a
+
+##### pipe_tr
+printf 'abc\n' | tr a-z A-Z
+
+##### pipe_status_last
+echo hi | sh -c 'exit 4'
+echo $?
+
+##### pipe_status_unfound
+nonexistent_cmd_xyz | cat
+echo $?
+echo hi | nonexistent_cmd_xyz
+echo $?
+
+##### redir_trunc
+echo one > f.txt
+echo two > f.txt
+cat f.txt
+
+##### redir_append
+echo one > f.txt
+echo two >> f.txt
+cat f.txt
+
+##### redir_in
+echo hello > f.txt
+cat < f.txt
+
+##### redir_in_out
+echo hello > f.txt
+cat < f.txt > g.txt
+cat g.txt
+
+##### redir_append_chain
+echo a > f.txt
+echo b > g.txt
+cat < f.txt >> g.txt
+cat g.txt
+
+##### redir_missing_dir
+echo hi > /no/such/dir/f
+echo $?
+
+##### redir_read_missing
+cat < /no/such/file.txt
+echo $?
+
+##### redir_multi_same
+echo first > f.txt
+echo second >> f.txt
+echo third >> f.txt
+wc -l < f.txt
+
+##### hd_basic
+cat << END
+one
+two
+END
+
+##### hd_empty
+cat << END
+END
+
+##### hd_single
+cat << END
+only
+END
+
+##### hd_quoted_delim
+cat << 'END'
+$HOME ${X}
+END
+
+##### hd_dquoted_delim
+cat << "END"
+$HOME
+END
+
+##### hd_dollar_vars
+export H=world
+cat << END
+hello $H
+END
+
+##### hd_question
+false
+cat << END
+status=$?
+END
+
+##### hd_multiple
+cat << A
+AAA
+A
+cat << B
+BBB
+B
+
+##### hd_pipe
+cat << END | wc -l
+x
+y
+z
+END
+
+##### hd_pipe_chain
+cat << END | tr a-z A-Z | wc -c
+abcd
+END
+
+##### hd_redir_out
+cat << END > out.txt
+line
+END
+cat out.txt
+
+##### hd_redir_out_in
+cat << END > f.txt
+A
+B
+END
+cat < f.txt
+
+##### hd_prefix_bug
+cat << END
+ENDING
+END
+
+##### hd_delim_trailing_space
+cat << END
+x
+END 
+END
+
+##### hd_special_content
+cat << 'END'
+| > < & ; $ ( ) ` \ " '
+END
+
+##### hd_indented_body
+cat << END
+    spaces
+	tab
+END
+
+##### hd_blank_lines
+cat << END
+a
+
+b
+END
+
+##### hd_delim_in_content
+cat << END
+pre END post
+END
+
+##### hd_grep
+echo start
+cat << END | grep -v skip
+keep
+skip
+END
+
+##### hd_numeric_delim
+cat << 123
+hello
+123
+
+##### hd_after_semicolon
+cat << END; echo tail
+body
+END
+
+##### hd_before_pipe_chain
+cat << END | cat | cat
+nested
+END
+
+##### bi_pwd
+pwd
+
+##### bi_cd_pwd
+mkdir -p d
+cd d
+pwd
+cd ..
+pwd
+
+##### bi_cd_dash
+cd /tmp
+cd -
+pwd
+
+##### bi_cd_missing
+cd /no/such/dir
+echo $?
+
+##### bi_cd_file
+touch afile
+cd afile
+echo $?
+
+##### bi_echo_variants
+echo hello
+echo
+echo one two three
+
+##### bi_env_export
+export A=1
+export B=2
+env | grep -E '^(A|B)=' | sort
+
+##### bi_unset
+export A=1
+unset A
+echo "[$A]"
+echo $?
+
+##### bi_unset_missing
+unset NOPE
+echo $?
+
+##### bi_export_overwrite
+export A=1
+export A=2
+echo "$A"
+
+##### bi_cd_home
+cd
+pwd
+
+##### err_cmd_not_found
+nonexistent_command_xyz
+echo $?
+
+##### err_cmd_not_found_args
+nonexistent_command_xyz arg1 arg2
+echo $?
+
+##### err_path_not_found
+/no/such/path/zzz
+echo $?
+
+##### err_permission
+touch noexec.txt
+chmod 000 noexec.txt
+./noexec.txt
+echo $?
+chmod 644 noexec.txt
+
+##### err_dir_as_cmd
+mkdir -p adir
+./adir
+echo $?
+
+##### err_pipe_not_found
+nonexistent_a | nonexistent_b
+echo $?
+
+##### err_sig_child_term
+sh -c 'kill -TERM $$'
+echo $?
+
+##### err_sig_child_kill
+sh -c 'kill -KILL $$'
+echo $?
+
+##### err_sig_child_segv
+sh -c 'kill -SEGV $$'
+echo $?
+
+##### err_sig_child_quit
+sh -c 'kill -QUIT $$'
+echo $?
+
+##### leak_stress
+export A=1
+cat << END > f.txt
+one $A
+two
+END
+cat f.txt | tr a-z A-Z | wc -l
+cat < f.txt >> g.txt
+nonexistent_cmd_xyz
+echo $?
+echo hi > h.txt
+cat h.txt g.txt
+cat << 'END' | cat | wc -l
+a
+b
+END
+rm -f f.txt g.txt h.txt
+
+##### leak_stress_repeat
+export A=1
+echo $A > f1
+cp f1 f2
+cat f1 f2 | wc -l
+grep A f1
+cat < f1
+cat << END | tr a-z A-Z | cat > out
+x
+y
+END
+cat out
+nonexistent_zzz
+cat < /no/such
+echo done
+rm -f f1 f2 out
