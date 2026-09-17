@@ -4,26 +4,45 @@
 <!-- ASCII banner: the same art is printed by `make` from source/header/header.txt. -->
 <p align="center">
 <pre>
-#######################################################################
-                                  __              ___    ___
- /'\_/`\  __          __         /\ \            /\_ \  /\_ \
-/\      \/\_\    ___ /\_\    ____\ \ \___      __\//\ \ \//\ \
-\ \ \__\ \/\ \ /' _ `\/\ \  /',__\\ \  _ `\  /'__`\\ \ \  \ \ \
- \ \ \_/\ \ \ \/\ \/\ \ \ \/\__, `\\ \ \ \ \/\  __/ \_\ \_ \_\ \_
-  \ \_\\ \_\ \_\ \_\ \_\ \_\/\____/ \ \_\ \_\ \____\/\____\/\____\
-   \/_/ \/_/\/_/\/_/\/_/\/_/\/___/   \/_/\/_/\/____/\/____/\/____/
-
-#######################################################################
+███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗
+████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║     ██║
+██╔████╔██║██║██╔██╗ ██║██║███████╗███████║█████╗  ██║     ██║
+██║╚██╔╝██║██║██║╚██╗██║██║╚════██║██╔══██║██╔══╝  ██║     ██║
+██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗
+╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝
 </pre>
 </p>
 
 <p align="center">
-  <i>This project has been created as part of the 42 curriculum by agalvan-.</i>
+  <b>Pipes</b> &middot; <b>Redirections</b> &middot; <b>Here-documents</b> &middot; <b>Signals</b> &middot; <b>Built-ins</b>
+  <br>
+  <sub>A from-scratch UNIX shell written in C for the 42 curriculum &mdash; no shell frameworks, just syscalls.</sub>
+</p>
+
+<p align="center">
+  <img alt="Language: C" src="https://img.shields.io/badge/language-C-00599C?style=flat-square">
+  <img alt="Build: make" src="https://img.shields.io/badge/build-make-00C853?style=flat-square">
+  <img alt="GNU readline" src="https://img.shields.io/badge/readline-GNU-4E9A06?style=flat-square">
+  <img alt="42" src="https://img.shields.io/badge/42-Minishell-000000?style=flat-square">
+  <img alt="Tests" src="https://img.shields.io/badge/tests-87%2F87%20%C2%B7%20156%2F156%20with%20--vg-success?style=flat-square">
 </p>
 
 # Minishell
 
-> *A from-scratch UNIX shell written in C: tokenizing, pipes, redirections, here-documents, signals and built-ins - one syscall at a time.*
+> *A from-scratch UNIX shell written in C: tokenizing, pipes, redirections, here-documents, signals and built-ins &mdash; one syscall at a time.*
+
+## Table of Contents
+
+- [Description](#description)
+- [Shell Theory and Core Concepts](#shell-theory-and-core-concepts)
+- [The Tokenization Process](#the-tokenization-process)
+- [Parsing and Syntax Validation](#parsing-and-syntax-validation)
+- [Instructions](#instructions)
+- [Technical Architecture and Workflow](#technical-architecture-and-workflow)
+- [Theoretical Foundation and Implementation Mechanics](#theoretical-foundation-and-implementation-mechanics)
+- [Directory and File Structure Breakdown](#directory-and-file-structure-breakdown)
+- [Memory and Cleanup Lifecycle](#memory-and-cleanup-lifecycle)
+- [Resources](#resources)
 
 ## Description
 
@@ -176,17 +195,21 @@ Expected status: `run_tests.sh` 15/15, `hard_tests.sh` 87/87 (156/156 with `--vg
 
 ## Technical Architecture and Workflow
 
-The shell operates as an interactive REPL (Read-Eval-Print Loop). Input strings go through sequential pipeline stages: lexical analysis (tokenization), syntax parsing, variable expansion and quote removal, process creation and redirection setup, and command execution with status-code collection.
+The shell operates as an interactive REPL (Read-Eval-Print Loop). Each line travels through well-separated stages — lexical analysis (tokenization), syntax parsing, variable expansion and quote removal, process creation with redirection setup, and finally execution with status-code collection. Keeping those stages independent is what makes the pipeline easy to reason about: the tokenizer produces data, the processing pass enriches it, and the executor only consumes it.
 
 ### Architecture Diagram
+
+At the highest level, minishell is a loop around `readline` that turns text into `fork`/`execve` calls. The diagram below is the "one-page" map of the project: parsing is on one side (no side effects), execution is on the other (syscalls and file descriptors), and the memory lifecycle closes the loop after every command.
 
 <p align="center">
   <img src="source/header/diagram.png" alt="Minishell architecture overview" width="90%">
 </p>
 
-<p align="center"><sub>Minishell architecture overview, from input line to process exit (<code>source/header/diagram.png</code>).</sub></p>
+<p align="center"><sub><b>Figure 1.</b> High-level architecture, from the input line to process exit (<code>source/header/diagram.png</code>).</sub></p>
 
 ### Execution Pipeline Overview
+
+The flowchart below follows a single line of input, read top to bottom. Diamond nodes are decision points and rectangular nodes are transformations. Notice that parsing and processing stay strictly separated from execution: if either reports an error, the command is skipped, only `$?` is updated, and the shell returns to the prompt.
 
 ```mermaid
 flowchart TD
@@ -212,7 +235,22 @@ flowchart TD
     P --> A
 ```
 
+The eight stages map to the numbered nodes above:
+
+| # | Stage | What happens |
+| --- | --- | --- |
+| 1 | Input | `readline("[Minishell]$ ")` returns a heap-allocated line, or `NULL` on Ctrl-D. |
+| 2 | Semicolon split | `ft_execute_line_semicolon` cuts top-level `;` segments while respecting quotes. |
+| 3 | Tokenization | `ft_tokenization` produces the `t_token` linked list (`t_cmd` / `t_redir` / args). |
+| 4 | Processing | Variables are expanded, `PATH` is resolved and glued arguments are materialized. |
+| 5 | Redirection | Files are opened, pipes are created and here-documents are captured as `fd_in`/`fd_out`. |
+| 6 | Execution | Built-ins run in-process; external commands are forked and handed to `execve`. |
+| 7 | Wait | `ft_wait_all_pid` reaps every child and translates the wait status into `$?`. |
+| 8 | Cleanup | Descriptors and temporary here-document files are released, then the loop restarts. |
+
 ### REPL Sequence
+
+Where the flowchart describes *what* happens, this diagram describes *who* does it and in which order. For a single input line the shell alternates between pure transformations (tokenize, process) and effectful work (exec, wait). The loop body runs once per semicolon-separated segment.
 
 ```mermaid
 sequenceDiagram
@@ -242,9 +280,17 @@ sequenceDiagram
     SH-->>U: appends history.log, prints a new prompt
 ```
 
-### Data Model
+Unlike the flowchart, this diagram is **time-ordered**: it shows who calls whom for a single line. The shell never blocks on an external command until `ft_wait_all_pid`, which is why a pipeline can keep several children alive at once. Built-ins short-circuit the fork/exec path and run directly in the parent so that they can mutate the shell state (`cd`, `export`, `unset`, `exit`).
 
-The polymorphic `class` pointer on `t_token` is the heart of the design: the same list node can represent a command, a redirection or a plain argument. `ft_get_class` is the accessor used throughout the pipeline.
+---
+
+## Theoretical Foundation and Implementation Mechanics
+
+The rest of this section walks through the mechanics stage by stage. The data structures described first are shared by every stage, so they are worth understanding before the algorithms.
+
+### Data Model and Core Structures
+
+Everything the shell knows lives in a handful of linked lists rooted at `t_env`. A line of input becomes a list of `t_token` nodes, and each token's polymorphic `class` pointer is later *cast* to a concrete payload (`t_cmd`, `t_redir`, `t_arg`, …) depending on its `id`. `ft_get_class` is the accessor used throughout the pipeline, which is why the same node can be treated as a command, a redirection or a plain argument without any `union`.
 
 ```mermaid
 classDiagram
@@ -313,9 +359,7 @@ classDiagram
     t_redir "1" --> "1" t_file : tmp_file
 ```
 
----
-
-## Theoretical Foundation and Implementation Mechanics
+Reading the diagram: `t_env` owns three independent lists — the exported variables (`t_var`), the parsed tokens (`t_token`) and the line queue (`t_line`). A command token owns its ordered arguments through `t_arg`, while a redirection token owns the here-document temporary file through `t_file`. The `glued` flag on `t_arg` records whether an argument was formed by concatenating adjacent fragments (for example `"Hello "` and `$USER`).
 
 ### 1. Lexical Analysis (Tokenization)
 
@@ -367,7 +411,7 @@ Redirections and pipelines manipulate standard file descriptors: Standard Input 
   * `ft_redirect_cmd` (`source/processing/processing_redir.c`) performs the actual `dup2` and closes the original descriptor inside the child, invalidating it to `-1` to prevent double closes.
 * **Cleanup** (`source/redirection/close.c`): heredoc temporary files are `close`d and `unlink`ed (`ft_remove_tmp_file`), and remaining non-standard descriptors are closed before waiting on children (`ft_close_all_fd`).
 
-The following diagram traces `ls | grep x > out`:
+The following diagram traces a single pipeline, `ls | grep x > out`, showing how the two ends of a pipe are split across the commands and how the final output is redirected into a file:
 
 ```mermaid
 sequenceDiagram
@@ -389,6 +433,8 @@ sequenceDiagram
     C2->>C2: execve("/usr/bin/grep")
     SH->>SH: waitpid(cmd1), waitpid(cmd2)
 ```
+
+Two details are worth highlighting. First, the parent closes unused pipe ends before forking the next child so that EOF propagates correctly (otherwise `grep` would never see the pipe close). Second, each child resets `SIGINT`/`SIGQUIT` to `SIG_DFL` before calling `execve`, so `Ctrl+C` reaches the running program instead of the shell.
 
 ### 5. Execution Engine and System Binaries
 
@@ -646,6 +692,8 @@ flowchart TD
     G --> K["Free the raw input string"]
     K --> A
 ```
+
+Read the diagram as a single iteration: everything allocated *inside* the loop (tokens, argument arrays, the raw input string) is freed before the next prompt, while the environment list and `g_env` are only released when `readline` returns `NULL`. That split is what keeps repeated commands leak-free under valgrind.
 
 Additional memory-safety rules enforced by the code and verified under `valgrind --track-fds=yes`:
 
